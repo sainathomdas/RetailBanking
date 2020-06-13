@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %} Login {% endblock %}
+
+{% block content %}
+
+
+<header style="display: flex;flex-direction: column;justify-content: center;">
+    <h1 class="text-center text-white" style=" font-family: 'Fira Sans', sans-serif;"> Welcome to <span style="color: gold;">MARS BANK</span></h1>
+    <br>
+
+    {% with messages = get_flashed_messages(with_categories = True) %}
+	  {% if messages %}
+	    {% for category, message in messages %}
+		  <div class="alert alert-{{ category  }} alert-dismissible container" role="alert">
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+			{{message}}
+		  </div>
+		{% endfor %}
+	  {% endif %}
+    {% endwith %}
+    
+
+    <div class="login-wrapper">
+        <div class="form-signin">
+            <h2 class="form-signin-heading text-center">Login</h2>
+            <form action=" {{ url_for('login') }} " method="POST">
+            <label for="username">&nbsp;Username</label>
+            <input type="text" class="form-control" name="username" placeholder="Username" required autofocus>
+            <label for="password">&nbsp;Password</label>
+            <input type="password" class="form-control" name="password" placeholder="Password" required>
+            
+            <button type="submit" class="btn btn-lg btn-primary btn-block">Login</button>
+        </form>         
+        </div>
+    </div>
+</header>
+
+
+
+{% endblock %}
+

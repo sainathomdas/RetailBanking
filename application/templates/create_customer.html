@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block title %} Login {% endblock %}
+
+{% block content %}
+
+    {% with messages = get_flashed_messages(with_categories = True) %}
+	  {% if messages %}
+	    {% for category, message in messages %}
+		  <div class="alert alert-{{ category  }} alert-dismissible container" role="alert">
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+			{{message}}
+		  </div>
+		{% endfor %}
+	  {% endif %}
+    {% endwith %}
+
+	<div class="wrapper">
+		<div class="title">
+		  Create Customer
+		</div>
+		<form action="">
+		<div class="form">
+			<div class="inputfield">
+				<label>Customer SSN ID <span class="star">*</span> </label> 
+				<input type="number" class="input form-control-sm">
+			 </div>  
+		   <div class="inputfield">
+			  <label>Customer Name <span class="star">*</span> </label>
+			  <input type="text" class="input form-control-sm">
+		   </div>  
+		   <div class="inputfield">
+			<label>Age <span class="star">*</span> </label>
+			<input type="number" class="input form-control-sm">
+		 </div>
+		 <div class="inputfield">
+			<label>Address <span class="star">*</span> </label>
+			<textarea class="textarea form-control-sm"></textarea>
+		 </div> 
+		 <input type="hidden" name="country" id="countryId" value="IN"/>
+			<div class="inputfield">
+			  <label>State <span class="star">*</span> </label>
+			  <div class="custom_select ">
+				<select name="state" class="states order-alpha" id="stateId">
+					<option value="">Select State</option>
+				</select>
+			  </div>
+		   </div> 
+		   <div class="inputfield">
+			<label>City <span class="star">*</span> </label>
+			<div class="custom_select ">
+				<select name="city" class="cities order-alpha" id="cityId">
+					<option value="">Select City</option>
+				</select>
+			</div>
+		 </div> 
+		   
+		  
+		  <span class="star font-small font-weight-bolder ml-1 mt-0 pt-0"> (*) Fields are compulsory</span>
+	
+			<div>
+			<input type="submit" value="Submit" class="btn btn-sm black gold-text">
+			<input type="reset" value="Reset" class="ml-lg-5 btn btn-sm black white-text">
+			</div>
+		 
+		</div>
+
+	</form>
+	</div>
+	
+
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
+	<script src="//geodata.solutions/includes/statecity.js"></script>
+
+{% endblock %}
+
