@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block title %} Mars | Update Customer {% endblock %}
+
+{% block content %}
+
+	<div class="wrapper">
+		<div class="title">
+		  Update Customer
+		</div>
+
+{% include "includes/flash_message.html" %}
+
+		<form action="" method="POST">
+		<div class="form">
+			<div class="inputfield">
+				<label for="cust_ssid">Customer SSN ID  </label> 
+				<input type="number" name="cust_ssid" class="input form-control-sm disabled" readonly>
+             </div>
+             <div class="inputfield">
+				<label for="cust_id">Customer ID </label> 
+				<input type="number" name="cust_id" class="input form-control-sm disabled" readonly>
+			 </div>  
+		   <div class="inputfield">
+			  <label for="cust_old_name">Old Customer Name</label>
+			  <input type="text" name="cust_old_name" class="input form-control-sm disabled" readonly>
+           </div>
+           <div class="inputfield">
+            <label for="cust_new_name">New Customer Name <span class="star">*</span> </label>
+            <input type="text" name="cust_new_name" class="input form-control-sm">
+         </div>  
+		   <div class="inputfield">
+			<label for="cust_old_age">Old Age </label>
+			<input type="number" name="cust_old_age" class="disabled input form-control-sm" readonly>
+         </div>
+         <div class="inputfield">
+			<label for="cust_new_name">New Age <span class="star">*</span> </label>
+			<input type="number" name="cust_new_name" class="input form-control-sm" >
+		 </div>
+		 <div class="inputfield">
+			<label for="cust_old_address">Old Address  </label>
+			<textarea class="textarea form-control-sm disabled" name="cust_old_address" readonly></textarea>
+         </div>
+         <div class="inputfield">
+			<label for="cust_new_address">New Address <span class="star">*</span> </label>
+			<textarea name="cust_new_address" class="textarea form-control-sm"></textarea>
+		 </div> 
+		 <input type="hidden" name="country" id="countryId" value="IN"/>
+			<div class="inputfield">
+			  <label for="cust_state">State <span class="star">*</span> </label>
+			  <div class="custom_select ">
+				<select name="cust_state" class="states order-alpha" id="stateId">
+					<option value="">Select State</option>
+				</select>
+			  </div>
+		   </div> 
+		   <div class="inputfield">
+			<label for="cust_city">City <span class="star">*</span> </label>
+			<div class="custom_select ">
+				<select name="cust_city" class="cities order-alpha" id="cityId">
+					<option value="">Select City</option>
+				</select>
+			</div>
+		 </div> 
+		   
+		  
+		  <span class="star font-small font-weight-bolder ml-1 mt-0 pt-0"> (*) Fields are compulsory</span>
+	
+			<div>
+			<input type="submit" value="Update" class="btn btn-sm black gold-text">
+			<input type="reset" value="Reset" class="ml-lg-5 btn btn-sm black white-text">
+			</div>
+		 
+		</div>
+
+	</form>
+	</div>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
+	<script src="//geodata.solutions/includes/statecity.js"></script>
+
+{% endblock %}
+

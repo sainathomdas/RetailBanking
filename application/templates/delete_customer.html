@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %} Mars | Delete Customer {% endblock %}
+
+{% block content %}
+
+	<div class="wrapper">
+		<div class="title">
+		  Delete Customer
+		</div>
+
+{% include "includes/flash_message.html" %}
+
+		<form action="" method="POST">
+		<div class="form">
+			<div class="inputfield">
+				<label for="cust_ssid">Customer SSN ID  </label> 
+				<input type="number" name="cust_ssid" class="input form-control-sm disabled" readonly>
+             </div>
+             <div class="inputfield">
+				<label for="cust_id">Customer SSN ID </label> 
+				<input type="number" name="cust_id" class="input form-control-sm disabled" readonly>
+			 </div>    
+		   <div class="inputfield">
+			  <label for="cust_name">Customer Name </label>
+			  <input type="text" name="cust_name" class="input form-control-sm disabled" readonly> 
+		   </div>  
+		   <div class="inputfield">
+			<label for="cust_age">Age </label>
+			<input type="number" name="cust_age" class="input form-control-sm disabled" readonly>
+		 </div>
+		 <div class="inputfield">
+			<label for="cust_address">Address  </label>
+			<textarea name="cust_address" class="textarea form-control-sm disabled" readonly></textarea>
+		 </div> 
+	
+		  
+		  
+	
+			<div>
+			<input type="submit" value="Delete" class="btn btn-sm red white-text">
+			<input type="" value="Cancel" class="ml-lg-5 btn btn-sm black white-text">
+			</div>
+		 
+		</div>
+
+	</form>
+	</div>
+	
+
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
+	<script src="//geodata.solutions/includes/statecity.js"></script>
+
+{% endblock %}
+

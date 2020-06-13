@@ -19,3 +19,12 @@ def login():
 @app.route('/create_customer')
 def createCustomer():
     return render_template('create_customer.html')
+    
+@app.route('/update_customer')
+def updateCustomer():
+    return render_template('update_customer.html')
+
+
+@app.route('/delete_customer')
+def deleteCustomer():
+    return render_template('delete_customer.html')

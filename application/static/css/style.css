@@ -155,7 +155,11 @@ header {
 .star{
     color: red;
 }
+.disabled{
+  background-color: lightgrey;
+}
 /* =================================== end ofGeneral ==================================== */
+
 
 
 /* =================================== Form ==================================== */
@@ -188,7 +192,7 @@ header {
   }
   
   .wrapper .form .inputfield label{
-     width: 200px;
+     width: 220px;
      color: #000;
      margin-right: 10px;
     font-size: 14px;
