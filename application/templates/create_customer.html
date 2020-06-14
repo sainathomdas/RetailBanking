@@ -4,66 +4,111 @@
 
 {% block content %}
 
-	<div class="wrapper">
-		<div class="title">
-		  Create Customer
-		</div>
+<div class="wrapper">
+	<div class="title">
+		Create Customer
+	</div>
 
-{% include "includes/flash_message.html" %}
+	{% include "includes/flash_message.html" %}
 
-		<form action="" method="POST">
+	<form action="" method="POST" data-parsley-validate>
 		<div class="form">
 			<div class="inputfield">
-				<label for="cust_ssid">Customer SSN ID <span class="star">*</span> </label> 
-				<input type="number" name="cust_ssid" class="input form-control-sm">
-			 </div>  
-		   <div class="inputfield">
-			  <label for="cust_name">Customer Name <span class="star">*</span> </label>
-			  <input type="text" name="cust_name" class="input form-control-sm">
-		   </div>  
-		   <div class="inputfield">
-			<label for="cust_age">Age <span class="star">*</span> </label>
-			<input type="number" name="cust_age" class="input form-control-sm">
-		 </div>
-		 <div class="inputfield">
-			<label for="cust_address">Address <span class="star">*</span> </label>
-			<textarea name="cust_address" class="textarea form-control-sm"></textarea>
-		 </div> 
-		 <input type="hidden" name="country" id="countryId" value="IN"/>
+				<div class="row">
+					<div class="col-md-4">
+						<label for="cust_ssid">Customer SSN ID <span class="star">*</span> </label>
+					</div>
+					<div class="col-md-8">
+						<input type="number" id="cust_ssid" name="cust_ssid" class="input form-control-sm"
+						required minlength="9" maxlength="9" data-parsley-error-message = "Must be 9 digits long" data-parsley-type="integer">
+					</div>
+				</div>
+			</div>
+
 			<div class="inputfield">
-			  <label for="cust_state">State <span class="star">*</span> </label>
-			  <div class="custom_select ">
-				<select name="cust_state" class="states order-alpha" id="stateId">
-					<option value="">Select State</option>
-				</select>
-			  </div>
-		   </div> 
-		   <div class="inputfield">
-			<label for="cust_city">City <span class="star">*</span> </label>
-			<div class="custom_select ">
-				<select name="cust_city" class="cities order-alpha" id="cityId">
-					<option value="">Select City</option>
-				</select>
+				<div class="row">
+					<div class="col-md-4">
+						<label for="cust_name">Customer Name <span class="star">*</span> </label>
+					</div>
+					<div class="col-md-8">
+						<input type="text" name="cust_name" class="input form-control-sm" required>
+					</div>
+				</div>
 			</div>
-		 </div> 
-		   
-		  
-		  <span class="star font-small font-weight-bolder ml-1 mt-0 pt-0"> (*) Fields are compulsory</span>
-	
+
+			<div class="inputfield">
+				<div class="row">
+					<div class="col-md-4">
+						<label for="cust_age">Age <span class="star">*</span> </label>
+					</div>
+					<div class="col-md-8">
+						<input name="cust_age" class="input form-control-sm" data-parsley-type="number"	data-parsley-type="integer" maxlength="3" required>
+					</div>
+				</div>
+			</div>
+			
+			<div class="inputfield">
+				<div class="row">
+					<div class="col-md-4">
+						<label for="cust_address">Address <span class="star">*</span> </label>
+					</div>
+					<div class="col-md-8">
+						<textarea name="cust_address" class="textarea form-control-sm" required></textarea>
+					</div>
+				</div>
+			</div>
+
+			<input type="hidden" name="country" id="countryId" value="IN" />
+
+			<div class="inputfield">
+				<div class="row">
+					<div class="col-md-4">
+						<label for="cust_state">State <span class="star">*</span> </label>
+					</div>
+					<div class="col-md-8">
+						<div class="custom_select ">
+							<select name="cust_state" class="states order-alpha" id="stateId" required>
+								<option value="">Select State</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="inputfield">
+				<div class="row">
+					<div class="col-md-4">
+						<label for="cust_city">City <span class="star">*</span> </label>
+					</div>
+					<div class="col-md-8">
+						<div class="custom_select ">
+							<select name="cust_city" class="cities order-alpha" id="cityId" required>
+								<option value="">Select City</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<span class="star font-small font-weight-bolder ml-1 mt-0 pt-0"> (*) Fields are compulsory</span>
+
 			<div>
-			<input type="submit" value="Create" class="btn btn-sm black gold-text">
-			<input type="reset" value="Reset" class="ml-lg-5 btn btn-sm black white-text">
+				<input type="submit" value="Create" class="btn btn-sm black gold-text">
+				<input type="reset" value="Reset" class="ml-lg-5 btn btn-sm black white-text">
 			</div>
-		 
+
 		</div>
 
 	</form>
-	</div>
-	
+</div>
 
 
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
-	<script src="//geodata.solutions/includes/statecity.js"></script>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//geodata.solutions/includes/statecity.js"></script>
+<script src="{{ url_for('static', filename = 'js/jquery.form-validator.min.js') }}"></script>
+
+
 
 {% endblock %}
-

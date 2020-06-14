@@ -4,79 +4,148 @@
 
 {% block content %}
 
-	<div class="wrapper">
-		<div class="title">
-		  Update Customer
-		</div>
+<div class="wrapper">
+	<div class="title">
+		Update Customer
+	</div>
 
-{% include "includes/flash_message.html" %}
+	{% include "includes/flash_message.html" %}
 
-		<form action="" method="POST">
+	<form action="" method="POST"  data-parsley-validate>
 		<div class="form">
 			<div class="inputfield">
-				<label for="cust_ssid">Customer SSN ID  </label> 
-				<input type="number" name="cust_ssid" class="input form-control-sm disabled" readonly>
-             </div>
-             <div class="inputfield">
-				<label for="cust_id">Customer ID </label> 
-				<input type="number" name="cust_id" class="input form-control-sm disabled" readonly>
-			 </div>  
-		   <div class="inputfield">
-			  <label for="cust_old_name">Old Customer Name</label>
-			  <input type="text" name="cust_old_name" class="input form-control-sm disabled" readonly>
-           </div>
-           <div class="inputfield">
-            <label for="cust_new_name">New Customer Name <span class="star">*</span> </label>
-            <input type="text" name="cust_new_name" class="input form-control-sm">
-         </div>  
-		   <div class="inputfield">
-			<label for="cust_old_age">Old Age </label>
-			<input type="number" name="cust_old_age" class="disabled input form-control-sm" readonly>
-         </div>
-         <div class="inputfield">
-			<label for="cust_new_name">New Age <span class="star">*</span> </label>
-			<input type="number" name="cust_new_name" class="input form-control-sm" >
-		 </div>
-		 <div class="inputfield">
-			<label for="cust_old_address">Old Address  </label>
-			<textarea class="textarea form-control-sm disabled" name="cust_old_address" readonly></textarea>
-         </div>
-         <div class="inputfield">
-			<label for="cust_new_address">New Address <span class="star">*</span> </label>
-			<textarea name="cust_new_address" class="textarea form-control-sm"></textarea>
-		 </div> 
-		 <input type="hidden" name="country" id="countryId" value="IN"/>
+				<div class="row">
+					<div class="col-md-4">
+						<label for="cust_ssid">Customer SSN ID <span class="star">*</span> </label>
+					</div>
+					<div class="col-md-8">
+						<input type="number" name="cust_ssid" class="input form-control-sm disabled" readonly>
+					</div>
+				</div>
+			</div>
+
 			<div class="inputfield">
-			  <label for="cust_state">State <span class="star">*</span> </label>
-			  <div class="custom_select ">
-				<select name="cust_state" class="states order-alpha" id="stateId">
-					<option value="">Select State</option>
-				</select>
-			  </div>
-		   </div> 
-		   <div class="inputfield">
-			<label for="cust_city">City <span class="star">*</span> </label>
-			<div class="custom_select ">
-				<select name="cust_city" class="cities order-alpha" id="cityId">
-					<option value="">Select City</option>
-				</select>
+				<div class="row">
+					<div class="col-md-4">
+						<label for="cust_id">Customer ID </label>
+					</div>
+					<div class="col-md-8">
+						<input type="number" name="cust_id" class="input form-control-sm disabled" readonly>
+					</div>
+				</div>
 			</div>
-		 </div> 
-		   
-		  
-		  <span class="star font-small font-weight-bolder ml-1 mt-0 pt-0"> (*) Fields are compulsory</span>
-	
+
+			<div class="inputfield">
+				<div class="row">
+					<div class="col-md-4">
+						<label for="cust_old_name">Old Customer Name</label>
+					</div>
+					<div class="col-md-8">
+						<input type="text" name="cust_old_name" class="input form-control-sm disabled" readonly>
+					</div>
+				</div>
+			</div>
+
+			<div class="inputfield">
+				<div class="row">
+					<div class="col-md-4">
+						<label for="cust_new_name">New Customer Name <span class="star">*</span> </label>
+					</div>
+					<div class="col-md-8">
+						<input type="text" name="cust_new_name" class="input form-control-sm" required>
+					</div>
+				</div>
+			</div>
+
+			<div class="inputfield">
+				<div class="row">
+					<div class="col-md-4">
+						<label for="cust_old_age">Old Age </label>
+					</div>
+					<div class="col-md-8">
+						<input type="number" name="cust_old_age" class="disabled input form-control-sm" readonly>
+					</div>
+				</div>
+			</div>
+
+			<div class="inputfield">
+				<div class="row">
+					<div class="col-md-4">
+						<label for="cust_new_name">New Age <span class="star">*</span> </label>
+					</div>
+					<div class="col-md-8">
+						<input name="cust_new_age" class="input form-control-sm" data-parsley-type="number"	data-parsley-type="integer" maxlength="3" required>
+					</div>
+				</div>
+			</div>
+
+			<div class="inputfield">
+				<div class="row">
+					<div class="col-md-4">
+						<label for="cust_old_address">Old Address </label>
+					</div>
+					<div class="col-md-8">
+						<textarea class="textarea form-control-sm disabled" name="cust_old_address" readonly></textarea>
+					</div>
+				</div>
+			</div>
+
+			<div class="inputfield">
+				<div class="row">
+					<div class="col-md-4">
+						<label for="cust_new_address">New Address <span class="star">*</span> </label>
+					</div>
+					<div class="col-md-8">
+						<textarea name="cust_new_address" class="textarea form-control-sm" required></textarea>
+					</div>
+				</div>
+			</div>
+
+			<input type="hidden" name="country" id="countryId" value="IN" />
+
+			<div class="inputfield">
+				<div class="row">
+					<div class="col-md-4">
+						<label for="cust_state">State <span class="star">*</span> </label>
+					</div>
+					<div class="col-md-8">
+						<div class="custom_select ">
+							<select name="cust_state" class="states order-alpha" id="stateId" required>
+								<option value="">Select State</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="inputfield">
+				<div class="row">
+					<div class="col-md-4">
+						<label for="cust_city">City <span class="star">*</span> </label>
+					</div>
+					<div class="col-md-8">
+						<div class="custom_select ">
+							<select name="cust_city" class="cities order-alpha" id="cityId" required>
+								<option value="">Select City</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<span class="star font-small font-weight-bolder ml-1 mt-0 pt-0"> (*) Fields are compulsory</span>
+
 			<div>
-			<input type="submit" value="Update" class="btn btn-sm black gold-text">
-			<input type="reset" value="Reset" class="ml-lg-5 btn btn-sm black white-text">
+				<input type="submit" value="Update" class="btn btn-sm black gold-text">
+				<input type="reset" value="Reset" class="ml-lg-5 btn btn-sm black white-text">
 			</div>
-		 
+
 		</div>
 
 	</form>
-	</div>
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
-	<script src="//geodata.solutions/includes/statecity.js"></script>
+</div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//geodata.solutions/includes/statecity.js"></script>
 
 {% endblock %}
-

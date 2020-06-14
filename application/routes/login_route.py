@@ -28,3 +28,8 @@ def updateCustomer():
 @app.route('/delete_customer')
 def deleteCustomer():
     return render_template('delete_customer.html')
+
+
+@app.route('/customer_status')
+def customerStatus():
+    return render_template('customer_status.html', datatable = True)
