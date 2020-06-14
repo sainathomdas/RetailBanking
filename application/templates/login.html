@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %} Login {% endblock %}
+{% block title %} Mars | Login {% endblock %}
 
 {% block content %}
 
@@ -9,16 +9,7 @@
     <h1 class="text-center text-white" style=" font-family: 'Fira Sans', sans-serif;"> Welcome to <span style="color: gold;">MARS BANK</span></h1>
     <br>
 
-    {% with messages = get_flashed_messages(with_categories = True) %}
-	  {% if messages %}
-	    {% for category, message in messages %}
-		  <div class="alert alert-{{ category  }} alert-dismissible container" role="alert">
-		  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-			{{message}}
-		  </div>
-		{% endfor %}
-	  {% endif %}
-    {% endwith %}
+    {% include "includes/flash_message.html" %}
     
 
     <div class="login-wrapper">
