@@ -9,11 +9,27 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
-                        <a class="nav-link mx-2 active pb-0" href="#">Home </a>
+                        <a class="nav-link mx-2 {% if home %}
+                                active
+                        {% endif %}
+                         pb-0" href="#">Home </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link mx-2  pb-0" href="#">Customer Management</a>
-                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle mx-2 pb-0 {% if customer_mgmt %}
+                        active
+                {% endif %} "
+                 id="customer-mgmt" data-toggle="dropdown"
+                          aria-haspopup="true" aria-expanded="false">Customer Management
+                        </a>
+                        <div class="dropdown-menu dropdown-default" aria-labelledby="customer-mgmt">
+                          <a class="text-center dropdown-item" href=" {{ url_for('createCustomer') }}">Create Customer</a>
+                          <a class="text-center dropdown-item" href=" {{ url_for('customerManagement') }}">Manage Customers</a>
+                          
+                        </div>
+                      </li>
+
+            
                     <li class="nav-item">
                         <a class="nav-link mx-2  pb-0" href="#">Account Management</a>
                     </li>

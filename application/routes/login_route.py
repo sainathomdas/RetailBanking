@@ -18,7 +18,7 @@ def login():
 
 @app.route('/create_customer')
 def createCustomer():
-    return render_template('create_customer.html')
+    return render_template('create_customer.html', customer_mgmt = True)
     
 @app.route('/update_customer')
 def updateCustomer():
@@ -28,3 +28,12 @@ def updateCustomer():
 @app.route('/delete_customer')
 def deleteCustomer():
     return render_template('delete_customer.html')
+
+
+@app.route('/customer_status')
+def customerStatus():
+    return render_template('customer_status.html', datatable = True)
+
+@app.route('/customer_management')
+def customerManagement():
+    return render_template('customer_mgmt.html', datatable = True, customer_mgmt = True)
