@@ -14,16 +14,16 @@
 <link href=" {{ url_for('static',filename = 'css/addons/datatables.min.css') }}" rel="stylesheet">
 
 <div class="container table-responsive mt-2">
-  <table id="customer_status_table" class="table container table-sm table-hover table-bordered table-striped text-center" align="center">
+  <table id="datatable" class="table container table-sm table-hover table-bordered table-striped text-center" align="center">
     <thead style="background-color: gold;">
       <tr>
         <th>Customer ID</th>
-        <th scope="col">Customer SSN ID</th>
-        <th scope="col">Status</th>
-        <th scope="col">Message</th>
-        <th scope="col">Last Updated</th>
-        <th scope="col">Operations</th>
-        <th scope="col">View Profile</th>
+        <th scope="col" class="font-weight-bold">Customer SSN ID</th>
+        <th scope="col" class="font-weight-bold">Status</th>
+        <th scope="col" class="font-weight-bold">Message</th>
+        <th scope="col" class="font-weight-bold">Last Updated</th>
+        <th scope="col" class="font-weight-bold">Operations</th>
+        <th scope="col" class="font-weight-bold">View Profile</th>
 
       </tr>
     </thead>
