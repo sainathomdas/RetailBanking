@@ -24,9 +24,8 @@
                         <a class="text-center dropdown-item" href=" {{ url_for('createCustomer') }}">Create Customer</a>
                         <a class="text-center dropdown-item" href=" {{ url_for('updateCustomer') }}">Edit Customer</a>
                         <a class="text-center dropdown-item" href=" {{ url_for('deleteCustomer') }}">Delete Customer</a>
-                        <a class="text-center dropdown-item" href=" {{ url_for('viewCustomer') }}">View Customer</a>
-                        <a class="text-center dropdown-item" href=" {{ url_for('customerManagement') }}">Manage
-                            Customers</a>
+                        <!-- <a class="text-center dropdown-item" href=" {{ url_for('customerManagement') }}">Manage
+                            Customers</a> -->
 
                     </div>
                 </li>
@@ -44,13 +43,34 @@
                     </div>
                 </li>
 
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle mx-2 pb-0 {% if activate_status_details %}
+                        active
+                {% endif %} " id="status" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">Status Details
+                    </a>
+                    <div class="dropdown-menu dropdown-default" aria-labelledby="status">
+                        <a class="text-center dropdown-item" href=" {{ url_for('customerStatus') }}">Customer Status</a>
+                        <a class="text-center dropdown-item" href=" {{ url_for('accountStatus') }}">Account Status</a>
+                    </div>
+                </li>
 
-                <li class="nav-item">
-                    <a class="nav-link mx-2  pb-0" href="#">Status Details</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle mx-2 pb-0 {% if activate_search %}
+                        active
+                {% endif %} " id="search" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">Search &nbsp; <i class="fa fa-search" aria-hidden="true"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-default" aria-labelledby="search">
+                        <a class="text-center dropdown-item" href=" {{ url_for('customerSearch') }}">Search Customer</a>
+                        <a class="text-center dropdown-item" href=" {{ url_for('accountSearch') }}">Search Account</a>
+                    </div>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link mx-2  pb-0" href="#">Account Operations</a>
-                </li>
+
+              
+
+
+
                 <li class="nav-item">
                     <a class="nav-link mx-2  pb-0" href=" {{ url_for('logout') }} ">Logout</a>
                 </li>

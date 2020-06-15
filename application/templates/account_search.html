@@ -1,16 +1,15 @@
 {% extends 'base.html' %}
 
-{% block title %} Mars | Delete Account {% endblock %}
+{% block title %} Mars | Search Account {% endblock %}
 
 {% block content %}
 
 {% if search %}
-<div class="wrapper">
-    <div class="title mt-5">
-        Delete Account
+<div class="wrapper mt-5">
+    <div class="title">
+        Search Account
     </div>
-
-    <form action=" {{ url_for('deleteAccount') }} " method="POST" data-parsley-validate>
+    <form action=" {{ url_for('accountSearch') }} " method="POST" data-parsley-validate>
         <div class="form">
             <div class="inputfield">
                 <div class="row">
@@ -21,7 +20,7 @@
                         <div class="custom_select">
                             <select name="input_type" required>
                                 <option value="cust_id">Customer ID</option>
-                                <option value="ssn_id">SSN ID</option>
+                                <option value="acc_id">Account ID</option>
                             </select>
                         </div>
                     </div>
@@ -43,18 +42,22 @@
 
     <hr class="w-100 mt-4">
 </div>
+</div>
+
 {% endif %}
+
 
 {% include "includes/flash_message.html" %}
 
 {% if data %}
 <div class="wrapper mt-5">
-    <div class="title mt-5">
-        Delete Account
+    <div class="title">
+        Searched Account
     </div>
-    <form action=" {{ url_for('deleteAccountFromDatabase') }} " method="POST">
+    <form action=" {{ url_for('updateCustomer') }} " method="POST">
+        <input name="input_type" value="cust_id" hidden>
+        <input name="id" value="" hidden>
         <div class="form">
-
             <div class="inputfield">
                 <div class="row">
                     <div class="col-md-4">
@@ -80,10 +83,10 @@
             <div class="inputfield">
                 <div class="row">
                     <div class="col-md-4">
-                        <label for="account_id">Account ID </label>
+                        <label for="cust_name">Customer Name </label>
                     </div>
                     <div class="col-md-8">
-                        <input type="text" name="account_id" class="input form-control-sm disabled" readonly>
+                        <input type="text" name="cust_name" class="input form-control-sm disabled" readonly>
                     </div>
                 </div>
             </div>
@@ -91,20 +94,30 @@
             <div class="inputfield">
                 <div class="row">
                     <div class="col-md-4">
-                        <label for="account_type">Account Type </label>
+                        <label for="cust_age">Age </label>
                     </div>
                     <div class="col-md-8">
-                        <input type="text" name="account_type" class="input form-control-sm disabled" readonly>
+                        <input type="number" name="cust_age" class="input form-control-sm disabled" readonly>
                     </div>
                 </div>
             </div>
 
-            <div class="mt-4 justify-content-center">
-                <center>
-                <input type="submit" value="Delete" class="btn btn-sm red white-text">
-            </center>
-                <!-- <input type="rest" value="Cancel" class="ml-lg-5 btn btn-sm black white-text"> -->
+            <div class="inputfield">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="cust_address">Address </label>
+                    </div>
+                    <div class="col-md-8">
+                        <textarea name="cust_address" class="textarea form-control-sm disabled" readonly></textarea>
+                    </div>
+                </div>
             </div>
+
+            <!-- <div>
+                <input type="submit" value="Edit" class="btn btn-sm red white-text">
+
+                <a href=" {{ url_for('customerManagement') }} " class=" btn btn-sm black white-text ml-lg-5">Back</a>
+            </div> -->
 
         </div>
 

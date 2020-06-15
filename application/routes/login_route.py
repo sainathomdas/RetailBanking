@@ -149,7 +149,7 @@ def viewCustomer():
 @app.route('/customer_status/')
 # @is_logged_in
 def customerStatus():
-    return render_template('customer_status.html', datatable = True)
+    return render_template('customer_status.html', datatable = True, activate_status_details = True)
 
 @app.route('/customer_management')
 # @is_logged_in
@@ -202,3 +202,34 @@ def deleteAccountFromDatabase():
     if request.method == 'POST':
         # same like updateIntoDatabase
         return redirect(url_for('deleteAccount'))
+
+
+@app.route('/account_status/')
+def accountStatus():
+    return render_template('account_status.html', activate_status_details = True, datatable = True)
+
+@app.route('/customer_search', methods = ['GET', 'POST'])
+def customerSearch():
+    if request.method == 'POST':
+        if('input_type' in request.form and 'id' in request.form):
+            input_type = request.form['input_type']
+            id = request.form['id']
+            if 1==1: # if customer found
+                return render_template('customer_search.html', activate_search = True, search = False, data = 'pass data')
+            else:
+                flash(f'Customer with {input_type} = {id} not found! ')
+                return redirect(url_for('customerSearch')) 
+    return render_template('customer_search.html', activate_search = True, search = True)
+
+@app.route('/account_search/', methods = ['GET', 'POST'])
+def accountSearch():
+    if request.method == 'POST':
+        if('input_type' in request.form and 'id' in request.form):
+            input_type = request.form['input_type']
+            id = request.form['id']
+            if 1==1: # if account found
+                return render_template('account_search.html', activate_search = True, search = False, data = 'pass data')
+            else:
+                flash(f'Account with {input_type} = {id} not found! ')
+                return redirect(url_for('accountSearch'))
+    return render_template('account_search.html', activate_search = True, search = True)

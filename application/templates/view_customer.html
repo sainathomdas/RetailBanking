@@ -8,9 +8,9 @@
 	<div class="title">
 		View Customer
 	</div>
-
+</div>
 	{% include "includes/flash_message.html" %}
-
+<div class="wrapper">
 	<form action=" {{ url_for('updateCustomer') }} " method="POST">
 		<input name="input_type" value="cust_id" hidden>
 		<input name="id" value="" hidden>
