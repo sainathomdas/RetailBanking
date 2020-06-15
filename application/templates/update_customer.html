@@ -5,13 +5,54 @@
 {% block content %}
 
 <div class="wrapper">
-	<div class="title">
+	<div class="title mt-2">
 		Update Customer
 	</div>
 
-	{% include "includes/flash_message.html" %}
 
-	<form action="" method="POST"  data-parsley-validate>
+	<form action=" {{ url_for('searchCustomer') }} " method="POST" data-parsley-validate>
+		<div class="form">
+
+			<input type="text" name="from_page" value="update_customer.html" hidden>
+			<input type="text" name="redirect_url" value="updateCustomer" hidden>
+
+			<div class="inputfield">
+				<div class="row">
+					<div class="col-md-3">
+						<label for="" class="pt-2">Input Type</label>
+					</div>
+					<div class="col-md-4">
+						<div class="custom_select">
+							<select name="input_type" required>
+								<option value="cust_id">Customer ID</option>
+								<option value="ssn_id">SSN ID</option>
+							</select>
+						</div>
+					</div>
+					<div class="input-group form-sm  form-2 pl-0 col-md-5 ">
+						<input name="id" class="form-control my-0 py-1 " type="text" placeholder="Enter ID"
+							aria-label="Search" required style="border: 1px solid black;" minlength="9" maxlength="9" data-parsley-type="integer">
+						<div class="input-group-append">
+							<button type="submit" style="border: 1px solid black;"><span class="input-group-text "
+									id="basic-text1"><i class="fas fa-search text-grey"
+										aria-hidden="true"></i></span></button>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+
+	<hr class="w-100 mt-4">
+</div>
+
+{% include "includes/flash_message.html" %}
+
+{% if data %}
+
+<div class="wrapper">
+	<form action="" method="POST" data-parsley-validate>
 		<div class="form">
 			<div class="inputfield">
 				<div class="row">
@@ -74,7 +115,8 @@
 						<label for="cust_new_name">New Age <span class="star">*</span> </label>
 					</div>
 					<div class="col-md-8">
-						<input name="cust_new_age" class="input form-control-sm" data-parsley-type="number"	data-parsley-type="integer" maxlength="3" required>
+						<input name="cust_new_age" class="input form-control-sm" data-parsley-type="number"
+							data-parsley-type="integer" maxlength="3" required>
 					</div>
 				</div>
 			</div>
@@ -145,7 +187,13 @@
 
 	</form>
 </div>
+
+
+
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="//geodata.solutions/includes/statecity.js"></script>
+{% endif %}
+
+
 
 {% endblock %}
