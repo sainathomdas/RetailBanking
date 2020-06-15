@@ -25,11 +25,12 @@
 <body>
 
   {% if not login_page  %}
-  {% if 1==1 %}
-  {% include "includes/customer_executive_navbar.html" %}
-  {% else %}
-  {% include "includes/cashier_navbar.html" %}
-  {% endif %}
+
+    {% if session['login_type']  == 'cust_executive' %}
+      {% include "includes/customer_executive_navbar.html" %}
+    {% else %}
+      {% include "includes/cashier_navbar.html" %}
+    {% endif %}
   {% endif %}
 
 

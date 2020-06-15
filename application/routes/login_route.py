@@ -23,26 +23,29 @@ class ExecutiveAccount(db.Model):
 db.create_all()
 
 @app.route('/home/')
-def home():
+def home(login_type = None):
     return render_template('home.html', home = True)
 
 @app.route('/')
 @app.route('/login/',methods = ['GET', 'POST'])
 def login():
+    if 'logged_in' in session:
+        if session['logged_in']:
+            return redirect(url_for('home'))
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
         login_type = request.form['login_type']
-        
         result = db.session.query(ExecutiveAccount).filter(ExecutiveAccount.username==username)
         
         if(len(result.all())>0):
             for row in result:
-                if(username == row.username and password_candidate == row.password):
+                if(username == row.username and password == row.password):
                     session['logged_in'] = True
                     session['username'] = username
+                    session['login_type'] = login_type
                     flash("Successfully Logged In","success")
-                    return render_template('create_customer.html')
+                    return redirect(url_for('home'))
                 else:
                     flash("Wrong password!! Try Again !!",category= "warning")
                     return render_template('login.html', login_page = True)
