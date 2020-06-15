@@ -6,12 +6,12 @@
 
 {% if search %}
 <div class="wrapper">
-	<div class="title mt-2">
+	<div class="title mt-4">
 		Update Customer
 	</div>
 
 
-	<form action=" {{ url_for('searchCustomer') }} " method="POST" data-parsley-validate>
+	<form action=" {{ url_for('updateCustomer') }} " method="POST" data-parsley-validate>
 		<div class="form">
 
 			<input type="text" name="from_page" value="update_customer.html" hidden>

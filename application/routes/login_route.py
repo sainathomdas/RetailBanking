@@ -4,7 +4,8 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from passlib.hash import sha256_crypt
 from functools import wraps
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///Database.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://sainath:123456@localhost/retailbanking'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 # Table for customer executive account
@@ -19,6 +20,7 @@ class ExecutiveAccount(db.Model):
 
 # password = sha256_crypt.encrypt(passwd)
 # if(sha256_crypt.verify(password_candidate,password))
+db.create_all()
 
 @app.route('/')
 @app.route('/login/',methods = ['GET', 'POST'])
@@ -38,7 +40,7 @@ def login():
                     flash("Successfully Logged In","success")
                     return render_template('create_customer.html')
                 else:
-                    flash("Wrong password!! Try Again !!","warning")
+                    flash("Wrong password!! Try Again !!",category= "warning")
                     return render_template('login.html', login_page = True)
         else:
             flash("Invalid Username","warning")
@@ -101,7 +103,7 @@ def updateIntoDatabase():
         cust_state = request.form['cust_state']
         cust_city = request.form['cust_city']
         #udpate into database
-        if 1==1:
+        if 1==1: #if updation is sucess
             flash("Updated Successfully", category= 'success')
             return redirect(url_for('updateCustomer'))
         else:
@@ -112,7 +114,17 @@ def updateIntoDatabase():
 @app.route('/delete_customer/', methods = ['GET', 'POST'])
 @is_logged_in
 def deleteCustomer():
-    return render_template('delete_customer.html')
+    if request.method == "POST":
+        if(request.form['input_type'] and request.form['id']):
+            input_type = request.form['input_type']
+            id = request.form['id']
+            #search for customer data with id and input_type...write a funtion to pull data from db using input_Type and id
+            if 1==1: #if customer found
+                return render_template('delete_customer.html',search = False, data = 'sainath')
+            else:
+                flash(f"Customer with {input_type} = {id} not found!", category='warning')
+    
+    return render_template('delete_customer.html', search = True)
 
 @app.route('/view_customer', methods = ['GET', 'POST'])
 @is_logged_in
