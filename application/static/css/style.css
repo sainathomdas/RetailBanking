@@ -36,7 +36,7 @@ nav {
 }
 .dropdown-menu{
 background-color: gold;
-z-index: -100;
+z-index: 100;
 margin-top: 10;
 }
 

@@ -10,11 +10,19 @@
 	</div>
 
 
+
 	<form action=" {{ url_for('searchCustomer') }} " method="POST" data-parsley-validate>
 		<div class="form">
 
 			<input type="text" name="from_page" value="update_customer.html" hidden>
 			<input type="text" name="redirect_url" value="updateCustomer" hidden>
+
+	<form id="search_form" action=" {{ url_for('searchCustomer') }} " method="POST" data-parsley-validate>
+		<div class="form">
+
+			<!-- <input type="text" name="from_page" value="update_customer.html" hidden>
+			<input type="text" name="redirect_url" value="updateCustomer" hidden> -->
+
 
 			<div class="inputfield">
 				<div class="row">
@@ -23,15 +31,25 @@
 					</div>
 					<div class="col-md-4">
 						<div class="custom_select">
+
 							<select name="input_type" required>
+
+							<select name="input_type" required id="input_type">
+
 								<option value="cust_id">Customer ID</option>
 								<option value="ssn_id">SSN ID</option>
 							</select>
 						</div>
 					</div>
 					<div class="input-group form-sm  form-2 pl-0 col-md-5 ">
+
 						<input name="id" class="form-control my-0 py-1 " type="text" placeholder="Enter ID"
 							aria-label="Search" required style="border: 1px solid black;" minlength="9" maxlength="9" data-parsley-type="integer">
+
+						<input type="number" name="id" id="id" class="form-control my-0 py-1 " type="text"
+							placeholder="Enter ID" aria-label="Search" required style="border: 1px solid black;"
+							required minlength="9" maxlength="9">
+
 						<div class="input-group-append">
 							<button type="submit" style="border: 1px solid black;"><span class="input-group-text "
 									id="basic-text1"><i class="fas fa-search text-grey"
@@ -44,6 +62,11 @@
 		</div>
 	</form>
 
+	<div id="alert" class="alert alert-warning alert-dismissible container" role="alert" style="display: none;">
+		<button type="button" class="m-0 float-right"><span onclick="window.location.reload();">×</span></button>
+		<span id="alert_msg"> </span>
+	</div>
+
 	<hr class="w-100 mt-4">
 </div>
 
@@ -52,6 +75,11 @@
 {% if data %}
 
 <div class="wrapper">
+
+
+
+<div class="wrapper" id="customer_details_wrapper" style="display: none;">
+
 	<form action="" method="POST" data-parsley-validate>
 		<div class="form">
 			<div class="inputfield">
@@ -82,7 +110,8 @@
 						<label for="cust_old_name">Old Customer Name</label>
 					</div>
 					<div class="col-md-8">
-						<input type="text" name="cust_old_name" class="input form-control-sm disabled" readonly>
+						<input type="text" id="cust_old_name" name="cust_old_name"
+							class="input form-control-sm disabled" readonly>
 					</div>
 				</div>
 			</div>
@@ -93,7 +122,8 @@
 						<label for="cust_new_name">New Customer Name <span class="star">*</span> </label>
 					</div>
 					<div class="col-md-8">
-						<input type="text" name="cust_new_name" class="input form-control-sm" required>
+						<input type="text" id="cust_new_name" name="cust_new_name" class="input form-control-sm"
+							required>
 					</div>
 				</div>
 			</div>
@@ -190,7 +220,11 @@
 
 
 
+
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+
 <script src="//geodata.solutions/includes/statecity.js"></script>
 {% endif %}
 
