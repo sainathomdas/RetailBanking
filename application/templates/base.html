@@ -15,7 +15,7 @@
   <link href=" {{ url_for('static', filename = 'css/bootstrap.min.css') }} " rel="stylesheet">
   <!-- Material Design Bootstrap -->
   <link href=" {{ url_for('static', filename = 'css/mdb.min.css') }}" rel="stylesheet">
-
+  <link rel='stylesheet' type='text/css' media='screen' href="{{ url_for('static',filename = 'css/parsley.css') }}">
   <link rel='stylesheet' type='text/css' media='screen' href="{{ url_for('static',filename = 'css/style.css') }}">
 
 
@@ -30,8 +30,6 @@
   {% include "includes/cashier_navbar.html" %}
   {% endif %}
   {% endif %}
-
-
 
 
   {% block content %}
@@ -56,7 +54,7 @@
 
           <!-- Content -->
           <h5 class="text-uppercase gold-text font-weight-bold">About Us</h5>
-          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Perspiciatis ipsam quisquam facere, voluptas ab
+          <p class="text-justify">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Perspiciatis ipsam quisquam facere, voluptas ab
             at, magnam sequi consequuntur sint a necessitatibus temporibus minus? Reprehenderit nisi laudantium eum
             recusandae magnam nam.</p>
 
@@ -134,8 +132,30 @@
   <script type="text/javascript" src=" {{ url_for('static', filename = 'js/bootstrap.min.js') }}"></script>
   <!-- MDB core JavaScript -->
   <script type="text/javascript" src=" {{ url_for('static', filename = 'js/mdb.min.js') }}"></script>
+  <script type="text/javascript" src=" {{ url_for('static', filename = 'js/parsley.min.js') }}"></script>
+  
   <script type="text/javascript" src=" {{ url_for('static', filename = 'js/my_js.js') }}"></script>
 
+
+{% if datatable %}
+    <!-- MDBootstrap Datatables  -->
+  <script type="text/javascript" src="{{ url_for('static', filename = 'js/addons/datatables.min.js') }}"></script>
+  <script>
+    $(document).ready(function () {
+      $('#datatable').DataTable({
+        "ordering": false,
+        // "scrollY": "1000px",
+        // "scrollCollapse": true  
+      });
+      $('.dataTables_length').addClass('bs-select');
+
+    });
+  </script>
+{% endif %}
+
+
+
+  
 </body>
 
 </html>

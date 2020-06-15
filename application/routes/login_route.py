@@ -30,13 +30,13 @@ def login():
         password = request.form['password']
         login_type = request.form['login_type']
         
-        result = db.session.query(ExecutiveAccount).filter(ExecutiveAccount.username==user_name)
+        result = db.session.query(ExecutiveAccount).filter(ExecutiveAccount.username==username)
         
         if(len(result.all())>0):
             for row in result:
-                if(user_name == row.username and password_candidate == row.password):
+                if(username == row.username and password_candidate == row.password):
                     session['logged_in'] = True
-                    session['username'] = user_name
+                    session['username'] = username
                     flash("Successfully Logged In","success")
                     return render_template('create_customer.html')
                 else:
