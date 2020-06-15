@@ -22,6 +22,10 @@ class ExecutiveAccount(db.Model):
 # if(sha256_crypt.verify(password_candidate,password))
 db.create_all()
 
+@app.route('/home/')
+def home():
+    return render_template('home.html', home = True)
+
 @app.route('/')
 @app.route('/login/',methods = ['GET', 'POST'])
 def login():
@@ -61,24 +65,24 @@ def is_logged_in(f):
 
 
 @app.route('/logout')
-@is_logged_in
+#@is_logged_in
 def logout():
     session.clear()
     flash('You are now logged out !','success')
-    return render_template('login.html')
+    return redirect(url_for('login'))
 
 
 
 @app.route('/create_customer/')
-@is_logged_in
+# @is_logged_in
 def createCustomer():
-    return render_template('create_customer.html', customer_mgmt = True)
+    return render_template('create_customer.html', activate_customer_mgmt = True)
     
 @app.route('/update_customer/', methods = ['GET', 'POST'])
-@is_logged_in
+# @is_logged_in
 def updateCustomer():
     if request.method == "POST":
-        if(request.form['input_type'] and request.form['id']):
+        if( 'input_type' in request.form and 'id' in request.form):
             input_type = request.form['input_type']
             id = request.form['id']
             #search for customer data with id and input_type...write a funtion to pull data from db using input_Type and id
@@ -87,7 +91,7 @@ def updateCustomer():
             else:
                 flash(f"Customer with {input_type} = {id} not found!", category='warning')
 
-    return render_template('update_customer.html', search = True)
+    return render_template('update_customer.html', search = True,  activate_customer_mgmt = True)
 
 @app.route('/update_into_database', methods = ['GET', 'POST'])
 @is_logged_in
@@ -112,10 +116,10 @@ def updateIntoDatabase():
 
 
 @app.route('/delete_customer/', methods = ['GET', 'POST'])
-@is_logged_in
+# @is_logged_in
 def deleteCustomer():
     if request.method == "POST":
-        if(request.form['input_type'] and request.form['id']):
+        if( 'input_type' in request.form and 'id' in request.form):
             input_type = request.form['input_type']
             id = request.form['id']
             #search for customer data with id and input_type...write a funtion to pull data from db using input_Type and id
@@ -124,22 +128,22 @@ def deleteCustomer():
             else:
                 flash(f"Customer with {input_type} = {id} not found!", category='warning')
     
-    return render_template('delete_customer.html', search = True)
+    return render_template('delete_customer.html', search = True,  activate_customer_mgmt = True)
 
-@app.route('/view_customer', methods = ['GET', 'POST'])
-@is_logged_in
+@app.route('/view_customer/', methods = ['GET', 'POST'])
+# @is_logged_in
 def viewCustomer():
-    return render_template('view_customer.html', datatable = True, customer_mgmt = True)
+    return render_template('view_customer.html', datatable = True,  activate_customer_mgmt = True)
 
-@app.route('/customer_status')
-@is_logged_in
+@app.route('/customer_status/')
+# @is_logged_in
 def customerStatus():
     return render_template('customer_status.html', datatable = True)
 
 @app.route('/customer_management')
-@is_logged_in
+# @is_logged_in
 def customerManagement():
-    return render_template('customer_mgmt.html', datatable = True, customer_mgmt = True)
+    return render_template('customer_mgmt.html', datatable = True,  activate_customer_mgmt = True)
 
 
 

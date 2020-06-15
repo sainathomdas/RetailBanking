@@ -30,6 +30,17 @@ nav {
     font-family: 'Fira Sans', sans-serif;
 }
 
+.dropdown:hover .dropdown-menu {
+  display: block;
+  margin-top: 0;
+}
+.dropdown-menu{
+background-color: gold;
+z-index: -100;
+margin-top: 10;
+}
+
+
 @media (min-width:320px) {
     /* smartphones, iPhone, portrait 480x320 phones */
 }
@@ -158,6 +169,14 @@ header {
 .disabled{
   background-color: lightgrey;
 }
+.title{
+  font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    color: black;
+    text-transform: uppercase;
+    text-align: center;
+}
 /* =================================== end ofGeneral ==================================== */
 
 
@@ -169,7 +188,7 @@ header {
   
     margin: 0 auto;
  
-    padding: 30px;
+    padding: 15 px;
   }
   
   .wrapper .title{
@@ -187,7 +206,7 @@ header {
   
   .wrapper .form .inputfield{
     margin-bottom: 15px;
-    display: flex;
+    /* display: flex; */
    /* align-items: center;*/
   }
   
