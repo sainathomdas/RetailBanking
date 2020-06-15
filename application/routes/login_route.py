@@ -79,7 +79,7 @@ def updateCustomer():
         if(request.form['input_type'] and request.form['id']):
             input_type = request.form['input_type']
             id = request.form['id']
-            #search for customer data with id and input_type
+            #search for customer data with id and input_type...write a funtion to pull data from db using input_Type and id
             if 1==1: #if customer found
                 return render_template('update_customer.html',search = False, data = 'sainath')
             else:
@@ -100,6 +100,13 @@ def updateIntoDatabase():
         cust_new_address = request.form['cust_new_address']
         cust_state = request.form['cust_state']
         cust_city = request.form['cust_city']
+        #udpate into database
+        if 1==1:
+            flash("Updated Successfully", category= 'success')
+            return redirect(url_for('updateCustomer'))
+        else:
+            flash("An unknown error occured", category= 'warning')
+            return redirect(url_for('updateCustomer'))
 
 
 @app.route('/delete_customer/', methods = ['GET', 'POST'])
