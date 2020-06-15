@@ -22,9 +22,7 @@ class ExecutiveAccount(db.Model):
 # if(sha256_crypt.verify(password_candidate,password))
 db.create_all()
 
-@app.route('/home/')
-def home(login_type = None):
-    return render_template('home.html', home = True)
+
 
 @app.route('/')
 @app.route('/login/',methods = ['GET', 'POST'])
@@ -44,7 +42,7 @@ def login():
                     session['logged_in'] = True
                     session['username'] = username
                     session['login_type'] = login_type
-                    flash("Successfully Logged In","success")
+                    # flash("Successfully Logged In","success")
                     return redirect(url_for('home'))
                 else:
                     flash("Wrong password!! Try Again !!",category= "warning")
@@ -67,14 +65,20 @@ def is_logged_in(f):
     return wrap
 
 @app.route('/logout')
-#@is_logged_in
+@is_logged_in
 def logout():
     session.clear()
     flash('You are now logged out !','success')
     return redirect(url_for('login'))
+    
+@app.route('/home/')
+@is_logged_in
+def home(login_type = None):
+    return render_template('home.html', home = True)
+
 
 @app.route('/create_customer/', methods = ['GET', 'POST'])
-# @is_logged_in
+@is_logged_in
 def createCustomer():
     if request.method == 'POST':
         #create customer and return accordingly
@@ -83,7 +87,7 @@ def createCustomer():
     return render_template('create_customer.html', activate_customer_mgmt = True)
     
 @app.route('/update_customer/', methods = ['GET', 'POST'])
-# @is_logged_in
+@is_logged_in
 def updateCustomer():
     if request.method == "POST":
         if( 'input_type' in request.form and 'id' in request.form):
@@ -120,7 +124,7 @@ def updateIntoDatabase():
 
 
 @app.route('/delete_customer/', methods = ['GET', 'POST'])
-# @is_logged_in
+@is_logged_in
 def deleteCustomer():
     if request.method == "POST":
         if( 'input_type' in request.form and 'id' in request.form):
@@ -145,21 +149,22 @@ def deleteCustomerFromDatabase():
 
 
 @app.route('/view_customer/', methods = ['GET', 'POST'])
-# @is_logged_in
+@is_logged_in
 def viewCustomer():
     return render_template('view_customer.html', datatable = True,  activate_customer_mgmt = True)
 
 @app.route('/customer_status/')
-# @is_logged_in
+@is_logged_in
 def customerStatus():
     return render_template('customer_status.html', datatable = True, activate_status_details = True)
 
 @app.route('/customer_management')
-# @is_logged_in
+@is_logged_in
 def customerManagement():
     return render_template('customer_mgmt.html', datatable = True,  activate_customer_mgmt = True)
 
 @app.route('/create_account/', methods = ['GET', 'POST'])
+@is_logged_in
 def createAccount():
     if request.method == 'POST':
         if( 'cust_id' in request.form and 'account_type' in request.form and 'deposit_amt' in request.form ):
@@ -182,7 +187,7 @@ def createAccount():
 
 
 @app.route('/delete_account/', methods = ['GET', 'POST'])
-# @is_logged_in
+@is_logged_in
 def deleteAccount():
     if request.method == "POST":
         if('input_type' in request.form and 'id' in request.form):
@@ -201,6 +206,7 @@ def deleteAccount():
     return render_template('delete_account.html', search = True,  activate_account_mgmt = True)
 
 @app.route('/delete_account_from_database', methods = ['GET', 'POST'])
+@is_logged_in
 def deleteAccountFromDatabase():
     if request.method == 'POST':
         # same like updateIntoDatabase
@@ -208,10 +214,12 @@ def deleteAccountFromDatabase():
 
 
 @app.route('/account_status/')
+@is_logged_in
 def accountStatus():
     return render_template('account_status.html', activate_status_details = True, datatable = True)
 
 @app.route('/customer_search', methods = ['GET', 'POST'])
+@is_logged_in
 def customerSearch():
     if request.method == 'POST':
         if('input_type' in request.form and 'id' in request.form):
@@ -225,6 +233,7 @@ def customerSearch():
     return render_template('customer_search.html', activate_search = True, search = True)
 
 @app.route('/account_search/', methods = ['GET', 'POST'])
+@is_logged_in
 def accountSearch():
     if request.method == 'POST':
         if('input_type' in request.form and 'id' in request.form):
