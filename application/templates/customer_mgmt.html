@@ -34,8 +34,9 @@
         <td class="font-weight-normal">987654321</td>
         <td class="font-weight-normal">Active</td>
         <td class="font-weight-normal">
-            <form action=" {{ url_for('updateCustomer') }} " method="POST">
-                <input name="cust_id" value="" hidden>
+            <form action=" {{ url_for('updateCustomer') }} " method="GET">
+              <input name="input_type" value="cust_id" hidden>
+                <input name="id" value="" hidden>
                 <input type="submit" class="border-0 btn-sm px-3" style="color: white;background-color: blue;" value="Update">
             </form>
         </td>        
@@ -46,7 +47,7 @@
             </form>
         </td>
         <td class="font-weight-normal">
-            <form action="" method="POST">
+            <form action=" {{ url_for('viewCustomer') }} " method="POST">
                 <input name="cust_id" value="" hidden>
                 <input type="submit" class="border-0 btn-success btn-sm px-4" style="color: white;" value="View">
             </form>

@@ -16,7 +16,7 @@
 			<div class="inputfield">
 				<div class="row">
 					<div class="col-md-4">
-						<label for="cust_ssid">Customer SSN ID </label>
+						<label for="cust_ssid">Customer ID </label>
 					</div>
 					<div class="col-md-8">
 						<input type="number" name="cust_ssid" class="input form-control-sm disabled" readonly>
@@ -73,7 +73,7 @@
 
 			<div>
 				<input type="submit" value="Delete" class="btn btn-sm red white-text">
-				<input type="" value="Cancel" class="ml-lg-5 btn btn-sm black white-text">
+				<a href=" {{ url_for('customerManagement') }} " class=" btn btn-sm black white-text ml-lg-5">Cancel</a>
 			</div>
 
 		</div>
