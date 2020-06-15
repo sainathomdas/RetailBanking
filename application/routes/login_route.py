@@ -28,7 +28,7 @@ def login():
         password = request.form['password']
         login_type = request.form['login_type']
         
-    result = db.session.query(ExecutiveAccount).filter(ExecutiveAccount.username==user_name)
+        result = db.session.query(ExecutiveAccount).filter(ExecutiveAccount.username==user_name)
         
         if(len(result.all())>0):
             for row in result:
@@ -43,7 +43,6 @@ def login():
         else:
             flash("Invalid Username","warning")
             return render_template('login.html', login_page = True)
-
 
     return render_template('login.html', login_page = True)
 
