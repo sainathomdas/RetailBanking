@@ -11,6 +11,9 @@
 	</div>
 
 
+
+	{% include "includes/flash_message.html" %}
+
 	<form action=" {{ url_for('updateCustomer') }} " method="POST" data-parsley-validate>
 		<div class="form">
 			<div class="inputfield">
@@ -45,9 +48,6 @@
 {% endif %}
 
 
-
-{% include "includes/flash_message.html" %}
-
 {% if data %}
 <div class="title mt-5">
 	Update Customer
@@ -62,7 +62,7 @@
 						<label for="cust_ssid">Customer SSN ID <span class="star">*</span> </label>
 					</div>
 					<div class="col-md-8">
-						<input type="number" name="cust_ssid" class="input form-control-sm disabled" value={{data.ssnid}} readonly>
+						<input type="number" name="cust_ssid" class="input form-control-sm disabled" value={{data[1]}} readonly>
 					</div>
 				</div>
 			</div>
@@ -73,7 +73,7 @@
 						<label for="cust_id">Customer ID </label>
 					</div>
 					<div class="col-md-8">
-						<input type="number" name="cust_id" class="input form-control-sm disabled" value={{data.custid}} readonly>
+						<input type="number" name="cust_id" class="input form-control-sm disabled" value={{data[0]}} readonly>
 					</div>
 				</div>
 			</div>
@@ -84,7 +84,7 @@
 						<label for="cust_old_name">Old Customer Name</label>
 					</div>
 					<div class="col-md-8">
-						<input type="text" name="cust_old_name" class="input form-control-sm disabled" value={{data.name}} readonly>
+						<input type="text" name="cust_old_name" class="input form-control-sm disabled" value={{data[2]}} readonly>
 					</div>
 				</div>
 			</div>
@@ -106,7 +106,7 @@
 						<label for="cust_old_age">Old Age </label>
 					</div>
 					<div class="col-md-8">
-						<input type="number" name="cust_old_age" class="disabled input form-control-sm" value={{data.age}} readonly>
+						<input type="number" name="cust_old_age" class="disabled input form-control-sm" value={{data[3]}} readonly>
 					</div>
 				</div>
 			</div>
@@ -129,7 +129,7 @@
 						<label for="cust_old_address">Old Address </label>
 					</div>
 					<div class="col-md-8">
-						<textarea class="textarea form-control-sm disabled" name="cust_old_address" readonly>{{data.address}}</textarea>
+						<textarea class="textarea form-control-sm disabled" name="cust_old_address" readonly>{{data[4]}}, {{ data[6] }}, {{ data[5] }} </textarea>
 					</div>
 				</div>
 			</div>

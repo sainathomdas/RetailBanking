@@ -54,28 +54,20 @@
     <div class="title">
         Searched Account
     </div>
-    <form action=" {{ url_for('updateCustomer') }} " method="POST">
+</div>   
+    {% for row in data %}
+    <div class="wrapper">
+    <form action=" " method="POST" class="mb-5">
         <input name="input_type" value="cust_id" hidden>
         <input name="id" value="" hidden>
         <div class="form">
             <div class="inputfield">
                 <div class="row">
                     <div class="col-md-4">
-                        <label for="cust_ssid">Customer SSN ID </label>
-                    </div>
-                    <div class="col-md-8">
-                        <input type="number" name="cust_ssid" class="input form-control-sm disabled" readonly>
-                    </div>
-                </div>
-            </div>
-
-            <div class="inputfield">
-                <div class="row">
-                    <div class="col-md-4">
                         <label for="cust_id">Customer ID </label>
                     </div>
                     <div class="col-md-8">
-                        <input type="number" name="cust_id" class="input form-control-sm disabled" readonly>
+                        <input type="number" value={{row[1]}} name="cust_id" class="input form-control-sm disabled" readonly>
                     </div>
                 </div>
             </div>
@@ -83,10 +75,10 @@
             <div class="inputfield">
                 <div class="row">
                     <div class="col-md-4">
-                        <label for="cust_name">Customer Name </label>
+                        <label for="acc_id">Account ID </label>
                     </div>
                     <div class="col-md-8">
-                        <input type="text" name="cust_name" class="input form-control-sm disabled" readonly>
+                        <input type="number" value={{row[0]}} name="acc_id" class="input form-control-sm disabled" readonly>
                     </div>
                 </div>
             </div>
@@ -94,24 +86,13 @@
             <div class="inputfield">
                 <div class="row">
                     <div class="col-md-4">
-                        <label for="cust_age">Age </label>
+                        <label for="acc_type">Account Type </label>
                     </div>
                     <div class="col-md-8">
-                        <input type="number" name="cust_age" class="input form-control-sm disabled" readonly>
+                        <input type="text" value="{{row[2]}}" name="acc_type" class="input form-control-sm disabled" readonly>
                     </div>
                 </div>
-            </div>
-
-            <div class="inputfield">
-                <div class="row">
-                    <div class="col-md-4">
-                        <label for="cust_address">Address </label>
-                    </div>
-                    <div class="col-md-8">
-                        <textarea name="cust_address" class="textarea form-control-sm disabled" readonly></textarea>
-                    </div>
-                </div>
-            </div>
+            </div>          
 
             <!-- <div>
                 <input type="submit" value="Edit" class="btn btn-sm red white-text">
@@ -120,9 +101,14 @@
             </div> -->
 
         </div>
-
+        <hr class="w-100">
     </form>
+    
 </div>
+</div>
+    {% endfor %}
+    
+
 {% endif %}
 
 

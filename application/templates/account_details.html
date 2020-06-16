@@ -31,20 +31,24 @@ Account Details
     
     <tbody class="text-dark font-weight-bold">
 
+      {% for row in data %}
       <tr>
-        <td class="font-weight-normal" name='cust_id' >123456789</td>
-        <td class="font-weight-normal">987654321</td>
-        <td class="font-weight-normal">Current</td>
-        <td class="font-weight-normal">Active</td>
-        <td class="font-weight-normal">Account Created</td>
-        <td class="font-weight-normal">2020-06-15 11:54:30</td>
-        <td class="font-weight-normal">12000</td>
+        <td class="font-weight-normal" name='cust_id'> {{ row[1] }} </td>
+        <td class="font-weight-normal">{{ row[0] }} </td>
+        <td class="font-weight-normal">{{ row[2] }} </td>
+        <td class="font-weight-normal">{{ row[6] }} </td>
+        <td class="font-weight-normal">{{ row[4] }} </td>
+        <td class="font-weight-normal">{{ row[5] }} </td>
+        <td class="font-weight-normal">{{ row[3] }} </td>
         <td class="font-weight-normal">
             <a href=" {{ url_for('deposit', acc_id= data.acc_id)}} " class="btn btn-sm text-white p-1" style="background-color: blue;">Deposit</a>
             <a href=" {{ url_for('withdraw', acc_id= data.acc_id)}} " class="btn btn-sm text-white p-1" style="background-color: red;">withdraw</a>
             <a href=" {{ url_for('transfer', acc_id= data.acc_id)}} " class="btn btn-sm text-white p-1" style="background-color: green;">Transfer</a>
          </td>
       </tr>
+      {% endfor %}
+      
+     
 
       
      

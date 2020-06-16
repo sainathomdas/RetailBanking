@@ -29,18 +29,19 @@
     </thead>
     <tbody class="text-dark font-weight-bold">
 
-      <tr>
-        <td class="font-weight-normal">123456789</td>
-        <td class="font-weight-normal">987654321</td>
-        <td class="font-weight-normal">Current</td>
-        <td class="font-weight-normal">Active</td>
-        <td class="font-weight-normal">Account Creation Complete</td>
-        <td class="font-weight-normal">2020-06-13 20:04:04</td>        
-        <td class="font-weight-normal"> <a href="#!" style="color: blue;text-decoration: none;"> Refresh </a> </td>
-
+     {% for row in data %}      
+<tr>
+        <td class="font-weight-normal">{{ row[1] }}</td>
+        <td class="font-weight-normal">{{ row[0] }}</td>
+        <td class="font-weight-normal">{{ row[2] }}</td>
+        <td class="font-weight-normal">{{ row[6] }}</td>
+        <td class="font-weight-normal">{{ row[4] }}</td>
+        <td class="font-weight-normal">{{ row[5] }}</td>        
+        <td class="font-weight-normal"> <a href=" {{ url_for('accountStatus') }} " style="color: blue;text-decoration: none;"> Refresh </a> </td>
       </tr>
 
       
+     {% endfor %}
      
 
     </tbody>

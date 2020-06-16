@@ -1,54 +1,17 @@
 from application import app
+from application import conn
 from flask import render_template, request, redirect, url_for, flash, session
-from flask_sqlalchemy import SQLAlchemy
-from datetime import datetime
+from datetime import datetime, date
 from passlib.hash import sha256_crypt
 from functools import wraps
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://sainath:123456@localhost/retailbanking'
-# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///Database.db'
-db = SQLAlchemy(app)
+from datetime import datetime
+from application.models import login as login_table
+from application.models import login_timestamp as login_timestamp_table
+from application.models import customer as customer_table
+from application.models import accounts as accounts_table
+from application.models import transactions as transactions_table
 
-# Table for customer executive account
-class ExecutiveAccount(db.Model):
-    id = db.Column(db.Integer, primary_key = True)
-    username = db.Column(db.String(100),nullable=False)
-    password = db.Column(db.String(20),nullable=False)
-    timestamp = db.Column(db.DateTime,nullable=False,default = datetime.utcnow)
-
-    def __repr__(self):
-        return 'Executive : ' + str(self.id)
-
-class ExecutiveLoggedIn(db.Model):
-    id = db.Column(db.Integer, primary_key = True)
-    username = db.Column(db.String(100),nullable=False)
-    login_timestamp = db.Column(db.DateTime,nullable=False,default = datetime.utcnow)
-
-    def __repr__(self):
-        return 'Username :' + str(self.username) 
-
-
-class CustomerAccount(db.Model):
-    custid = db.Column(db.Integer, primary_key = True) 
-    ssnid = db.Column(db.Integer, primary_key = True)
-    name = db.Column(db.String(100),nullable=False)
-    age = db.Column(db.Integer,nullable=False)
-    address = db.Column(db.Text,nullable=False)
-    state = db.Column(db.String(30),nullable=False)
-    city = db.Column(db.String(30),nullable=False)
-
-    def __repr__(self):
-        return 'SSNID : ' + str(self.ssnid)
-
-# password = sha256_crypt.encrypt(passwd)
-# if(sha256_crypt.verify(password_candidate,password))
-db.create_all()
-db.session.commit()
-#db.session.add(ExecutiveAccount(username='arunkumar1',password='Arunkumar@1'))
-#db.session.add(CustomerAccount(custid=100000000,ssnid=756839632,name='Jack',age=33,address='Somewhere on earth',state='telangana',city='Hyd'))
-db.session.commit()
-
-
+#login_table.insert_logins("""'sainath1234','S@inath123','cashier'""")
 
 @app.route('/')
 @app.route('/login',methods = ['GET', 'POST'])
@@ -60,26 +23,25 @@ def login():
         username = request.form['username']
         password = request.form['password']
         login_type = request.form['login_type']
-        result = db.session.query(ExecutiveAccount).filter(ExecutiveAccount.username==username)
-        
-        if(len(result.all())>0):
+        result = login_table.read_logins(f"username='{username}' and role='{login_type}'")
+        if(len(result)>0):
             for row in result:
-                if(username == row.username and password == row.password):
+                if(username == row[0] and password == row[1]):
                     session['logged_in'] = True
                     session['username'] = username
                     session['login_type'] = login_type
-                    db.session.add(ExecutiveLoggedIn(username=username))
-                    db.session.commit()
+                    login_timestamp_table.insert_login_timestamp(f"'{username}','{str(datetime.now())}'")
+                
                     # flash("Successfully Logged In","success")
                     return render_template('home.html', home = True)
                 else:
                     flash("Wrong password!! Try Again !!",category= "warning")
-                    return render_template('login.html', login_page = True)
+                    return redirect(url_for('login'))
         else:
             flash("Invalid Username","warning")
-            return render_template('login.html', login_page = True)
-
+            return redirect(url_for('login'))
     return render_template('login.html', login_page = True)
+
 
 # Declaring a decorator to check if user is logged in (Authorization)
 def is_logged_in(f):
@@ -92,71 +54,81 @@ def is_logged_in(f):
             return redirect(url_for('login'))
     return wrap
 
-@app.route('/logout')
+@app.route('/logout/')
 @is_logged_in
 def logout():
     session.clear()
     flash('You are now logged out !','success')
     return redirect(url_for('login'))
     
-@app.route('/home')
+@app.route('/home/')
 @is_logged_in
 def home(login_type = None):
     return render_template('home.html', home = True)
 
 
-@app.route('/create_customer', methods = ['GET', 'POST'])
+@app.route('/create_customer/', methods = ['GET', 'POST'])
 @is_logged_in
 def createCustomer():
     if request.method == 'POST':
         #create customer and return accordingly
-        ssid = request.form['cust_ssid']
+        ssnid = int(request.form['cust_ssid'])
         name = request.form['cust_name']
         age = request.form['cust_age']
         address = request.form['cust_address']
         state = request.form['cust_state']
         city = request.form['cust_city']
+        result = customer_table.read_customer(f"ssnid={ssnid}")
+        if(len(result)>0):
+            flash(f"Customer with ssnid = {ssnid} already exists!",category="warning")
+            return redirect(url_for('createCustomer'))
 
-        prev_custid = db.session.query(CustomerAccount).order_by(CustomerAccount.custid.desc()).first().custid
-        custid = prev_custid + 1
+        result = customer_table.getLastRow()
+        prev_cust_id = None
+        for row in result:
+            prev_cust_id = row[0]
+        
+        if prev_cust_id != None:        
+            cust_id = int(prev_cust_id) + 1
+        else:
+            cust_id = 100000001
 
-        customer_obj = CustomerAccount(custid=custid,ssnid=ssid,name=name,age=age,address=address,state=state,city=city)
-        db.session.add(customer_obj)
-        db.session.commit()
+        customer_table.insert_customer(f"{int(cust_id)},{int(ssnid)},'{name}','{age}','{address}','{state}','{city}','Active','{str(datetime.now())}','Customer creation initiated successfully' ")
 
         flash('Customer created successfully', 'success')
         return render_template('create_customer.html', activate_customer_mgmt = True)
     return render_template('create_customer.html', activate_customer_mgmt = True)
     
-@app.route('/update_customer', methods = ['GET', 'POST'])
+@app.route('/update_customer/', methods = ['GET', 'POST'])
 @is_logged_in
 def updateCustomer():
     if request.method == "POST":
         if( 'input_type' in request.form and 'id' in request.form):
             input_type = request.form['input_type']
-            cust_id = int(request.form['id'])
+            id = int(request.form['id'])
             #search for customer data with id and input_type...write a funtion to pull data from db using input_Type and id
             if(input_type=='cust_id'):
-                result = db.session.query(CustomerAccount).filter(CustomerAccount.custid==cust_id)
-                if(len(result.all())>0):
+                result = customer_table.read_customer(f"cust_id={id}")
+                if(len(result) > 0):
                     for row in result:
-                        if(cust_id == row.custid):
-                            flash(f"Customer found!",category="success")
+                        if(id == row[0]):
+                            #flash(f"Customer found!",category="success")
                             return render_template('update_customer.html',search = False, data = row, activate_customer_mgmt = True)
-                        else:
-                            flash(f"Customer with {input_type} = {cust_id} not found!", category='warning')
-                            return render_template('update_customer.html', search = True,  activate_customer_mgmt = True)
+                else:
+                    flash(f"Customer with {input_type} = {id} not found!", category='warning')
+                    return render_template('update_customer.html', search = True,  activate_customer_mgmt = True)
+
         
             elif(input_type=='ssn_id'):
-                result = db.session.query(CustomerAccount).filter(CustomerAccount.ssnid==cust_id)
-                if(len(result.all())>0):
+                result = customer_table.read_customer(f"ssnid={id}")
+                if(len(result) > 0 ):   
                     for row in result:
-                        if(cust_id == row.ssnid):
-                            flash(f"Customer found!",category="success")
+                        if(id == row[1]):
+                            # flash(f"Customer found!",category="success")
                             return render_template('update_customer.html',search = False, data = row, activate_customer_mgmt = True)
-                        else:
-                            flash(f"Customer with {input_type} = {cust_id} not found!", category='warning')
-                            return render_template('update_customer.html', search = True,  activate_customer_mgmt = True)
+                else:
+                    flash(f"Customer with {input_type} = {id} not found!", category='warning')
+                    return render_template('update_customer.html', search = True,  activate_customer_mgmt = True)
     return render_template('update_customer.html', search = True,  activate_customer_mgmt = True)
 
 @app.route('/update_into_database', methods = ['GET', 'POST'])
@@ -174,45 +146,37 @@ def updateIntoDatabase():
         cust_city = request.form['cust_city']
         #udpate into database
         try:
-            obj = CustomerAccount.query.get((cust_id,cust_ssid))
-            obj.name = cust_new_name
-            obj.age = cust_new_age
-            obj.address = cust_new_address
-            obj.state =  cust_state
-            obj.city = cust_city
-            db.session.commit()
+            customer_table.update_customer(f"name='{cust_new_name}', age={int(cust_new_age)}, address='{cust_new_address}', city='{cust_city}', state = '{cust_state}', message='Customer update initiated successfully',last_updated='{str(datetime.now())}'" , f"ssnid={int(cust_ssid)}")
             flash("Updated Successfully", category= 'success')
             return redirect(url_for('updateCustomer'))
         except:
             flash("An unknown error occured", category= 'warning')
             return redirect(url_for('updateCustomer'))
 
-
-
-@app.route('/delete_customer', methods = ['GET', 'POST'])
+@app.route('/delete_customer/', methods = ['GET', 'POST'])
 @is_logged_in
 def deleteCustomer():
     if request.method == "POST":
         flag = 0
         input_type = request.form['input_type']
-        cid = request.form['id']
+        id = request.form['id']
         if(input_type=='cust_id'):
-            result = db.session.query(CustomerAccount).filter(CustomerAccount.custid==cid)
-            if(len(result.all())>0):
+            result = customer_table.read_customer(f"cust_id={id}")
+            if(len(result) > 0):
                 flag = 1
                 for row in result:
-                    flash("Customer Found",category="success")
-                    return render_template('delete_customer.html',search = False, data = row, activate_account_mgmt = True)
+                    #flash("Customer Found",category="success")
+                    return render_template('delete_customer.html',search = False, data = row, activate_customer_mgmt = True)
             
         elif(input_type=='ssn_id'):
-            result = db.session.query(CustomerAccount).filter(CustomerAccount.ssnid==cid)
-            if(len(result.all())>0):
+            result = customer_table.read_customer(f"ssnid={id}")
+            if(len(result) > 0):
                 flag = 1
                 for row in result:
-                    flash("Customer Found",category="success")
-                    return render_template('delete_customer.html',search = False, data = row, activate_account_mgmt = True)
+                    #flash("Customer Found",category="success")
+                    return render_template('delete_customer.html',search = False, data = row, activate_customer_mgmt = True)
         if(flag==0):
-            flash(f'Account not found for {input_type} = {cid} ', 'warning')
+            flash(f'Customer not found with {input_type} = {id} ', 'warning')
             return render_template('delete_customer.html', search = True,  activate_customer_mgmt = True)
 
     return render_template('delete_customer.html', search = True,  activate_customer_mgmt = True)
@@ -223,30 +187,31 @@ def deleteCustomer():
 @is_logged_in
 def deleteCustomerFromDatabase():
     if request.method == 'POST':
-        # same like updateIntoDatabase
-        custid = request.form['cust_id']
-        ssid = request.form['cust_ssid'] 
-        obj = CustomerAccount.query.get((custid,ssid))
-        db.session.delete(obj)
-        db.session.commit()
+        custid = int(request.form['cust_id'])
+        ssid = int(request.form['cust_ssid'])
+        customer_table.delete_customer(f"cust_id={custid}")
         flash("Successfully Deleted !!","success")
-        return render_template('delete_customer.html', search = True,  activate_customer_mgmt = True)
+        return redirect(url_for('deleteCustomer'))
 
 
 
 @app.route('/view_customer/', methods = ['GET', 'POST'])
 @is_logged_in
-def viewCustomer():
+def viewCustomer():    
     if request.method=='POST':
-        custid = request.form['custid']
-        ssnid = request.form['ssnid']
-        obj = CustomerAccount.query.get((custid,ssnid))
-        return render_template('view_customer.html', datatable = True,  activate_customer_mgmt = True, data = obj)
+        custid = int(request.form['custid'])
+        ssnid = int(request.form['ssnid'])
+        result = customer_table.read_customer(f"ssnid={ssnid}")
+        if(len(result) > 0):
+            flag = 1
+            for row in result:
+                #flash("Customer Found",category="success")
+                return render_template('view_customer.html', datatable = True,  activate_customer_mgmt = True, data = row)
 
 @app.route('/customer_status/')
 @is_logged_in
 def customerStatus():
-    customers = CustomerAccount.query.all()
+    customers = customer_table.read_customer()
     return render_template('customer_status.html', datatable = True, activate_status_details = True,data=customers)
 
 @app.route('/customer_management')
@@ -260,20 +225,47 @@ def customerManagement():
 def createAccount():
     if request.method == 'POST':
         if( 'cust_id' in request.form and 'account_type' in request.form and 'deposit_amt' in request.form ):
-            cust_id = request.form['cust_id']
+            cust_id = int(request.form['cust_id'])
             account_type = request.form['account_type']
-            deposit_amt = request.form['deposit_amt']
+            deposit_amt = int(float(request.form['deposit_amt']))
+            result = accounts_table.read_accounts(f"cust_id={cust_id} and acc_type='{account_type}'")
+            if(len(result)>0):
+                flash(f"A {account_type} account with cust_id = {cust_id} already exists!",category="warning")
+                return redirect(url_for('createAccount'))
 
-            if 1==1: #if customer found
-                if 1==1: # if deposit success
-                    flash('Deposit Success', 'success')
-                    return redirect(url_for('createAccount'), activate_account_mgmt = True)
-                else:
-                    flash('An unknown error occured', 'warning')
-                    return redirect(url_for('createAccount'), activate_account_mgmt = True)
+            result = customer_table.read_customer(f"cust_id={cust_id}")
+            if len(result) > 0: #if customer found
+                for row in result:
+                    rec = accounts_table.getLastRow()
+                    prev_acc_id = None
+                    for r in rec:
+                        prev_acc_id = r[0]
+        
+                    if prev_acc_id != None:        
+                        acc_id = int(prev_acc_id) + 1
+                    else:
+                        acc_id = 100000001
+                    ans = accounts_table.insert_accounts(f"{acc_id},{cust_id},'{account_type}',{deposit_amt},'Account creation initiated successfully', '{str(datetime.now())}','active' ")
+                    
+                    if ans: # if deposit success
+                        prev_trans_id = None
+                        transIDs = transactions_table.getLastRow()
+                        for t in transIDs:
+                            prev_trans_id = t[1]
+                        
+                        if prev_trans_id == None:
+                            trans_id = 100000001
+                        else:
+                            trans_id = prev_trans_id + 1
+                        transactions_table.insert_transactions(f"{acc_id},{trans_id},'Deposit','{date.today()}',{deposit_amt} ")
+                        flash('Account creation initiated successfully', 'success')
+                        return redirect(url_for('createAccount'))
+                    else:
+                        flash('An unknown error occured', 'warning')
+                        return redirect(url_for('createAccount'))
             else:
                 flash(f'Customer with id = {cust_id} not found! ', 'warning')
-                return redirect(url_for('createAccount'), activate_account_mgmt = True)
+                return redirect(url_for('createAccount'))
                 
     return render_template('create_account.html', activate_account_mgmt = True)
 
@@ -282,18 +274,28 @@ def createAccount():
 @is_logged_in
 def deleteAccount():
     if request.method == "POST":
+        flag = 0
         if('input_type' in request.form and 'id' in request.form):
             input_type = request.form['input_type']
-            id = request.form['id']
-            if 1==1: #if customer found
-                if 1==1: #if account found
-                    return render_template('delete_account.html',search = False, data = 'sainath', activate_account_mgmt = True)
-                else:
-                    flash(f'Account not found for {input_type} = {id} ', 'warning')
-                    return redirect(url_for('deleteAccount'), search = True, activate_account_mgmt = True)
-                    
-            else:
-                flash(f"Customer with {input_type} = {id} not found!", category='warning')
+            id = int(request.form['id'])
+            if(input_type=='cust_id'):
+                result = accounts_table.read_accounts(f"cust_id={id}")
+                if(len(result) > 0):
+                    flag = 1
+                    # for row in result:
+                        #flash("Customer Found",category="success")
+                    return render_template('delete_account.html',search = False, data = result, activate_account_mgmt = True)
+            
+            elif(input_type=='acc_id'):
+                result = accounts_table.read_accounts(f"acc_id={id}")
+                if(len(result) > 0):
+                    flag = 1
+                    #for row in result:
+                        #flash("Customer Found",category="success")
+                    return render_template('delete_account.html',search = False, data = result, activate_account_mgmt = True)
+            if(flag==0):
+                flash(f'Account with {input_type} = {id} not found!!', 'warning')
+                return redirect(url_for('deleteAccount'))
     
     return render_template('delete_account.html', search = True,  activate_account_mgmt = True)
 
@@ -301,14 +303,18 @@ def deleteAccount():
 @is_logged_in
 def deleteAccountFromDatabase():
     if request.method == 'POST':
-        # same like updateIntoDatabase
+        custid = int(request.form['cust_id'])
+        acc_id = int(request.form['account_id'])
+        accounts_table.delete_accounts(f"acc_id={acc_id}")
+        flash("Successfully Deleted !!","success")
         return redirect(url_for('deleteAccount'))
 
 
 @app.route('/account_status/')
 @is_logged_in
 def accountStatus():
-    return render_template('account_status.html', activate_status_details = True, datatable = True)
+    accounts = accounts_table.read_accounts()
+    return render_template('account_status.html', activate_status_details = True, datatable = True, data = accounts)
 
 @app.route('/customer_search', methods = ['GET', 'POST'])
 @is_logged_in
@@ -316,30 +322,30 @@ def customerSearch():
     if request.method == "POST":
         if( 'input_type' in request.form and 'id' in request.form):
             input_type = request.form['input_type']
-            cust_id = int(request.form['id'])
+            id = int(request.form['id'])
             #search for customer data with id and input_type...write a funtion to pull data from db using input_Type and id
             if(input_type=='cust_id'):
-                result = db.session.query(CustomerAccount).filter(CustomerAccount.custid==cust_id)
-                if(len(result.all())>0):
+                result = customer_table.read_customer(f"cust_id={id}")
+                if(len(result) > 0):
                     for row in result:
-                        if(cust_id == row.custid):
-                            flash(f"Customer found!",category="success")
-                            return render_template('customer_search.html',search = False, data = row, activate_customer_mgmt = True)
-                        else:
-                            flash(f"Customer with {input_type} = {cust_id} not found!", category='warning')
-                            return render_template('customer_search.html', search = True,  activate_customer_mgmt = True)
+                        if(id == row[0]):
+                            #flash(f"Customer found!",category="success")
+                            return render_template('customer_search.html',search = False, data = row, activate_search = True)
+                else:
+                    flash(f"Customer with {input_type} = {id} not found!", category='warning')
+                    return render_template('customer_search.html', search = True,  activate_search = True)
         
             elif(input_type=='ssn_id'):
-                result = db.session.query(CustomerAccount).filter(CustomerAccount.ssnid==cust_id)
-                if(len(result.all())>0):
+                result = customer_table.read_customer(f"ssnid={id}")
+                if(len(result) > 0):
                     for row in result:
-                        if(cust_id == row.ssnid):
-                            flash(f"Customer found!",category="success")
-                            return render_template('customer_search.html',search = False, data = row, activate_customer_mgmt = True)
-                        else:
-                            flash(f"Customer with {input_type} = {cust_id} not found!", category='warning')
-                            return render_template('customer_search.html', search = True,  activate_customer_mgmt = True)
-    return render_template('customer_search.html', search = True,  activate_customer_mgmt = True)
+                        if(id == row[1]):
+                            #flash(f"Customer found!",category="success")
+                            return render_template('customer_search.html',search = False, data = row, activate_search = True)
+                else:
+                    flash(f"Customer with {input_type} = {id} not found!", category='warning')
+                    return render_template('customer_search.html', search = True,  activate_search = True)
+    return render_template('customer_search.html', search = True,  activate_search = True)
 
 @app.route('/account_search/', methods = ['GET', 'POST'])
 @is_logged_in
@@ -347,18 +353,35 @@ def accountSearch():
     if request.method == 'POST':
         if('input_type' in request.form and 'id' in request.form):
             input_type = request.form['input_type']
-            id = request.form['id']
-            if 1==1: # if account found
-                return render_template('account_search.html', activate_search = True, search = False, data = 'pass data')
-            else:
-                flash(f'Account with {input_type} = {id} not found! ')
-                return redirect(url_for('accountSearch'))
+            id = int(request.form['id'])
+            if(input_type=='cust_id'):
+                result = accounts_table.read_accounts(f"cust_id={id}")
+                if(len(result) > 0):
+                    # for row in result:
+                    #     if(id == row[0]):
+                    #         #flash(f"Customer found!",category="success")
+                    return render_template('account_search.html',search = False, data = result, activate_search = True)
+                else:
+                    flash(f"Account with {input_type} = {id} not found!", category='warning')
+                    return render_template('account_search.html', search = True,  activate_search = True)
+        
+            elif(input_type=='acc_id'):
+                result = accounts_table.read_accounts(f"acc_id={id}")
+                if(len(result) > 0):
+                    # for row in result:
+                    #     if(id == row[0]):
+                            #flash(f"Customer found!",category="success")
+                    return render_template('account_search.html',search = False, data = result, activate_search = True)
+                else:
+                    flash(f"Account with {input_type} = {id} not found!", category='warning')
+                    return render_template('account_search.html', search = True,  activate_search = True)
     return render_template('account_search.html', activate_search = True, search = True)
 
 @app.route('/account_details/')
 @is_logged_in
 def accountDetails():
-    return render_template('account_details.html', activate_account_details = True, datatable = True, data = {'acc_id':'123456789'})
+    accounts = accounts_table.read_accounts()
+    return render_template('account_details.html', activate_account_details = True, datatable = True, data = accounts)
 
 @app.route('/deposit/', methods = ['GET', 'POST'])
 @app.route('/deposit/<acc_id>', methods = ['GET', 'POST'])
@@ -372,7 +395,7 @@ def deposit(acc_id=None):
             deposit_amt = request.form['deposit_amt']
             new_balance = int(float(balance)) + int(float(deposit_amt))
             #update the DB
-            if 1==1: #deposted successfully
+            if 1==1: #deposited successfully
                 flash('Amount deposited successfully', 'success')
                 return redirect(url_for('accountDetails'))
             else:

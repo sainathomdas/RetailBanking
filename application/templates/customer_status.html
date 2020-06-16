@@ -14,7 +14,8 @@
 <link href=" {{ url_for('static',filename = 'css/addons/datatables.min.css') }}" rel="stylesheet">
 
 <div class="container table-responsive mt-2">
-  <table id="datatable" class="table container table-sm table-hover table-bordered table-striped text-center" align="center">
+  <table id="datatable" class="table container table-sm table-hover table-bordered table-striped text-center"
+    align="center">
     <thead style="background-color: #212121;" class="text-white">
       <tr>
         <th class="font-weight-bold">Customer ID</th>
@@ -30,17 +31,18 @@
     <tbody class="text-dark font-weight-bold">
       {% for row in data %}
       <tr>
-        <td class="font-weight-normal">{{row.custid}}</td>
-        <td class="font-weight-normal">{{row.ssnid}}</td>
-        <td class="font-weight-normal">Active</td>
-        <td class="font-weight-normal">Customer Update Complete</td>
-        <td class="font-weight-normal">2020-06-13 20:04:04</td>        
-        <td class="font-weight-normal"> <a href=" {{ url_for('customerStatus') }} " style="color: blue;text-decoration: none;"> Refresh </a> </td>
-        <td class="font-weight-normal"> 
+        <td class="font-weight-normal">{{row[0]}}</td>
+        <td class="font-weight-normal">{{row[1]}}</td>
+        <td class="font-weight-normal">{{row[7]}}</td>
+        <td class="font-weight-normal">{{row[9]}}</td>
+        <td class="font-weight-normal">{{row[8]}}</td>
+        <td class="font-weight-normal"> <a href=" {{ url_for('customerStatus') }} "
+            style="color: blue;text-decoration: none;"> Refresh </a> </td>
+        <td class="font-weight-normal">
           <form action=" {{ url_for('viewCustomer') }} " method="POST">
-          <input type="number" name="custid" value={{row.custid}} hidden>
-          <input type="number" name="ssnid" value={{row.ssnid}} hidden>
-          <input type="submit" class="border-0 btn-success btn-sm px-4" style="color: white;" value="View">
+            <input type="number" name="custid" value={{row[0]}} hidden>
+            <input type="number" name="ssnid" value={{row[1]}} hidden>
+            <input type="submit" class="border-0 btn-success btn-sm px-4" style="color: white;" value="View">
           </form>
         </td>
       </tr>
