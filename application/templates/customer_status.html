@@ -28,20 +28,23 @@
       </tr>
     </thead>
     <tbody class="text-dark font-weight-bold">
-
+      {% for row in data %}
       <tr>
-        <td class="font-weight-normal">123456789</td>
-        <td class="font-weight-normal">987654321</td>
+        <td class="font-weight-normal">{{row.custid}}</td>
+        <td class="font-weight-normal">{{row.ssnid}}</td>
         <td class="font-weight-normal">Active</td>
         <td class="font-weight-normal">Customer Update Complete</td>
         <td class="font-weight-normal">2020-06-13 20:04:04</td>        
-        <td class="font-weight-normal"> <a href="#!" style="color: blue;text-decoration: none;"> Refresh </a> </td>
-        <td class="font-weight-normal"> <a href="#!" style="color: blue;text-decoration: none;"> View Details </a> </td>
+        <td class="font-weight-normal"> <a href=" {{ url_for('customerStatus') }} " style="color: blue;text-decoration: none;"> Refresh </a> </td>
+        <td class="font-weight-normal"> 
+          <form action=" {{ url_for('viewCustomer') }} " method="POST">
+          <input type="number" name="custid" value={{row.custid}} hidden>
+          <input type="number" name="ssnid" value={{row.ssnid}} hidden>
+          <input type="submit" class="border-0 btn-success btn-sm px-4" style="color: white;" value="View">
+          </form>
+        </td>
       </tr>
-
-      
-     
-
+      {% endfor %}
     </tbody>
   </table>
 </div>

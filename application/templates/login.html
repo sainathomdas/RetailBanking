@@ -18,7 +18,7 @@
             <label for="username">&nbsp;Username</label>
             <input type="text" class="form-control" name="username" placeholder="Username" 	data-parsley-type="alphanum" minlength="8" required autofocus>
             <label for="password">&nbsp;Password</label>
-            <input type="password" class="form-control" name="password" placeholder="Password" pattern="/^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{10}$/" data-parsley-error-message = "Password should contain 10 characters including one special character, one upper case, one lower case and one numeric" required>
+            <input type="password" class="form-control" name="password" placeholder="Password" pattern="/^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{10,}$/" data-parsley-error-message = "Password should contain 10 characters including one special character, one upper case, one lower case and one numeric" required>
              <select name="login_type" class="form-control" required>
                  <option value="cust_executive">Login as Customer Executive</option>
                  <option value="cashier">Login as Cashier</option>

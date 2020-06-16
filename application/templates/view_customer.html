@@ -10,6 +10,8 @@
 	</div>
 </div>
 	{% include "includes/flash_message.html" %}
+
+{% if data %}
 <div class="wrapper">
 	<form action=" {{ url_for('updateCustomer') }} " method="POST">
 		<input name="input_type" value="cust_id" hidden>
@@ -21,7 +23,7 @@
 						<label for="cust_ssid">Customer SSN ID </label>
 					</div>
 					<div class="col-md-8">
-						<input type="number" name="cust_ssid" class="input form-control-sm disabled" readonly>
+						<input type="number" name="cust_ssid" class="input form-control-sm disabled" value={{data.ssnid}} readonly>
 					</div>
 				</div>
 			</div>
@@ -32,7 +34,7 @@
 						<label for="cust_id">Customer ID </label>
 					</div>
 					<div class="col-md-8">
-						<input type="number" name="cust_id" class="input form-control-sm disabled" readonly>
+						<input type="number" name="cust_id" class="input form-control-sm disabled" value={{data.custid}} readonly>
 					</div>
 				</div>
 			</div>
@@ -43,7 +45,7 @@
 						<label for="cust_name">Customer Name </label>
 					</div>
 					<div class="col-md-8">
-						<input type="text" name="cust_name" class="input form-control-sm disabled" readonly>
+						<textarea name="cust_name" class="textarea form-control-sm disabled" readonly>{{data.name}}</textarea>
 					</div>
 				</div>
 			</div>
@@ -54,7 +56,7 @@
 						<label for="cust_age">Age </label>
 					</div>
 					<div class="col-md-8">
-						<input type="number" name="cust_age" class="input form-control-sm disabled" readonly>
+						<input type="number" name="cust_age" class="input form-control-sm disabled" value={{data.age}} readonly>
 					</div>
 				</div>
 			</div>
@@ -65,7 +67,7 @@
 						<label for="cust_address">Address </label>
 					</div>
 					<div class="col-md-8">
-						<textarea name="cust_address" class="textarea form-control-sm disabled" readonly></textarea>
+						<textarea name="cust_address" class="textarea form-control-sm disabled" readonly>{{data.address}}</textarea>
 					</div>
 				</div>
 			</div>
@@ -73,13 +75,14 @@
 			<div>
 				<input type="submit" value="Edit" class="btn btn-sm red white-text">
                 
-                <a href=" {{ url_for('customerManagement') }} " class=" btn btn-sm black white-text ml-lg-5">Back</a>
+                <a href=" {{ url_for('customerStatus') }} " class=" btn btn-sm black white-text ml-lg-5">Back</a>
 			</div>
 
 		</div>
 
 	</form>
 </div>
+{% endif %}
 
 
 {% endblock %}
