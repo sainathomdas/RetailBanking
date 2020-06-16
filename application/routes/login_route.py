@@ -354,3 +354,122 @@ def accountSearch():
                 flash(f'Account with {input_type} = {id} not found! ')
                 return redirect(url_for('accountSearch'))
     return render_template('account_search.html', activate_search = True, search = True)
+
+@app.route('/account_details/')
+@is_logged_in
+def accountDetails():
+    return render_template('account_details.html', activate_account_details = True, datatable = True, data = {'acc_id':'123456789'})
+
+@app.route('/deposit/', methods = ['GET', 'POST'])
+@app.route('/deposit/<acc_id>', methods = ['GET', 'POST'])
+@is_logged_in
+def deposit(acc_id=None):
+    if request.method == 'POST':
+        if('account_id' in request.form and 'account_type' in request.form and 'deposit_amt' in request.form and 'balance' in request.form):
+            account_id = request.form['account_id']
+            account_type = request.form['account_type']
+            balance = request.form['balance']
+            deposit_amt = request.form['deposit_amt']
+            new_balance = int(float(balance)) + int(float(deposit_amt))
+            #update the DB
+            if 1==1: #deposted successfully
+                flash('Amount deposited successfully', 'success')
+                return redirect(url_for('accountDetails'))
+            else:
+                flash('An unknown error occured', 'warning')
+                return redirect(url_for('accountDetails'))
+
+    else:
+        if acc_id != None:
+            #retrieve account details
+            return render_template('deposit.html', activate_account_details = True, data = {'acc_id':'123456789', 'name':'sainath', 'balance': 2000} )
+        else:
+            flash('Please select an account', 'warning')
+            return redirect(url_for('accountDetails'))
+
+@app.route('/withdraw/', methods = ['GET', 'POST'])
+@app.route('/withdraw/<acc_id>', methods = ['GET', 'POST'])
+@is_logged_in
+def withdraw(acc_id = None):
+    if request.method == 'POST':
+        if('account_id' in request.form and 'account_type' in request.form and 'withdraw_amt' in request.form and 'balance' in request.form):
+            account_id = request.form['account_id']
+            account_type = request.form['account_type']
+            balance = request.form['balance']
+            withdraw_amt = request.form['withdraw_amt']
+            new_balance = int(float(balance)) - int(float(withdraw_amt))
+            print(new_balance)
+            if(new_balance < 0):
+                flash('Withdraw not allowed, please choose smaller amount', 'warning')
+                return redirect(url_for('withdraw', acc_id = account_id))
+
+            #update the DB
+            if 1==1: #withdrawn successfully
+                flash('Amount withdrawn successfully', 'success')
+                return redirect(url_for('accountDetails'))
+            else:
+                flash('An unknown error occured', 'warning')
+                return redirect(url_for('accountDetails'))
+
+    else:
+        if acc_id != None:
+            #retrieve account details
+            return render_template('withdraw.html', activate_account_details = True, data = {'acc_id':'123456789', 'name':'sainath', 'balance': 100})
+        else:
+            flash('Please select an account', 'warning')
+            return redirect(url_for('accountDetails'))
+        
+@app.route('/transfer/', methods = ['GET', 'POST'])
+@app.route('/transfer/<acc_id>', methods = ['GET', 'POST'])
+@is_logged_in
+def transfer(acc_id=None):
+    if request.method == 'POST':
+        if('source_account_id' in request.form and 'src_account_type' in request.form and 'target_account_id' in request.form and 'transfer_amt' in request.form and 'balance' in request.form and 'target_account_type' in request.form):
+            source_account_id = request.form['source_account_id']
+            src_account_type = request.form['src_account_type']
+            target_account_id = request.form['target_account_id']
+            target_account_type = request.form['target_account_type']
+            balance = request.form['balance']
+            transfer_amt = request.form['transfer_amt']
+            new_balance = int(float(balance)) - int(float(transfer_amt))
+            print(new_balance)
+            if(new_balance < 0):
+                flash('Transfer not allowed, please choose smaller amount', 'warning')
+                return redirect(url_for('transfer', acc_id = source_account_id))
+
+            #update the DB
+            if 1==1: #withdrawn successfully
+                flash('Amount transferred successfully', 'success')
+                return redirect(url_for('accountDetails'))
+            else:
+                flash('An unknown error occured', 'warning')
+                return redirect(url_for('accountDetails'))
+
+    else:
+        if acc_id != None:
+            #retrieve account details
+            return render_template('transfer.html', activate_account_details = True, data = {'acc_id':'123456789', 'name':'sainath', 'balance': 100})
+        else:
+            flash('Please select an account', 'warning')
+            return redirect(url_for('accountDetails'))
+
+
+
+@app.route('/account_statement', methods = ['GET', 'POST'])
+@is_logged_in
+def accountStatement():
+    if request.method == 'POST':
+        if('account_id' in request.form and 'statement_type' in request.form):
+            account_id = request.form['account_id']            
+            if request.form['statement_type'] == 'transactions':
+                num_of_transactions = request.form['num_of_transactions']
+                # get last number of transactions
+                return render_template('account_stmt.html', activate_account_stmt = True, datatable_for_stmt = True, data = {'name':'sainath'})
+            else:
+                start_date = request.form['start_date'] 
+                end_date = request.form['end_date'] 
+                # get statement btween these dates
+                return render_template('account_stmt.html', activate_account_stmt = True, datatable_for_stmt = True, data = {'name':'sainath'})
+
+    return render_template('account_stmt.html', activate_account_stmt = True, input = True)
+

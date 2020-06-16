@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %} Mars | Customer Management {% endblock %}
+
+{% block content %}
+
+
+<div class="title mt-md-4">
+Account Details
+</div>
+
+{% include "includes/flash_message.html" %}
+
+<!-- MDBootstrap Datatables  -->
+<link href=" {{ url_for('static',filename = 'css/addons/datatables.min.css') }}" rel="stylesheet">
+
+<div class="container table-responsive">
+  <table id="datatable" class="table container table-sm table-hover table-striped text-center" align="center">
+    <thead style="background-color: #212121; color: white;">
+      <tr>
+        <th scope="col" class="font-weight-bold" >Customer ID</th>
+        <th scope="col" class="font-weight-bold" >Account ID</th>
+        <th scope="col" class="font-weight-bold">Account Type</th>
+        <th scope="col" class="font-weight-bold">Account Status</th>
+        <th scope="col" class="font-weight-bold">Message</th>
+        <th scope="col" class="font-weight-bold">Last Transaction</th>
+        <th scope="col" class="font-weight-bold">Balance</th>
+        <th scope="col" class="font-weight-bold">Options</th>
+      </tr>
+    </thead>
+    
+    <tbody class="text-dark font-weight-bold">
+
+      <tr>
+        <td class="font-weight-normal" name='cust_id' >123456789</td>
+        <td class="font-weight-normal">987654321</td>
+        <td class="font-weight-normal">Current</td>
+        <td class="font-weight-normal">Active</td>
+        <td class="font-weight-normal">Account Created</td>
+        <td class="font-weight-normal">2020-06-15 11:54:30</td>
+        <td class="font-weight-normal">12000</td>
+        <td class="font-weight-normal">
+            <a href=" {{ url_for('deposit', acc_id= data.acc_id)}} " class="btn btn-sm text-white p-1" style="background-color: blue;">Deposit</a>
+            <a href=" {{ url_for('withdraw', acc_id= data.acc_id)}} " class="btn btn-sm text-white p-1" style="background-color: red;">withdraw</a>
+            <a href=" {{ url_for('transfer', acc_id= data.acc_id)}} " class="btn btn-sm text-white p-1" style="background-color: green;">Transfer</a>
+         </td>
+      </tr>
+
+      
+     
+
+    </tbody>
+  </table>
+</div>
+
+
+{% endblock %}

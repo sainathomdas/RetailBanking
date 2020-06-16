@@ -8,15 +8,24 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item ml-lg-3">
-                        <a class="nav-link mx-3 active pb-0" href="#">Home </a>
+                    <li class="nav-item">
+                        <a class="nav-link mx-2 {% if home %}
+                                    active
+                            {% endif %}
+                             pb-0" href=" {{ url_for('home') }} ">Home </a>
                     </li>
                
                     <li class="nav-item">
-                        <a class="nav-link mx-3  pb-0" href="#">Account Details</a>
+                        <a class="nav-link mx-3 {% if activate_account_details %}
+                                active
+                        {% endif %}
+                         pb-0" href=" {{ url_for('accountDetails') }} ">Account Details</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link mx-3  pb-0" href="#">Account Statement</a>
+                        <a class="nav-link mx-3 {% if activate_account_stmt %}
+                                active
+                        {% endif %}
+                         pb-0" href=" {{ url_for('accountStatement') }} ">Account Statement</a>
                     </li>
                    
                 <li class="nav-item">

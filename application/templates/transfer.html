@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+
+{% block title %} Mars | Transfer {% endblock %}
+
+{% block content %}
+
+
+{% include "includes/flash_message.html" %}
+
+
+<div class="wrapper mt-5">
+    <div class="title mt-5">
+        Transfer Amount
+    </div>
+    <form action=" {{ url_for('transfer') }} " method="POST" data-parsley-validate>
+        <div class="form">
+
+
+            <div class="inputfield">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="cust_id">Customer ID </label>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="number" name="cust_id" class="input form-control-sm disabled" readonly>
+                    </div>
+                </div>
+            </div>
+
+            <div class="inputfield">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="source_account_id">Source Account ID </label>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="text" name="source_account_id" value=" {{ data.acc_id }} " class="input form-control-sm disabled" readonly>
+                    </div>
+                </div>
+            </div>
+
+            <div class="inputfield">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="src_account_type">Source Account Type </label>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="text" name="src_account_type" class="input form-control-sm disabled" readonly>
+                    </div>
+                </div>
+            </div>
+
+            <div class="inputfield">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="target_account_id">Target Account ID </label>
+                    </div>
+                    <div class="col-md-8">
+                        <input id="target_account_id" name="target_account_id" class="input form-control-sm" required minlength="9"
+							maxlength="9" data-parsley-error-message="Must be 9 digits long"
+							data-parsley-type="integer">
+                    </div>
+                </div>
+            </div>
+
+            <div class="inputfield">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="target_account_type">Target Account Type </label>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="custom_select ">
+							<select id="target_account_type" class="form-control" name="target_account_type" required>
+                                <option value="">Select Account Type</option>
+                                <option value="savings">Savings</option>
+                                <option value="current">Current</option>
+                            </select>
+						</div>
+                    </div>
+                </div>
+            </div>
+       
+
+            <div class="inputfield">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="balance">Current Balance </label>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="text" name="balance" value=" {{ data.balance }} " class="input form-control-sm disabled" readonly>
+                    </div>
+                </div>
+            </div>
+
+            <div class="inputfield">
+				<div class="row">
+					<div class="col-md-4">
+						<label for="transfer_amt">Transfer Amount <span class="star">*</span> </label>
+					</div>
+					<div class="col-md-8">
+						<input type="number" name="transfer_amt" class="input form-control-sm" data-parsley-type="number"
+							data-parsley-type="digits" min="0" required data-parsley-error-message="Required and only integers allowed">
+					</div>
+				</div>
+			</div>
+
+            <div class="mt-4 justify-content-center">
+                <center>
+                <input type="submit" value="Transfer" class="btn btn-sm white-text" style="background-color: green;">
+            </center>
+                <!-- <input type="rest" value="Cancel" class="ml-lg-5 btn btn-sm black white-text"> -->
+            </div>
+
+        </div>
+
+    </form>
+</div>
+
+
+
+
+{% endblock %}

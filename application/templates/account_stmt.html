@@ -1,0 +1,197 @@
+{% extends 'base.html' %}
+
+{% block title %} Mars | Account Statment {% endblock %}
+
+{% block content %}
+
+{% if input %}
+
+<div class="wrapper mt-5">
+    <div class="title mt-5">
+        Account Statment
+    </div>
+    {% include "includes/flash_message.html" %}
+    <form action=" {{ url_for('accountStatement') }} " method="POST" data-parsley-validate>
+        <div class="form">
+            <div class="inputfield">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label for="account_id">Account ID <span class="star">*</span> </label>
+                    </div>
+                    <div class="col-md-8">
+                        <input id="account_id" name="account_id" class="input form-control-sm" required minlength="9"
+                            maxlength="9" data-parsley-error-message="Must be 9 digits long"
+                            data-parsley-type="integer">
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row mx-auto mt-4">
+                <!-- Default inline 1-->
+                <div class="offset-md-1 custom-control custom-radio custom-control-inline">
+                    <input type="radio" class="custom-control-input" id="transactions" value="transactions"
+                        name="statement_type" checked onchange="radioFunction(1)">
+                    <label class="custom-control-label" for="transactions">Last No. of Transactions</label>
+                </div>
+
+                <!-- Default inline 2-->
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" class="custom-control-input" id="dates" value="dates" name="statement_type" onchange="radioFunction(0)">
+                    <label class="custom-control-label" for="dates">Start to End Dates</label>
+                </div>
+            </div>
+
+            <div class="inputfield mt-4" id="dropdown">
+                <div class="row">
+                    <div class="offset-md-2 col-md-4">
+                        <label for="num_of_transactions">Number of Transactions <span class="star">*</span> </label>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="custom_select ">
+                            <select id="num_of_transactions" class="form-control" name="num_of_transactions">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="dates_div" style="display: none;" class="mt-4">
+                <div class="inputfield">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label for="start_date">From Date<span class="star">*</span> </label>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="date" onkeydown="return false" name="start_date" id="start_date" />
+    
+                        </div>
+                    </div>
+                </div>
+                <div class="inputfield">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label for="end_date">End Date<span class="star">*</span> </label>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="date" onkeydown="return false" name="end_date" id="end_date" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <span class="star font-small font-weight-bolder ml-1 mt-0 pt-0"> (*) Fields are compulsory</span> -->
+
+			<div>
+                <center>
+				<input type="submit" value="Submit" class="btn btn-sm black gold-text">
+                <input type="reset" value="Reset" class="ml-lg-5 btn btn-sm black white-text">
+            </center>
+			</div>
+
+        </div>
+    </form>
+</div>
+{% endif %}
+
+
+{% if data %}
+<div class="title mt-md-4">
+    Account Statement
+  </div>
+  {% include "includes/flash_message.html" %}
+
+<!-- MDBootstrap Datatables  -->
+<link href=" {{ url_for('static',filename = 'css/addons/datatables.min.css') }}" rel="stylesheet">
+
+<div class="container table-responsive">
+  <table id="datatable" class="table container table-sm table-hover table-fixed  table-striped text-center" align="center">
+    <thead style="background-color: #212121; color: white;">
+      <tr>
+        <th scope="col" class="font-weight-bold" >Account ID</th>
+        <th scope="col" class="font-weight-bold" >Transaction ID</th>
+        <th scope="col" class="font-weight-bold" >Description</th>
+        <th scope="col" class="font-weight-bold">Date (YYYY-MM-DD)</th>
+        <th scope="col" class="font-weight-bold">Amount</th>
+        
+      </tr>
+    </thead>
+    
+    <tbody class="text-dark font-weight-bold">
+
+      <tr>
+        <td class="font-weight-normal">123456789</td>
+        <td class="font-weight-normal">123456789</td>
+        <td class="font-weight-normal">Deposit</td>        
+        <td class="font-weight-normal">2020-06-16</td>
+        <td class="font-weight-normal">2000</td>
+        
+      </tr>
+
+      
+     
+
+    </tbody>
+  </table>
+</div>
+
+<div class="container">
+    <center>
+    <a class="btn black text-white btn-sm" href=" {{ url_for('accountStatement') }} ">Go Back</a>
+</center>
+</div>
+
+{% endif %}
+
+
+
+{% if input %}
+        
+<script>
+    var start = document.getElementById('start_date');
+    var end = document.getElementById('end_date');
+    start.max = new Date().toISOString().split("T")[0];
+    end.max = new Date().toISOString().split("T")[0];
+
+    start.addEventListener('change', function () {
+        if (start.value)
+            end.min = start.value;
+    }, false);
+    end.addEventLiseter('change', function () {
+        if (end.value)
+            start.max = end.value;
+    }, false);
+
+    function radioFunction(type){
+        if(type == 1){
+            document.getElementById('dates_div').style.display = 'none';
+            document.getElementById('start_date').required = false;
+            document.getElementById('end_date').required = false;
+            document.getElementById('dropdown').style.display = 'block';
+        }
+        else{
+            document.getElementById('dates_div').style.display = 'block';
+            document.getElementById('dropdown').style.display = 'none';
+            document.getElementById('start_date').required = true;
+            document.getElementById('end_date').required = true;
+        }
+    }
+
+</script>
+{% endif %}
+
+
+
+
+{% endblock %}

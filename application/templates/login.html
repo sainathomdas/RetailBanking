@@ -8,11 +8,11 @@
 <header style="display: flex;flex-direction: column;justify-content: center;">
     <h1 class="text-center text-white" style=" font-family: 'Fira Sans', sans-serif;"> Welcome to <span style="color: gold;">MARS BANK</span></h1>
     <br>
-  
+    {% include "includes/flash_message.html" %}
     <div class="login-wrapper">
        
         <div class="form-signin">
-            {% include "includes/flash_message.html" %}
+            
             <h2 class="form-signin-heading text-center">Login</h2>
             <form action=" {{ url_for('login') }} " method="POST" data-parsley-validate>
             <label for="username">&nbsp;Username</label>
