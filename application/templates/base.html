@@ -26,11 +26,11 @@
 
   {% if not login_page  %}
 
-    {% if session['login_type']  == 'cust_executive' %}
-      {% include "includes/customer_executive_navbar.html" %}
-    {% else %}
-      {% include "includes/cashier_navbar.html" %}
-    {% endif %}
+  {% if session['login_type']  == 'cust_executive' %}
+  {% include "includes/customer_executive_navbar.html" %}
+  {% else %}
+  {% include "includes/cashier_navbar.html" %}
+  {% endif %}
   {% endif %}
 
 
@@ -56,7 +56,8 @@
 
           <!-- Content -->
           <h5 class="text-uppercase gold-text font-weight-bold">About Us</h5>
-          <p class="text-justify">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Perspiciatis ipsam quisquam facere, voluptas ab
+          <p class="text-justify">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Perspiciatis ipsam quisquam
+            facere, voluptas ab
             at, magnam sequi consequuntur sint a necessitatibus temporibus minus? Reprehenderit nisi laudantium eum
             recusandae magnam nam.</p>
 
@@ -135,29 +136,55 @@
   <!-- MDB core JavaScript -->
   <script type="text/javascript" src=" {{ url_for('static', filename = 'js/mdb.min.js') }}"></script>
   <script type="text/javascript" src=" {{ url_for('static', filename = 'js/parsley.min.js') }}"></script>
-  
+
+
+
+
   <script type="text/javascript" src=" {{ url_for('static', filename = 'js/my_js.js') }}"></script>
 
 
-{% if datatable %}
-    <!-- MDBootstrap Datatables  -->
+  {% if datatable %}
+
   <script type="text/javascript" src="{{ url_for('static', filename = 'js/addons/datatables.min.js') }}"></script>
   <script>
     $(document).ready(function () {
       $('#datatable').DataTable({
         "ordering": false,
-        // "scrollY": "1000px",
-        // "scrollCollapse": true  
+      });
+      $('.dataTables_length').addClass('bs-select');
+    });
+  </script>
+  {% endif %}
+
+  {% if datatable_for_stmt %}
+  <script type="text/javascript" src="{{ url_for('static', filename = 'js/addons/datatables.min.js') }}"></script>
+  <script src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script>
+  <script src = "https://cdn.datatables.net/buttons/1.6.2/js/buttons.flash.min.js"></script>
+  <script src = "https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+  <script src = "https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+  <script src = "https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+  <script src = "https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js"></script>
+  <script src = "https://cdn.datatables.net/buttons/1.6.2/js/buttons.print.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('#datatable').DataTable({
+        "ordering": false,
+        "searching": false,
+        "paging": false,
+        "info": false,
+        dom: 'Bfrtip',
+        buttons: [
+             'csv', 'excel', 'pdf', 'print'
+        ] //copy button also available
       });
       $('.dataTables_length').addClass('bs-select');
 
     });
   </script>
-{% endif %}
+  {% endif %}
 
 
 
-  
 </body>
 
 </html>
