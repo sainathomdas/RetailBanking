@@ -60,13 +60,13 @@ margin-top: 10;
 @media (min-width:1025px) {
     /* big landscape tablets, laptops, and desktops */
     nav {
-        margin-left: 8em;
-        margin-right: 8em;
-        margin-top: 1rem;
+        margin-left: 6.5em;
+        margin-right: 6.5em;
+        margin-top: 0.8rem;
     }
     .bank {
-        margin-left: 8rem;
-        margin-right: 8rem;
+        margin-left: 6.5rem;
+        margin-right: 6.5rem;
     }
 }
 
