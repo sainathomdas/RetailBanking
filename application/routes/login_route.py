@@ -59,7 +59,7 @@ def is_customer_executive(f):
         if 'login_type' in session and session['login_type']=='cust_executive':
             return f(*args,*kwargs)
         else:
-            flash('Must be customer executive to process','warning')
+            # flash('Must be customer executive to process','warning')
             return redirect(url_for('login'))
     return wrap
 
@@ -69,26 +69,9 @@ def is_cashier(f):
         if 'login_type' in session and session['login_type']=='cashier':
             return f(*args,*kwargs)
         else:
-            flash('Must be cashier to process','warning')
+            # flash('Must be cashier to process','warning')
             return redirect(url_for('login'))
     return wrap
-
-
-# Declaring a decorator to check if user is customer executive
-# def is_customer_executive(f):
-#     @wraps(f)
-#     def wrap(*args,**kwargs):
-#         if 'login_type' in session:
-#             if session['login_type'] == 'cust_executive':
-#                 return f(*args,*kwargs)
-#             else:
-#                 flash('You are not authorized','warning')
-#                 session.pop('logged_in',None)
-#                 return redirect(url_for('login'))
-#         else:
-#             flash('Must be logged in to process','warning')
-#             return redirect(url_for('login'))
-#     return wrap
 
 @app.route('/logout/')
 @is_logged_in
@@ -231,6 +214,7 @@ def deleteCustomerFromDatabase():
         custid = int(request.form['cust_id'])
         ssid = int(request.form['cust_ssid'])
         customer_table.delete_customer(f"cust_id={custid}")
+        accounts_table.delete_accounts(f"cust_id={custid}")
         flash("Successfully Deleted !!","success")
         return redirect(url_for('deleteCustomer'))
 
