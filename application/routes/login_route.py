@@ -85,6 +85,7 @@ def logout():
 def home(login_type = None):
     return render_template('home.html', home = True)
 
+# ------------------------------------------------------------------------------------------------------------
 
 @app.route('/create_customer/', methods = ['GET', 'POST'])
 @is_logged_in
@@ -232,7 +233,7 @@ def viewCustomer():
             flag = 1
             for row in result:
                 #flash("Customer Found",category="success")
-                return render_template('view_customer.html', datatable = True,  activate_customer_mgmt = True, data = row)
+                return render_template('view_customer.html', datatable = True,  activate_status_details = True, data = row)
 
 @app.route('/customer_status/')
 @is_logged_in
@@ -247,6 +248,43 @@ def customerStatus():
 def customerManagement():
     customers = CustomerAccount.query.all()
     return render_template('customer_mgmt.html', datatable = True,  activate_customer_mgmt = True, data=customers)
+
+
+@app.route('/customer_search', methods = ['GET', 'POST'])
+@is_logged_in
+@is_customer_executive
+def customerSearch():
+    if request.method == "POST":
+        if( 'input_type' in request.form and 'id' in request.form):
+            input_type = request.form['input_type']
+            id = int(request.form['id'])
+            #search for customer data with id and input_type...write a funtion to pull data from db using input_Type and id
+            if(input_type=='cust_id'):
+                result = customer_table.read_customer(f"cust_id={id}")
+                if(len(result) > 0):
+                    for row in result:
+                        if(id == row[0]):
+                            #flash(f"Customer found!",category="success")
+                            return render_template('customer_search.html',search = False, data = row, activate_search = True)
+                else:
+                    flash(f"Customer with {input_type} = {id} not found!", category='warning')
+                    return render_template('customer_search.html', search = True,  activate_search = True)
+        
+            elif(input_type=='ssn_id'):
+                result = customer_table.read_customer(f"ssnid={id}")
+                if(len(result) > 0):
+                    for row in result:
+                        if(id == row[1]):
+                            #flash(f"Customer found!",category="success")
+                            return render_template('customer_search.html',search = False, data = row, activate_search = True)
+                else:
+                    flash(f"Customer with {input_type} = {id} not found!", category='warning')
+                    return render_template('customer_search.html', search = True,  activate_search = True)
+    return render_template('customer_search.html', search = True,  activate_search = True)
+
+#--------------------------------------------------------------------------------------------------------------
+
+
 
 @app.route('/create_account/', methods = ['GET', 'POST'])
 @is_logged_in
@@ -273,7 +311,7 @@ def createAccount():
                     if prev_acc_id != None:        
                         acc_id = int(prev_acc_id) + 1
                     else:
-                        acc_id = 100000001
+                        acc_id = 300000001
                     ans = accounts_table.insert_accounts(f"{acc_id},{cust_id},'{account_type}',{deposit_amt},'Account creation initiated successfully', '{str(datetime.now().strftime('%Y/%m/%d, %H:%M:%S'))}','active' ")
                     
                     if ans: # if deposit success
@@ -283,7 +321,7 @@ def createAccount():
                             prev_trans_id = t[1]
                         
                         if prev_trans_id == None:
-                            trans_id = 100000001
+                            trans_id = 500000001
                         else:
                             trans_id = prev_trans_id + 1
                         transactions_table.insert_transactions(f"{acc_id},{trans_id},'Deposit','{date.today()}',{deposit_amt} ")
@@ -348,37 +386,6 @@ def accountStatus():
     accounts = accounts_table.read_accounts()
     return render_template('account_status.html', activate_status_details = True, datatable = True, data = accounts)
 
-@app.route('/customer_search', methods = ['GET', 'POST'])
-@is_logged_in
-@is_customer_executive
-def customerSearch():
-    if request.method == "POST":
-        if( 'input_type' in request.form and 'id' in request.form):
-            input_type = request.form['input_type']
-            id = int(request.form['id'])
-            #search for customer data with id and input_type...write a funtion to pull data from db using input_Type and id
-            if(input_type=='cust_id'):
-                result = customer_table.read_customer(f"cust_id={id}")
-                if(len(result) > 0):
-                    for row in result:
-                        if(id == row[0]):
-                            #flash(f"Customer found!",category="success")
-                            return render_template('customer_search.html',search = False, data = row, activate_search = True)
-                else:
-                    flash(f"Customer with {input_type} = {id} not found!", category='warning')
-                    return render_template('customer_search.html', search = True,  activate_search = True)
-        
-            elif(input_type=='ssn_id'):
-                result = customer_table.read_customer(f"ssnid={id}")
-                if(len(result) > 0):
-                    for row in result:
-                        if(id == row[1]):
-                            #flash(f"Customer found!",category="success")
-                            return render_template('customer_search.html',search = False, data = row, activate_search = True)
-                else:
-                    flash(f"Customer with {input_type} = {id} not found!", category='warning')
-                    return render_template('customer_search.html', search = True,  activate_search = True)
-    return render_template('customer_search.html', search = True,  activate_search = True)
 
 @app.route('/account_search/', methods = ['GET', 'POST'])
 @is_logged_in
@@ -449,7 +456,7 @@ def depositIntoDatabase():
                 for t in transIDs:
                     prev_trans_id = t[1]
                 if prev_trans_id == None:
-                    trans_id = 100000001
+                    trans_id = 500000001
                 else:
                     trans_id = prev_trans_id + 1
                 transactions_table.insert_transactions(f"{account_id},{trans_id},'Deposit','{date.today()}',{deposit_amt} ")
@@ -494,7 +501,7 @@ def withdrawFromDatabase():
                 for t in transIDs:
                     prev_trans_id = t[1]
                 if prev_trans_id == None:
-                    trans_id = 100000001
+                    trans_id = 500000001
                 else:
                     trans_id = prev_trans_id + 1
                 transactions_table.insert_transactions(f"{account_id},{trans_id},'Withdraw','{date.today()}',{withdraw_amt} ")
@@ -548,7 +555,7 @@ def transferFromDatabase():
                 for t in transIDs:
                     prev_trans_id = t[1]
                 if prev_trans_id == None:
-                    trans_id = 100000001
+                    trans_id = 500000001
                 else:
                     trans_id = prev_trans_id + 1
                 transactions_table.insert_transactions(f"{src_account_id},{trans_id},'Transfer','{date.today()}',{transfer_amt} ")
@@ -564,7 +571,7 @@ def transferFromDatabase():
                 for t in transIDs:
                     prev_trans_id = t[1]
                 if prev_trans_id == None:
-                    trans_id = 100000001
+                    trans_id = 500000001
                 else:
                     trans_id = prev_trans_id + 1
                 transactions_table.insert_transactions(f"{target_account_id},{trans_id},'Recieved','{date.today()}',{transfer_amt} ")
@@ -609,9 +616,4 @@ def accountStatement():
 
     return render_template('account_stmt.html', activate_account_stmt = True, input = True)
 
-
-"""
-cd ~
-source webflask/bin/activate
-cd Documents/Flask\ Apps/RetailBanking 
-"""
+# --------------------------------------------------------------------------------------------------------

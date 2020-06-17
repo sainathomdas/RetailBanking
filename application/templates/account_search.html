@@ -4,6 +4,8 @@
 
 {% block content %}
 
+{% include "includes/flash_message.html" %}
+
 {% if search %}
 <div class="wrapper mt-5" style="min-height: 40vh;">
 	<div class="title mt-5">
@@ -47,7 +49,6 @@
 {% endif %}
 
 
-{% include "includes/flash_message.html" %}
 
 {% if data %}
 <div class="wrapper mt-5">
