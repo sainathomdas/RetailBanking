@@ -53,6 +53,27 @@ def is_logged_in(f):
             return redirect(url_for('login'))
     return wrap
 
+def is_customer_executive(f):
+    @wraps(f)
+    def wrap(*args,**kwargs):
+        if 'login_type' in session and session['login_type']=='cust_executive':
+            return f(*args,*kwargs)
+        else:
+            flash('Must be customer executive to process','warning')
+            return redirect(url_for('login'))
+    return wrap
+
+def is_cashier(f):
+    @wraps(f)
+    def wrap(*args,**kwargs):
+        if 'login_type' in session and session['login_type']=='cashier':
+            return f(*args,*kwargs)
+        else:
+            flash('Must be cashier to process','warning')
+            return redirect(url_for('login'))
+    return wrap
+
+
 # Declaring a decorator to check if user is customer executive
 # def is_customer_executive(f):
 #     @wraps(f)
@@ -84,6 +105,7 @@ def home(login_type = None):
 
 @app.route('/create_customer/', methods = ['GET', 'POST'])
 @is_logged_in
+@is_customer_executive
 def createCustomer():
     if request.method == 'POST':
         #create customer and return accordingly
@@ -116,6 +138,7 @@ def createCustomer():
     
 @app.route('/update_customer/', methods = ['GET', 'POST'])
 @is_logged_in
+@is_customer_executive
 def updateCustomer():
     if request.method == "POST":
         if( 'input_type' in request.form and 'id' in request.form):
@@ -148,6 +171,7 @@ def updateCustomer():
 
 @app.route('/update_into_database', methods = ['GET', 'POST'])
 @is_logged_in
+@is_customer_executive
 def updateIntoDatabase():
     if request.method == 'POST':
         cust_ssid = request.form['cust_ssid']
@@ -170,6 +194,7 @@ def updateIntoDatabase():
 
 @app.route('/delete_customer/', methods = ['GET', 'POST'])
 @is_logged_in
+@is_customer_executive
 def deleteCustomer():
     if request.method == "POST":
         flag = 0
@@ -200,6 +225,7 @@ def deleteCustomer():
 
 @app.route('/delete_customer_from_database', methods = ['GET', 'POST'])
 @is_logged_in
+@is_customer_executive
 def deleteCustomerFromDatabase():
     if request.method == 'POST':
         custid = int(request.form['cust_id'])
@@ -212,6 +238,7 @@ def deleteCustomerFromDatabase():
 
 @app.route('/view_customer/', methods = ['GET', 'POST'])
 @is_logged_in
+@is_customer_executive
 def viewCustomer():    
     if request.method=='POST':
         custid = int(request.form['custid'])
@@ -225,18 +252,21 @@ def viewCustomer():
 
 @app.route('/customer_status/')
 @is_logged_in
+@is_customer_executive
 def customerStatus():
     customers = customer_table.read_customer()
     return render_template('customer_status.html', datatable = True, activate_status_details = True,data=customers)
 
 @app.route('/customer_management')
 @is_logged_in
+@is_customer_executive
 def customerManagement():
     customers = CustomerAccount.query.all()
     return render_template('customer_mgmt.html', datatable = True,  activate_customer_mgmt = True, data=customers)
 
 @app.route('/create_account/', methods = ['GET', 'POST'])
 @is_logged_in
+@is_customer_executive
 def createAccount():
     if request.method == 'POST':
         if( 'cust_id' in request.form and 'account_type' in request.form and 'deposit_amt' in request.form ):
@@ -287,6 +317,7 @@ def createAccount():
 
 @app.route('/delete_account/', methods = ['GET', 'POST'])
 @is_logged_in
+@is_customer_executive
 def deleteAccount():
     if request.method == "POST":
         flag = 0
@@ -316,6 +347,7 @@ def deleteAccount():
 
 @app.route('/delete_account_from_database', methods = ['GET', 'POST'])
 @is_logged_in
+@is_customer_executive
 def deleteAccountFromDatabase():
     if request.method == 'POST':
         custid = int(request.form['cust_id'])
@@ -327,12 +359,14 @@ def deleteAccountFromDatabase():
 
 @app.route('/account_status/')
 @is_logged_in
+@is_customer_executive
 def accountStatus():
     accounts = accounts_table.read_accounts()
     return render_template('account_status.html', activate_status_details = True, datatable = True, data = accounts)
 
 @app.route('/customer_search', methods = ['GET', 'POST'])
 @is_logged_in
+@is_customer_executive
 def customerSearch():
     if request.method == "POST":
         if( 'input_type' in request.form and 'id' in request.form):
@@ -364,6 +398,7 @@ def customerSearch():
 
 @app.route('/account_search/', methods = ['GET', 'POST'])
 @is_logged_in
+@is_customer_executive
 def accountSearch():
     if request.method == 'POST':
         if('input_type' in request.form and 'id' in request.form):
@@ -394,12 +429,14 @@ def accountSearch():
 
 @app.route('/account_details/')
 @is_logged_in
+@is_cashier
 def accountDetails():
     accounts = accounts_table.read_accounts()
     return render_template('account_details.html', activate_account_details = True, datatable = True, data = accounts)
 
 @app.route('/deposit/', methods = ['GET', 'POST'])
 @is_logged_in
+@is_cashier
 def deposit():
     if request.method == 'POST':
         if 'account_id' in request.form and 'account_type' in request.form and 'balance' in request.form and 'cust_id' in request.form:
@@ -411,6 +448,7 @@ def deposit():
 
 @app.route('/deposit_into_database/', methods = ['GET', 'POST'])
 @is_logged_in
+@is_cashier
 def depositIntoDatabase():
     if request.method == 'POST':
         if 'account_id' in request.form and 'account_type' in request.form and 'balance' in request.form and 'cust_id' in request.form and 'deposit_amt' in request.form:
@@ -439,6 +477,7 @@ def depositIntoDatabase():
 
 @app.route('/withdraw/', methods = ['GET', 'POST'])
 @is_logged_in
+@is_cashier
 def withdraw():
     if request.method == 'POST':
         if 'account_id' in request.form and 'account_type' in request.form and 'balance' in request.form and 'cust_id' in request.form:
@@ -450,6 +489,7 @@ def withdraw():
 
 @app.route('/withdraw_from_database/', methods = ['GET', 'POST'])
 @is_logged_in
+@is_cashier
 def withdrawFromDatabase():
     if request.method == 'POST':
         if 'account_id' in request.form and 'account_type' in request.form and 'balance' in request.form and 'cust_id' in request.form and 'withdraw_amt' in request.form:
@@ -483,6 +523,7 @@ def withdrawFromDatabase():
 
 @app.route('/transfer/', methods = ['GET', 'POST'])
 @is_logged_in
+@is_cashier
 def transfer():
     if request.method == 'POST':
         if 'account_id' in request.form and 'account_type' in request.form and 'balance' in request.form and 'cust_id' in request.form:
@@ -494,6 +535,7 @@ def transfer():
 
 @app.route('/transfer_into_database/', methods = ['GET', 'POST'])
 @is_logged_in
+@is_cashier
 def transferFromDatabase():
     if request.method == 'POST':
         if 'src_account_id' in request.form and 'src_account_type' in request.form and 'balance' in request.form and 'src_cust_id' in request.form and 'transfer_amt' in request.form and 'target_account_id' in request.form and 'target_account_type' in request.form:
@@ -554,6 +596,7 @@ def transferFromDatabase():
 
 @app.route('/account_statement', methods = ['GET', 'POST'])
 @is_logged_in
+@is_cashier
 def accountStatement():
     if request.method == 'POST':
         if('account_id' in request.form and 'statement_type' in request.form):
@@ -582,3 +625,9 @@ def accountStatement():
 
     return render_template('account_stmt.html', activate_account_stmt = True, input = True)
 
+
+"""
+cd ~
+source webflask/bin/activate
+cd Documents/Flask\ Apps/RetailBanking 
+"""
