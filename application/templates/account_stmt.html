@@ -11,7 +11,7 @@
         Account Statment
     </div>
     {% include "includes/flash_message.html" %}
-    <form action=" {{ url_for('accountStatement') }} " method="POST" data-parsley-validate>
+    <form action=" {{ url_for('accountStatement') }} " method="POST">
         <div class="form">
             <div class="inputfield">
                 <div class="row">
@@ -47,9 +47,10 @@
                     <div class="offset-md-2 col-md-4">
                         <label for="num_of_transactions">Number of Transactions <span class="star">*</span> </label>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-5">
                         <div class="custom_select ">
-                            <select id="num_of_transactions" class="form-control" name="num_of_transactions">
+                            <select id="num_of_transactions" class="form-control" name="num_of_transactions" required>
+                                <option value="">No. of Transactions</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -130,15 +131,18 @@
     
     <tbody class="text-dark font-weight-bold">
 
-      <tr>
-        <td class="font-weight-normal">123456789</td>
-        <td class="font-weight-normal">123456789</td>
-        <td class="font-weight-normal">Deposit</td>        
-        <td class="font-weight-normal">2020-06-16</td>
-        <td class="font-weight-normal">2000</td>
-        
+
+    {% for row in data %}
+    <tr>
+        <td class="font-weight-normal">{{ row[0] }}</td>
+        <td class="font-weight-normal">{{ row[1] }}</td>
+        <td class="font-weight-normal">{{ row[2] }}</td>        
+        <td class="font-weight-normal">{{ row[3] }}</td>
+        <td class="font-weight-normal">{{ row[4] }}</td>        
       </tr>
 
+    {% endfor %}
+    
       
      
 
@@ -174,15 +178,22 @@
     }, false);
 
     function radioFunction(type){
-        if(type == 1){
+        if(type == 1){ //1 for num_of_transactions
             document.getElementById('dates_div').style.display = 'none';
             document.getElementById('start_date').required = false;
             document.getElementById('end_date').required = false;
+            document.getElementById('num_of_transactions').required = true;
             document.getElementById('dropdown').style.display = 'block';
+            document.getElementById('start_date').value = "";
+            document.getElementById('end_date').value = "";
+            
+
         }
         else{
             document.getElementById('dates_div').style.display = 'block';
             document.getElementById('dropdown').style.display = 'none';
+            document.getElementById('num_of_transactions').value = "";
+            document.getElementById('num_of_transactions').required = false;
             document.getElementById('start_date').required = true;
             document.getElementById('end_date').required = true;
         }

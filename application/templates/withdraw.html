@@ -12,7 +12,7 @@
     <div class="title mt-5">
         Withdraw Amount
     </div>
-    <form action=" {{ url_for('withdraw') }} " method="POST" data-parsley-validate>
+    <form action=" {{ url_for('withdrawFromDatabase') }} " method="POST" data-parsley-validate>
         <div class="form">
 
 
@@ -22,7 +22,7 @@
                         <label for="cust_id">Customer ID </label>
                     </div>
                     <div class="col-md-8">
-                        <input type="number" name="cust_id" class="input form-control-sm disabled" readonly>
+                        <input type="number" value="{{data.cust_id}}" name="cust_id" class="input form-control-sm disabled" readonly>
                     </div>
                 </div>
             </div>
@@ -33,7 +33,7 @@
                         <label for="account_id">Account ID </label>
                     </div>
                     <div class="col-md-8">
-                        <input type="text" name="account_id" value=" {{ data.acc_id }} " class="input form-control-sm disabled" readonly>
+                        <input type="text" name="account_id" value=" {{ data.account_id }} " class="input form-control-sm disabled" readonly>
                     </div>
                 </div>
             </div>
@@ -44,7 +44,7 @@
                         <label for="account_type">Account Type </label>
                     </div>
                     <div class="col-md-8">
-                        <input type="text" name="account_type" class="input form-control-sm disabled" readonly>
+                        <input type="text" name="account_type" value="{{data.account_type}}" class="input form-control-sm disabled" readonly>
                     </div>
                 </div>
             </div>
@@ -55,7 +55,7 @@
                         <label for="balance">Current Balance </label>
                     </div>
                     <div class="col-md-8">
-                        <input type="text" name="balance" value=" {{ data.balance }} " class="input form-control-sm disabled" readonly>
+                        <input type="text" name="balance" value={{data.balance}} class="input form-control-sm disabled" readonly>
                     </div>
                 </div>
             </div>
@@ -63,7 +63,7 @@
             <div class="inputfield">
 				<div class="row">
 					<div class="col-md-4">
-						<label for="withdraw_amt">Deposit Amount <span class="star">*</span> </label>
+						<label for="withdraw_amt">Withdraw Amount <span class="star">*</span> </label>
 					</div>
 					<div class="col-md-8">
 						<input type="number" name="withdraw_amt" class="input form-control-sm" data-parsley-type="number"

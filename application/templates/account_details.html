@@ -40,10 +40,28 @@ Account Details
         <td class="font-weight-normal">{{ row[4] }} </td>
         <td class="font-weight-normal">{{ row[5] }} </td>
         <td class="font-weight-normal">{{ row[3] }} </td>
-        <td class="font-weight-normal">
-            <a href=" {{ url_for('deposit', acc_id= data.acc_id)}} " class="btn btn-sm text-white p-1" style="background-color: blue;">Deposit</a>
-            <a href=" {{ url_for('withdraw', acc_id= data.acc_id)}} " class="btn btn-sm text-white p-1" style="background-color: red;">withdraw</a>
-            <a href=" {{ url_for('transfer', acc_id= data.acc_id)}} " class="btn btn-sm text-white p-1" style="background-color: green;">Transfer</a>
+        <td class="font-weight-normal p-0" >
+            <form action=" {{ url_for('deposit') }} " method="POST" class="form-inline p-0" style="display: inline;margin: 0;">
+              <input type="text" name="account_id" value={{row[0]}} hidden>
+              <input type="text" name="account_type" value={{row[2]}} hidden>
+              <input type="text" name="cust_id" value={{row[1]}} hidden>
+              <input type="text" name="balance" value={{row[3]}} hidden>
+              <input type="submit" value="Deposit" class="btn btn-sm text-white p-1 m-0" style="background-color: blue;">
+            </form>
+            <form action=" {{ url_for('withdraw') }} " method="POST" class="form-inline p-0" style="display: inline;margin: 0;">
+              <input type="text" name="account_id" value={{row[0]}} hidden>
+              <input type="text" name="account_type" value={{row[2]}} hidden>
+              <input type="text" name="cust_id" value={{row[1]}} hidden>
+              <input type="text" name="balance" value={{row[3]}} hidden>
+              <input type="submit" value="Withdraw" class="btn btn-sm text-white p-1 m-0" style="background-color: red;">
+            </form>
+            <form action=" {{ url_for('transfer') }} " method="POST" class="form-inline p-0" style="display: inline;margin: 0;">
+              <input type="text" name="account_id" value={{row[0]}} hidden>
+              <input type="text" name="account_type" value={{row[2]}} hidden>
+              <input type="text" name="cust_id" value={{row[1]}} hidden>
+              <input type="text" name="balance" value={{row[3]}} hidden>
+              <input type="submit" value="Transfer" class="btn btn-sm text-white p-1 m-0" style="background-color: green;">
+            </form>
          </td>
       </tr>
       {% endfor %}

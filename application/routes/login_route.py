@@ -4,7 +4,6 @@ from flask import render_template, request, redirect, url_for, flash, session
 from datetime import datetime, date
 from passlib.hash import sha256_crypt
 from functools import wraps
-from datetime import datetime
 from application.models import login as login_table
 from application.models import login_timestamp as login_timestamp_table
 from application.models import customer as customer_table
@@ -30,7 +29,7 @@ def login():
                     session['logged_in'] = True
                     session['username'] = username
                     session['login_type'] = login_type
-                    login_timestamp_table.insert_login_timestamp(f"'{username}','{str(datetime.now())}'")
+                    login_timestamp_table.insert_login_timestamp(f"'{username}','{str(datetime.now().strftime('%Y/%m/%d, %H:%M:%S'))}'")
                 
                     # flash("Successfully Logged In","success")
                     return render_template('home.html', home = True)
@@ -53,6 +52,22 @@ def is_logged_in(f):
             flash('Must be logged in to process','warning')
             return redirect(url_for('login'))
     return wrap
+
+# Declaring a decorator to check if user is customer executive
+# def is_customer_executive(f):
+#     @wraps(f)
+#     def wrap(*args,**kwargs):
+#         if 'login_type' in session:
+#             if session['login_type'] == 'cust_executive':
+#                 return f(*args,*kwargs)
+#             else:
+#                 flash('You are not authorized','warning')
+#                 session.pop('logged_in',None)
+#                 return redirect(url_for('login'))
+#         else:
+#             flash('Must be logged in to process','warning')
+#             return redirect(url_for('login'))
+#     return wrap
 
 @app.route('/logout/')
 @is_logged_in
@@ -93,7 +108,7 @@ def createCustomer():
         else:
             cust_id = 100000001
 
-        customer_table.insert_customer(f"{int(cust_id)},{int(ssnid)},'{name}','{age}','{address}','{state}','{city}','Active','{str(datetime.now())}','Customer creation initiated successfully' ")
+        customer_table.insert_customer(f"{int(cust_id)},{int(ssnid)},'{name}','{age}','{address}','{state}','{city}','Active','{str(datetime.now().strftime('%Y/%m/%d, %H:%M:%S'))}','Customer creation initiated successfully' ")
 
         flash('Customer created successfully', 'success')
         return render_template('create_customer.html', activate_customer_mgmt = True)
@@ -146,7 +161,7 @@ def updateIntoDatabase():
         cust_city = request.form['cust_city']
         #udpate into database
         try:
-            customer_table.update_customer(f"name='{cust_new_name}', age={int(cust_new_age)}, address='{cust_new_address}', city='{cust_city}', state = '{cust_state}', message='Customer update initiated successfully',last_updated='{str(datetime.now())}'" , f"ssnid={int(cust_ssid)}")
+            customer_table.update_customer(f"name='{cust_new_name}', age={int(cust_new_age)}, address='{cust_new_address}', city='{cust_city}', state = '{cust_state}', message='Customer update initiated successfully',last_updated='{str(datetime.now().strftime('%Y/%m/%d, %H:%M:%S'))}'" , f"ssnid={int(cust_ssid)}")
             flash("Updated Successfully", category= 'success')
             return redirect(url_for('updateCustomer'))
         except:
@@ -245,7 +260,7 @@ def createAccount():
                         acc_id = int(prev_acc_id) + 1
                     else:
                         acc_id = 100000001
-                    ans = accounts_table.insert_accounts(f"{acc_id},{cust_id},'{account_type}',{deposit_amt},'Account creation initiated successfully', '{str(datetime.now())}','active' ")
+                    ans = accounts_table.insert_accounts(f"{acc_id},{cust_id},'{account_type}',{deposit_amt},'Account creation initiated successfully', '{str(datetime.now().strftime('%Y/%m/%d, %H:%M:%S'))}','active' ")
                     
                     if ans: # if deposit success
                         prev_trans_id = None
@@ -384,97 +399,156 @@ def accountDetails():
     return render_template('account_details.html', activate_account_details = True, datatable = True, data = accounts)
 
 @app.route('/deposit/', methods = ['GET', 'POST'])
-@app.route('/deposit/<acc_id>', methods = ['GET', 'POST'])
 @is_logged_in
-def deposit(acc_id=None):
+def deposit():
     if request.method == 'POST':
-        if('account_id' in request.form and 'account_type' in request.form and 'deposit_amt' in request.form and 'balance' in request.form):
+        if 'account_id' in request.form and 'account_type' in request.form and 'balance' in request.form and 'cust_id' in request.form:
             account_id = request.form['account_id']
             account_type = request.form['account_type']
             balance = request.form['balance']
-            deposit_amt = request.form['deposit_amt']
-            new_balance = int(float(balance)) + int(float(deposit_amt))
-            #update the DB
-            if 1==1: #deposited successfully
-                flash('Amount deposited successfully', 'success')
-                return redirect(url_for('accountDetails'))
-            else:
-                flash('An unknown error occured', 'warning')
-                return redirect(url_for('accountDetails'))
+            cust_id = request.form['cust_id']
+            return render_template('deposit.html', activate_account_details = True, data = {'account_id':account_id, 'account_type':account_type, 'balance': balance, 'cust_id': cust_id })
 
-    else:
-        if acc_id != None:
-            #retrieve account details
-            return render_template('deposit.html', activate_account_details = True, data = {'acc_id':'123456789', 'name':'sainath', 'balance': 2000} )
-        else:
-            flash('Please select an account', 'warning')
-            return redirect(url_for('accountDetails'))
+@app.route('/deposit_into_database/', methods = ['GET', 'POST'])
+@is_logged_in
+def depositIntoDatabase():
+    if request.method == 'POST':
+        if 'account_id' in request.form and 'account_type' in request.form and 'balance' in request.form and 'cust_id' in request.form and 'deposit_amt' in request.form:
+            account_id = int(request.form['account_id'])
+            account_type = request.form['account_type']
+            balance = int(float(request.form['balance']))
+            cust_id = int(request.form['cust_id'])
+            deposit_amt = request.form['deposit_amt']
+            new_balance = balance + int(float(deposit_amt))
+            try:
+                accounts_table.update_accounts(f"balance='{new_balance}',last_updated='{str(datetime.now().strftime('%Y/%m/%d, %H:%M:%S'))}',message='Amount deposited successfully'" , f"acc_id={account_id}")
+                prev_trans_id = None
+                transIDs = transactions_table.getLastRow()
+                for t in transIDs:
+                    prev_trans_id = t[1]
+                if prev_trans_id == None:
+                    trans_id = 100000001
+                else:
+                    trans_id = prev_trans_id + 1
+                transactions_table.insert_transactions(f"{account_id},{trans_id},'Deposit','{date.today()}',{deposit_amt} ")
+                flash("Deposited Successfully", category= 'success')
+                return redirect(url_for('accountDetails'))
+            except:
+                flash("An unknown error occured", category= 'warning')
+                return redirect(url_for('accountDetails'))
 
 @app.route('/withdraw/', methods = ['GET', 'POST'])
-@app.route('/withdraw/<acc_id>', methods = ['GET', 'POST'])
 @is_logged_in
-def withdraw(acc_id = None):
+def withdraw():
     if request.method == 'POST':
-        if('account_id' in request.form and 'account_type' in request.form and 'withdraw_amt' in request.form and 'balance' in request.form):
+        if 'account_id' in request.form and 'account_type' in request.form and 'balance' in request.form and 'cust_id' in request.form:
             account_id = request.form['account_id']
             account_type = request.form['account_type']
             balance = request.form['balance']
+            cust_id = request.form['cust_id']
+            return render_template('withdraw.html', activate_account_details = True, data = {'account_id':account_id, 'account_type':account_type, 'balance': balance, 'cust_id': cust_id })
+
+@app.route('/withdraw_from_database/', methods = ['GET', 'POST'])
+@is_logged_in
+def withdrawFromDatabase():
+    if request.method == 'POST':
+        if 'account_id' in request.form and 'account_type' in request.form and 'balance' in request.form and 'cust_id' in request.form and 'withdraw_amt' in request.form:
+            account_id = int(request.form['account_id'])
+            account_type = request.form['account_type']
+            balance = int(float(request.form['balance']))
+            cust_id = int(request.form['cust_id'])
             withdraw_amt = request.form['withdraw_amt']
             new_balance = int(float(balance)) - int(float(withdraw_amt))
-            print(new_balance)
             if(new_balance < 0):
                 flash('Withdraw not allowed, please choose smaller amount', 'warning')
-                return redirect(url_for('withdraw', acc_id = account_id))
-
-            #update the DB
-            if 1==1: #withdrawn successfully
-                flash('Amount withdrawn successfully', 'success')
-                return redirect(url_for('accountDetails'))
-            else:
-                flash('An unknown error occured', 'warning')
                 return redirect(url_for('accountDetails'))
 
-    else:
-        if acc_id != None:
-            #retrieve account details
-            return render_template('withdraw.html', activate_account_details = True, data = {'acc_id':'123456789', 'name':'sainath', 'balance': 100})
-        else:
-            flash('Please select an account', 'warning')
-            return redirect(url_for('accountDetails'))
-        
+            try:
+                accounts_table.update_accounts(f"balance='{new_balance}',last_updated='{str(datetime.now().strftime('%Y/%m/%d, %H:%M:%S'))}',message='Amount Withdrawn successfully'" , f"acc_id={account_id}")
+                prev_trans_id = None
+                transIDs = transactions_table.getLastRow()
+                for t in transIDs:
+                    prev_trans_id = t[1]
+                if prev_trans_id == None:
+                    trans_id = 100000001
+                else:
+                    trans_id = prev_trans_id + 1
+                transactions_table.insert_transactions(f"{account_id},{trans_id},'Withdraw','{date.today()}',{withdraw_amt} ")
+                flash("Amount Withdrawn Successfully", category= 'success')
+                return redirect(url_for('accountDetails'))
+            except:
+                flash("An unknown error occured", category= 'warning')
+                return redirect(url_for('accountDetails'))
+
+
 @app.route('/transfer/', methods = ['GET', 'POST'])
-@app.route('/transfer/<acc_id>', methods = ['GET', 'POST'])
 @is_logged_in
-def transfer(acc_id=None):
+def transfer():
     if request.method == 'POST':
-        if('source_account_id' in request.form and 'src_account_type' in request.form and 'target_account_id' in request.form and 'transfer_amt' in request.form and 'balance' in request.form and 'target_account_type' in request.form):
-            source_account_id = request.form['source_account_id']
-            src_account_type = request.form['src_account_type']
-            target_account_id = request.form['target_account_id']
-            target_account_type = request.form['target_account_type']
+        if 'account_id' in request.form and 'account_type' in request.form and 'balance' in request.form and 'cust_id' in request.form:
+            account_id = request.form['account_id']
+            account_type = request.form['account_type']
             balance = request.form['balance']
+            cust_id = request.form['cust_id']
+            return render_template('transfer.html', activate_account_details = True, data = {'account_id':account_id, 'account_type':account_type, 'balance': balance, 'cust_id': cust_id })
+
+@app.route('/transfer_into_database/', methods = ['GET', 'POST'])
+@is_logged_in
+def transferFromDatabase():
+    if request.method == 'POST':
+        if 'src_account_id' in request.form and 'src_account_type' in request.form and 'balance' in request.form and 'src_cust_id' in request.form and 'transfer_amt' in request.form and 'target_account_id' in request.form and 'target_account_type' in request.form:
+            src_account_id = int(request.form['src_account_id'])
+            src_account_type = request.form['src_account_type']
+            balance = int(float(request.form['balance']))
+            src_cust_id = int(request.form['src_cust_id'])
             transfer_amt = request.form['transfer_amt']
+            target_account_id = int(request.form['target_account_id'])
             new_balance = int(float(balance)) - int(float(transfer_amt))
-            print(new_balance)
+            target_account_type = request.form['target_account_type']
+
+            new_balance = int(float(balance)) - int(float(transfer_amt))
             if(new_balance < 0):
                 flash('Transfer not allowed, please choose smaller amount', 'warning')
-                return redirect(url_for('transfer', acc_id = source_account_id))
-
-            #update the DB
-            if 1==1: #withdrawn successfully
-                flash('Amount transferred successfully', 'success')
-                return redirect(url_for('accountDetails'))
-            else:
-                flash('An unknown error occured', 'warning')
                 return redirect(url_for('accountDetails'))
 
-    else:
-        if acc_id != None:
-            #retrieve account details
-            return render_template('transfer.html', activate_account_details = True, data = {'acc_id':'123456789', 'name':'sainath', 'balance': 100})
-        else:
-            flash('Please select an account', 'warning')
-            return redirect(url_for('accountDetails'))
+            result = accounts_table.read_accounts(f"acc_id={target_account_id} and acc_type='{target_account_type}'")
+            if not len(result) > 0:
+                flash(f"Target Customer with account id = {target_account_id} and account type = {target_account_type} not found!", 'warning')
+                return redirect(url_for('accountDetails'))
+            try:
+                accounts_table.update_accounts(f"balance='{new_balance}',last_updated='{str(datetime.now().strftime('%Y/%m/%d, %H:%M:%S'))}',message='Amount transferred successfully'" , f"acc_id={src_account_id}")
+                prev_trans_id = None
+                transIDs = transactions_table.getLastRow()
+                for t in transIDs:
+                    prev_trans_id = t[1]
+                if prev_trans_id == None:
+                    trans_id = 100000001
+                else:
+                    trans_id = prev_trans_id + 1
+                transactions_table.insert_transactions(f"{src_account_id},{trans_id},'Transfer','{date.today()}',{transfer_amt} ")
+
+
+                result = accounts_table.read_accounts(f"acc_id={target_account_id}")
+                for row in result:
+                    target_account_cur_bal = row[3]
+                update_target_bal = int(target_account_cur_bal) + int(transfer_amt)                
+                accounts_table.update_accounts(f"balance='{update_target_bal}',last_updated='{str(datetime.now().strftime('%Y/%m/%d, %H:%M:%S'))}',message='Amount received successfully'" , f"acc_id={target_account_id}")
+                prev_trans_id = None
+                transIDs = transactions_table.getLastRow()
+                for t in transIDs:
+                    prev_trans_id = t[1]
+                if prev_trans_id == None:
+                    trans_id = 100000001
+                else:
+                    trans_id = prev_trans_id + 1
+                transactions_table.insert_transactions(f"{target_account_id},{trans_id},'Recieved','{date.today()}',{transfer_amt} ")
+
+
+                flash("Amount Transferred Successfully", category= 'success')
+                return redirect(url_for('accountDetails'))
+            except:
+                flash("An unknown error occured", category= 'warning')
+                return redirect(url_for('accountDetails'))
 
 
 
@@ -483,16 +557,28 @@ def transfer(acc_id=None):
 def accountStatement():
     if request.method == 'POST':
         if('account_id' in request.form and 'statement_type' in request.form):
-            account_id = request.form['account_id']            
+            account_id = int(request.form['account_id'])
             if request.form['statement_type'] == 'transactions':
-                num_of_transactions = request.form['num_of_transactions']
+                num_of_transactions = int(request.form['num_of_transactions'])
                 # get last number of transactions
-                return render_template('account_stmt.html', activate_account_stmt = True, datatable_for_stmt = True, data = {'name':'sainath'})
+                result = transactions_table.getLastNTransactions(account_id, num_of_transactions)
+                if result != False:
+                    if not len(result) > 0:
+                        flash("No transactions found or account doesn't exist!", "warning")
+                        return redirect(url_for('accountStatement'))
+                if result != False:
+                    return render_template('account_stmt.html', activate_account_stmt = True, datatable_for_stmt = True, data = result)
             else:
                 start_date = request.form['start_date'] 
                 end_date = request.form['end_date'] 
                 # get statement btween these dates
-                return render_template('account_stmt.html', activate_account_stmt = True, datatable_for_stmt = True, data = {'name':'sainath'})
+                result = transactions_table.getStatementByDates(account_id, start_date, end_date)
+                if result != False:
+                    if not len(result) > 0:
+                        flash("No transactions found or account doesn't exist!", "warning")
+                        return redirect(url_for('accountStatement'))
+                    else:
+                        return render_template('account_stmt.html', activate_account_stmt = True, datatable_for_stmt = True, data = result)
 
     return render_template('account_stmt.html', activate_account_stmt = True, input = True)
 
