@@ -1,0 +1,1992 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 3.2.1 (Python 3.7.4 on win32)" generated="20200618 14:28:09.408" rpa="false">
+<suite id="s1" name="RetailBanking" source="E:\wamp64\www\RetailBanking\RetailBanking.robot">
+<test id="s1-t1" name="test_cust_executive_login">
+<kw name="Open Browser" library="SeleniumLibrary">
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<arguments>
+<arg>${base_url}</arg>
+<arg>chrome</arg>
+</arguments>
+<msg timestamp="20200618 14:28:09.636" level="INFO">Opening browser 'chrome' to base url 'http://127.0.0.1:5000/'.</msg>
+<status status="PASS" starttime="20200618 14:28:09.636" endtime="20200618 14:28:14.986"></status>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20200618 14:28:14.987" endtime="20200618 14:28:17.169"></status>
+</kw>
+<kw name="CustExecutive Login Page Should Be Open">
+<kw name="Title Should Be" library="SeleniumLibrary">
+<doc>Verifies that the current page title equals ``title``.</doc>
+<arguments>
+<arg>Mars | Login</arg>
+</arguments>
+<msg timestamp="20200618 14:28:17.179" level="INFO">Page title is 'Mars | Login'.</msg>
+<status status="PASS" starttime="20200618 14:28:17.173" endtime="20200618 14:28:17.179"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>name:username</arg>
+<arg>${CUST_EXECUTIVE_USERNAME}</arg>
+</arguments>
+<msg timestamp="20200618 14:28:17.180" level="INFO">Typing text 'admin123' into text field 'name:username'.</msg>
+<status status="PASS" starttime="20200618 14:28:17.179" endtime="20200618 14:28:17.305"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>name:password</arg>
+<arg>${CUST_EXECUTIVE_PASSWORD}</arg>
+</arguments>
+<msg timestamp="20200618 14:28:17.305" level="INFO">Typing text 'Admin@1234' into text field 'name:password'.</msg>
+<status status="PASS" starttime="20200618 14:28:17.305" endtime="20200618 14:28:17.452"></status>
+</kw>
+<kw name="Select From List By Value" library="SeleniumLibrary">
+<doc>Selects options from selection list ``locator`` by ``values``.</doc>
+<arguments>
+<arg>name:login_type</arg>
+<arg>cust_executive</arg>
+</arguments>
+<msg timestamp="20200618 14:28:17.452" level="INFO">Selecting options from selection list 'name:login_type' by value cust_executive.</msg>
+<status status="PASS" starttime="20200618 14:28:17.452" endtime="20200618 14:28:17.508"></status>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>Login</arg>
+</arguments>
+<msg timestamp="20200618 14:28:17.509" level="INFO">Clicking button 'Login'.</msg>
+<status status="PASS" starttime="20200618 14:28:17.508" endtime="20200618 14:28:19.579"></status>
+</kw>
+<kw name="Title Should Be" library="SeleniumLibrary">
+<doc>Verifies that the current page title equals ``title``.</doc>
+<arguments>
+<arg>Mars | Home</arg>
+</arguments>
+<msg timestamp="20200618 14:28:19.584" level="INFO">Page title is 'Mars | Home'.</msg>
+<status status="PASS" starttime="20200618 14:28:19.579" endtime="20200618 14:28:19.584"></status>
+</kw>
+<status status="PASS" starttime="20200618 14:28:17.169" endtime="20200618 14:28:19.585"></status>
+</kw>
+<kw name="Click Link" library="SeleniumLibrary">
+<doc>Clicks a link identified by ``locator``.</doc>
+<arguments>
+<arg>Logout</arg>
+</arguments>
+<msg timestamp="20200618 14:28:19.587" level="INFO">Clicking link 'Logout'.</msg>
+<status status="PASS" starttime="20200618 14:28:19.585" endtime="20200618 14:28:19.849"></status>
+</kw>
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20200618 14:28:19.849" endtime="20200618 14:28:22.447"></status>
+</kw>
+<status status="PASS" starttime="20200618 14:28:09.635" endtime="20200618 14:28:22.449" critical="yes"></status>
+</test>
+<test id="s1-t2" name="test_create_update_customer">
+<kw name="Open Browser" library="SeleniumLibrary">
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<arguments>
+<arg>${base_url}</arg>
+<arg>chrome</arg>
+</arguments>
+<msg timestamp="20200618 14:28:22.454" level="INFO">Opening browser 'chrome' to base url 'http://127.0.0.1:5000/'.</msg>
+<status status="PASS" starttime="20200618 14:28:22.454" endtime="20200618 14:28:26.900"></status>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20200618 14:28:26.900" endtime="20200618 14:28:29.033"></status>
+</kw>
+<kw name="CustExecutive Login Page Should Be Open">
+<kw name="Title Should Be" library="SeleniumLibrary">
+<doc>Verifies that the current page title equals ``title``.</doc>
+<arguments>
+<arg>Mars | Login</arg>
+</arguments>
+<msg timestamp="20200618 14:28:29.041" level="INFO">Page title is 'Mars | Login'.</msg>
+<status status="PASS" starttime="20200618 14:28:29.034" endtime="20200618 14:28:29.041"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>name:username</arg>
+<arg>${CUST_EXECUTIVE_USERNAME}</arg>
+</arguments>
+<msg timestamp="20200618 14:28:29.041" level="INFO">Typing text 'admin123' into text field 'name:username'.</msg>
+<status status="PASS" starttime="20200618 14:28:29.041" endtime="20200618 14:28:29.151"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>name:password</arg>
+<arg>${CUST_EXECUTIVE_PASSWORD}</arg>
+</arguments>
+<msg timestamp="20200618 14:28:29.151" level="INFO">Typing text 'Admin@1234' into text field 'name:password'.</msg>
+<status status="PASS" starttime="20200618 14:28:29.151" endtime="20200618 14:28:29.282"></status>
+</kw>
+<kw name="Select From List By Value" library="SeleniumLibrary">
+<doc>Selects options from selection list ``locator`` by ``values``.</doc>
+<arguments>
+<arg>name:login_type</arg>
+<arg>cust_executive</arg>
+</arguments>
+<msg timestamp="20200618 14:28:29.282" level="INFO">Selecting options from selection list 'name:login_type' by value cust_executive.</msg>
+<status status="PASS" starttime="20200618 14:28:29.282" endtime="20200618 14:28:29.330"></status>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>Login</arg>
+</arguments>
+<msg timestamp="20200618 14:28:29.330" level="INFO">Clicking button 'Login'.</msg>
+<status status="PASS" starttime="20200618 14:28:29.330" endtime="20200618 14:28:31.406"></status>
+</kw>
+<kw name="Title Should Be" library="SeleniumLibrary">
+<doc>Verifies that the current page title equals ``title``.</doc>
+<arguments>
+<arg>Mars | Home</arg>
+</arguments>
+<msg timestamp="20200618 14:28:31.412" level="INFO">Page title is 'Mars | Home'.</msg>
+<status status="PASS" starttime="20200618 14:28:31.406" endtime="20200618 14:28:31.412"></status>
+</kw>
+<status status="PASS" starttime="20200618 14:28:29.033" endtime="20200618 14:28:31.412"></status>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>//*[contains(text(),'Customer Management')]</arg>
+</arguments>
+<msg timestamp="20200618 14:28:31.413" level="INFO">Clicking element '//*[contains(text(),'Customer Management')]'.</msg>
+<status status="PASS" starttime="20200618 14:28:31.412" endtime="20200618 14:28:31.477"></status>
+</kw>
+<kw name="Click Link" library="SeleniumLibrary">
+<doc>Clicks a link identified by ``locator``.</doc>
+<arguments>
+<arg>Create Customer</arg>
+</arguments>
+<msg timestamp="20200618 14:28:31.479" level="INFO">Clicking link 'Create Customer'.</msg>
+<status status="PASS" starttime="20200618 14:28:31.478" endtime="20200618 14:28:31.768"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>name:cust_ssid</arg>
+<arg>${CUST_SSNID}</arg>
+</arguments>
+<msg timestamp="20200618 14:28:31.770" level="INFO">Typing text '123456789' into text field 'name:cust_ssid'.</msg>
+<status status="PASS" starttime="20200618 14:28:31.768" endtime="20200618 14:28:31.898"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>name:cust_name</arg>
+<arg>Sainath</arg>
+</arguments>
+<msg timestamp="20200618 14:28:31.899" level="INFO">Typing text 'Sainath' into text field 'name:cust_name'.</msg>
+<status status="PASS" starttime="20200618 14:28:31.899" endtime="20200618 14:28:32.010"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>name:cust_age</arg>
+<arg>22</arg>
+</arguments>
+<msg timestamp="20200618 14:28:32.011" level="INFO">Typing text '22' into text field 'name:cust_age'.</msg>
+<status status="PASS" starttime="20200618 14:28:32.011" endtime="20200618 14:28:32.098"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>name:cust_address</arg>
+<arg>Charlapally</arg>
+</arguments>
+<msg timestamp="20200618 14:28:32.099" level="INFO">Typing text 'Charlapally' into text field 'name:cust_address'.</msg>
+<status status="PASS" starttime="20200618 14:28:32.098" endtime="20200618 14:28:32.224"></status>
+</kw>
+<kw name="Execute Javascript" library="SeleniumLibrary">
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<arguments>
+<arg>window.scrollTo(0,200)</arg>
+</arguments>
+<msg timestamp="20200618 14:28:32.225" level="INFO">Executing JavaScript:
+window.scrollTo(0,200)
+Without any arguments.</msg>
+<status status="PASS" starttime="20200618 14:28:32.224" endtime="20200618 14:28:32.231"></status>
+</kw>
+<kw name="Select From List By Label" library="SeleniumLibrary">
+<doc>Selects options from selection list ``locator`` by ``labels``.</doc>
+<arguments>
+<arg>name:cust_state</arg>
+<arg>Andhra Pradesh</arg>
+</arguments>
+<msg timestamp="20200618 14:28:32.231" level="INFO">Selecting options from selection list 'name:cust_state' by label Andhra Pradesh.</msg>
+<status status="PASS" starttime="20200618 14:28:32.231" endtime="20200618 14:28:32.323"></status>
+</kw>
+<kw name="Select From List By Label" library="SeleniumLibrary">
+<doc>Selects options from selection list ``locator`` by ``labels``.</doc>
+<arguments>
+<arg>name:cust_city</arg>
+<arg>Hyderabad</arg>
+</arguments>
+<msg timestamp="20200618 14:28:32.324" level="INFO">Selecting options from selection list 'name:cust_city' by label Hyderabad.</msg>
+<status status="PASS" starttime="20200618 14:28:32.324" endtime="20200618 14:28:32.437"></status>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>Create</arg>
+</arguments>
+<msg timestamp="20200618 14:28:32.438" level="INFO">Clicking button 'Create'.</msg>
+<status status="PASS" starttime="20200618 14:28:32.437" endtime="20200618 14:28:32.880"></status>
+</kw>
+<kw name="Title Should Be" library="SeleniumLibrary">
+<doc>Verifies that the current page title equals ``title``.</doc>
+<arguments>
+<arg>Mars | Create Customer</arg>
+</arguments>
+<msg timestamp="20200618 14:28:32.900" level="INFO">Page title is 'Mars | Create Customer'.</msg>
+<status status="PASS" starttime="20200618 14:28:32.881" endtime="20200618 14:28:32.900"></status>
+</kw>
+<kw name="Set Selenium Speed" library="SeleniumLibrary">
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<arguments>
+<arg>0.2 seconds</arg>
+</arguments>
+<status status="PASS" starttime="20200618 14:28:32.901" endtime="20200618 14:28:32.902"></status>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>//*[contains(text(),'Customer Management')]</arg>
+</arguments>
+<msg timestamp="20200618 14:28:32.904" level="INFO">Clicking element '//*[contains(text(),'Customer Management')]'.</msg>
+<status status="PASS" starttime="20200618 14:28:32.903" endtime="20200618 14:28:33.369"></status>
+</kw>
+<kw name="Click Link" library="SeleniumLibrary">
+<doc>Clicks a link identified by ``locator``.</doc>
+<arguments>
+<arg>Edit Customer</arg>
+</arguments>
+<msg timestamp="20200618 14:28:33.370" level="INFO">Clicking link 'Edit Customer'.</msg>
+<status status="PASS" starttime="20200618 14:28:33.369" endtime="20200618 14:28:34.166"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>name:id</arg>
+<arg>${CUST_ID}</arg>
+</arguments>
+<msg timestamp="20200618 14:28:34.167" level="INFO">Typing text '100000004' into text field 'name:id'.</msg>
+<status status="PASS" starttime="20200618 14:28:34.167" endtime="20200618 14:28:34.932"></status>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>id:searchBtn</arg>
+</arguments>
+<msg timestamp="20200618 14:28:34.933" level="INFO">Clicking element 'id:searchBtn'.</msg>
+<status status="PASS" starttime="20200618 14:28:34.933" endtime="20200618 14:28:35.532"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>name:cust_new_name</arg>
+<arg>Sainath Omdas</arg>
+</arguments>
+<msg timestamp="20200618 14:28:35.533" level="INFO">Typing text 'Sainath Omdas' into text field 'name:cust_new_name'.</msg>
+<status status="PASS" starttime="20200618 14:28:35.533" endtime="20200618 14:28:36.309"></status>
+</kw>
+<kw name="Execute Javascript" library="SeleniumLibrary">
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<arguments>
+<arg>window.scrollTo(0,100)</arg>
+</arguments>
+<msg timestamp="20200618 14:28:36.310" level="INFO">Executing JavaScript:
+window.scrollTo(0,100)
+Without any arguments.</msg>
+<status status="PASS" starttime="20200618 14:28:36.309" endtime="20200618 14:28:36.530"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>name:cust_new_age</arg>
+<arg>22</arg>
+</arguments>
+<msg timestamp="20200618 14:28:36.531" level="INFO">Typing text '22' into text field 'name:cust_new_age'.</msg>
+<status status="PASS" starttime="20200618 14:28:36.531" endtime="20200618 14:28:37.229"></status>
+</kw>
+<kw name="Execute Javascript" library="SeleniumLibrary">
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<arguments>
+<arg>window.scrollTo(0,200)</arg>
+</arguments>
+<msg timestamp="20200618 14:28:37.230" level="INFO">Executing JavaScript:
+window.scrollTo(0,200)
+Without any arguments.</msg>
+<status status="PASS" starttime="20200618 14:28:37.229" endtime="20200618 14:28:37.436"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>name:cust_new_address</arg>
+<arg>Hyderabad</arg>
+</arguments>
+<msg timestamp="20200618 14:28:37.437" level="INFO">Typing text 'Hyderabad' into text field 'name:cust_new_address'.</msg>
+<status status="PASS" starttime="20200618 14:28:37.437" endtime="20200618 14:28:38.163"></status>
+</kw>
+<kw name="Execute Javascript" library="SeleniumLibrary">
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<arguments>
+<arg>window.scrollTo(0,100)</arg>
+</arguments>
+<msg timestamp="20200618 14:28:38.164" level="INFO">Executing JavaScript:
+window.scrollTo(0,100)
+Without any arguments.</msg>
+<status status="PASS" starttime="20200618 14:28:38.164" endtime="20200618 14:28:38.370"></status>
+</kw>
+<kw name="Select From List By Label" library="SeleniumLibrary">
+<doc>Selects options from selection list ``locator`` by ``labels``.</doc>
+<arguments>
+<arg>name:cust_state</arg>
+<arg>Andhra Pradesh</arg>
+</arguments>
+<msg timestamp="20200618 14:28:38.372" level="INFO">Selecting options from selection list 'name:cust_state' by label Andhra Pradesh.</msg>
+<status status="PASS" starttime="20200618 14:28:38.371" endtime="20200618 14:28:39.850"></status>
+</kw>
+<kw name="Select From List By Label" library="SeleniumLibrary">
+<doc>Selects options from selection list ``locator`` by ``labels``.</doc>
+<arguments>
+<arg>name:cust_city</arg>
+<arg>Hyderabad</arg>
+</arguments>
+<msg timestamp="20200618 14:28:39.851" level="INFO">Selecting options from selection list 'name:cust_city' by label Hyderabad.</msg>
+<status status="PASS" starttime="20200618 14:28:39.851" endtime="20200618 14:28:41.321"></status>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>Update</arg>
+</arguments>
+<msg timestamp="20200618 14:28:41.322" level="INFO">Clicking button 'Update'.</msg>
+<status status="PASS" starttime="20200618 14:28:41.322" endtime="20200618 14:28:42.252"></status>
+</kw>
+<kw name="Title Should Be" library="SeleniumLibrary">
+<doc>Verifies that the current page title equals ``title``.</doc>
+<arguments>
+<arg>Mars | Update Customer</arg>
+</arguments>
+<msg timestamp="20200618 14:28:42.469" level="INFO">Page title is 'Mars | Update Customer'.</msg>
+<status status="PASS" starttime="20200618 14:28:42.253" endtime="20200618 14:28:42.469"></status>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>//*[contains(text(),'Customer Management')]</arg>
+</arguments>
+<msg timestamp="20200618 14:28:42.470" level="INFO">Clicking element '//*[contains(text(),'Customer Management')]'.</msg>
+<status status="PASS" starttime="20200618 14:28:42.470" endtime="20200618 14:28:42.936"></status>
+</kw>
+<kw name="Click Link" library="SeleniumLibrary">
+<doc>Clicks a link identified by ``locator``.</doc>
+<arguments>
+<arg>Edit Customer</arg>
+</arguments>
+<msg timestamp="20200618 14:28:42.936" level="INFO">Clicking link 'Edit Customer'.</msg>
+<status status="PASS" starttime="20200618 14:28:42.936" endtime="20200618 14:28:43.681"></status>
+</kw>
+<kw name="Select From List By Value" library="SeleniumLibrary">
+<doc>Selects options from selection list ``locator`` by ``values``.</doc>
+<arguments>
+<arg>name:input_type</arg>
+<arg>ssn_id</arg>
+</arguments>
+<msg timestamp="20200618 14:28:43.682" level="INFO">Selecting options from selection list 'name:input_type' by value ssn_id.</msg>
+<status status="PASS" starttime="20200618 14:28:43.682" endtime="20200618 14:28:45.184"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>name:id</arg>
+<arg>${CUST_SSNID}</arg>
+</arguments>
+<msg timestamp="20200618 14:28:45.185" level="INFO">Typing text '123456789' into text field 'name:id'.</msg>
+<status status="PASS" starttime="20200618 14:28:45.185" endtime="20200618 14:28:45.938"></status>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>id:searchBtn</arg>
+</arguments>
+<msg timestamp="20200618 14:28:45.939" level="INFO">Clicking element 'id:searchBtn'.</msg>
+<status status="PASS" starttime="20200618 14:28:45.939" endtime="20200618 14:28:46.506"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>name:cust_new_name</arg>
+<arg>Sainath</arg>
+</arguments>
+<msg timestamp="20200618 14:28:46.507" level="INFO">Typing text 'Sainath' into text field 'name:cust_new_name'.</msg>
+<status status="PASS" starttime="20200618 14:28:46.507" endtime="20200618 14:28:47.238"></status>
+</kw>
+<kw name="Execute Javascript" library="SeleniumLibrary">
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<arguments>
+<arg>window.scrollTo(0,100)</arg>
+</arguments>
+<msg timestamp="20200618 14:28:47.239" level="INFO">Executing JavaScript:
+window.scrollTo(0,100)
+Without any arguments.</msg>
+<status status="PASS" starttime="20200618 14:28:47.239" endtime="20200618 14:28:47.459"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>name:cust_new_age</arg>
+<arg>22</arg>
+</arguments>
+<msg timestamp="20200618 14:28:47.460" level="INFO">Typing text '22' into text field 'name:cust_new_age'.</msg>
+<status status="PASS" starttime="20200618 14:28:47.460" endtime="20200618 14:28:48.153"></status>
+</kw>
+<kw name="Execute Javascript" library="SeleniumLibrary">
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<arguments>
+<arg>window.scrollTo(0,200)</arg>
+</arguments>
+<msg timestamp="20200618 14:28:48.155" level="INFO">Executing JavaScript:
+window.scrollTo(0,200)
+Without any arguments.</msg>
+<status status="PASS" starttime="20200618 14:28:48.154" endtime="20200618 14:28:48.361"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>name:cust_new_address</arg>
+<arg>Hyderabad</arg>
+</arguments>
+<msg timestamp="20200618 14:28:48.362" level="INFO">Typing text 'Hyderabad' into text field 'name:cust_new_address'.</msg>
+<status status="PASS" starttime="20200618 14:28:48.362" endtime="20200618 14:28:49.079"></status>
+</kw>
+<kw name="Execute Javascript" library="SeleniumLibrary">
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<arguments>
+<arg>window.scrollTo(0,100)</arg>
+</arguments>
+<msg timestamp="20200618 14:28:49.080" level="INFO">Executing JavaScript:
+window.scrollTo(0,100)
+Without any arguments.</msg>
+<status status="PASS" starttime="20200618 14:28:49.080" endtime="20200618 14:28:49.287"></status>
+</kw>
+<kw name="Select From List By Label" library="SeleniumLibrary">
+<doc>Selects options from selection list ``locator`` by ``labels``.</doc>
+<arguments>
+<arg>name:cust_state</arg>
+<arg>Andhra Pradesh</arg>
+</arguments>
+<msg timestamp="20200618 14:28:49.288" level="INFO">Selecting options from selection list 'name:cust_state' by label Andhra Pradesh.</msg>
+<status status="PASS" starttime="20200618 14:28:49.288" endtime="20200618 14:28:50.796"></status>
+</kw>
+<kw name="Select From List By Label" library="SeleniumLibrary">
+<doc>Selects options from selection list ``locator`` by ``labels``.</doc>
+<arguments>
+<arg>name:cust_city</arg>
+<arg>Hyderabad</arg>
+</arguments>
+<msg timestamp="20200618 14:28:50.797" level="INFO">Selecting options from selection list 'name:cust_city' by label Hyderabad.</msg>
+<status status="PASS" starttime="20200618 14:28:50.797" endtime="20200618 14:28:52.263"></status>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>Update</arg>
+</arguments>
+<msg timestamp="20200618 14:28:52.264" level="INFO">Clicking button 'Update'.</msg>
+<status status="PASS" starttime="20200618 14:28:52.264" endtime="20200618 14:28:53.181"></status>
+</kw>
+<kw name="Title Should Be" library="SeleniumLibrary">
+<doc>Verifies that the current page title equals ``title``.</doc>
+<arguments>
+<arg>Mars | Update Customer</arg>
+</arguments>
+<msg timestamp="20200618 14:28:53.403" level="INFO">Page title is 'Mars | Update Customer'.</msg>
+<status status="PASS" starttime="20200618 14:28:53.182" endtime="20200618 14:28:53.403"></status>
+</kw>
+<kw name="Click Link" library="SeleniumLibrary">
+<doc>Clicks a link identified by ``locator``.</doc>
+<arguments>
+<arg>Logout</arg>
+</arguments>
+<msg timestamp="20200618 14:28:53.404" level="INFO">Clicking link 'Logout'.</msg>
+<status status="PASS" starttime="20200618 14:28:53.403" endtime="20200618 14:28:54.304"></status>
+</kw>
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20200618 14:28:54.305" endtime="20200618 14:28:56.674"></status>
+</kw>
+<status status="PASS" starttime="20200618 14:28:22.452" endtime="20200618 14:28:56.675" critical="yes"></status>
+</test>
+<test id="s1-t3" name="test_account_management">
+<kw name="Open Browser" library="SeleniumLibrary">
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<arguments>
+<arg>${base_url}</arg>
+<arg>chrome</arg>
+</arguments>
+<msg timestamp="20200618 14:28:56.680" level="INFO">Opening browser 'chrome' to base url 'http://127.0.0.1:5000/'.</msg>
+<status status="PASS" starttime="20200618 14:28:56.680" endtime="20200618 14:29:01.463"></status>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20200618 14:29:01.464" endtime="20200618 14:29:03.812"></status>
+</kw>
+<kw name="CustExecutive Login Page Should Be Open">
+<kw name="Title Should Be" library="SeleniumLibrary">
+<doc>Verifies that the current page title equals ``title``.</doc>
+<arguments>
+<arg>Mars | Login</arg>
+</arguments>
+<msg timestamp="20200618 14:29:04.029" level="INFO">Page title is 'Mars | Login'.</msg>
+<status status="PASS" starttime="20200618 14:29:03.813" endtime="20200618 14:29:04.029"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>name:username</arg>
+<arg>${CUST_EXECUTIVE_USERNAME}</arg>
+</arguments>
+<msg timestamp="20200618 14:29:04.029" level="INFO">Typing text 'admin123' into text field 'name:username'.</msg>
+<status status="PASS" starttime="20200618 14:29:04.029" endtime="20200618 14:29:04.768"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>name:password</arg>
+<arg>${CUST_EXECUTIVE_PASSWORD}</arg>
+</arguments>
+<msg timestamp="20200618 14:29:04.768" level="INFO">Typing text 'Admin@1234' into text field 'name:password'.</msg>
+<status status="PASS" starttime="20200618 14:29:04.768" endtime="20200618 14:29:05.486"></status>
+</kw>
+<kw name="Select From List By Value" library="SeleniumLibrary">
+<doc>Selects options from selection list ``locator`` by ``values``.</doc>
+<arguments>
+<arg>name:login_type</arg>
+<arg>cust_executive</arg>
+</arguments>
+<msg timestamp="20200618 14:29:05.486" level="INFO">Selecting options from selection list 'name:login_type' by value cust_executive.</msg>
+<status status="PASS" starttime="20200618 14:29:05.486" endtime="20200618 14:29:06.706"></status>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>Login</arg>
+</arguments>
+<msg timestamp="20200618 14:29:06.706" level="INFO">Clicking button 'Login'.</msg>
+<status status="PASS" starttime="20200618 14:29:06.706" endtime="20200618 14:29:09.299"></status>
+</kw>
+<kw name="Title Should Be" library="SeleniumLibrary">
+<doc>Verifies that the current page title equals ``title``.</doc>
+<arguments>
+<arg>Mars | Home</arg>
+</arguments>
+<msg timestamp="20200618 14:29:09.504" level="INFO">Page title is 'Mars | Home'.</msg>
+<status status="PASS" starttime="20200618 14:29:09.299" endtime="20200618 14:29:09.504"></status>
+</kw>
+<status status="PASS" starttime="20200618 14:29:03.813" endtime="20200618 14:29:09.504"></status>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>//*[contains(text(),'Account Management')]</arg>
+</arguments>
+<msg timestamp="20200618 14:29:09.505" level="INFO">Clicking element '//*[contains(text(),'Account Management')]'.</msg>
+<status status="PASS" starttime="20200618 14:29:09.505" endtime="20200618 14:29:09.974"></status>
+</kw>
+<kw name="Click Link" library="SeleniumLibrary">
+<doc>Clicks a link identified by ``locator``.</doc>
+<arguments>
+<arg>Create Account</arg>
+</arguments>
+<msg timestamp="20200618 14:29:09.975" level="INFO">Clicking link 'Create Account'.</msg>
+<status status="PASS" starttime="20200618 14:29:09.974" endtime="20200618 14:29:10.919"></status>
+</kw>
+<kw name="Title Should Be" library="SeleniumLibrary">
+<doc>Verifies that the current page title equals ``title``.</doc>
+<arguments>
+<arg>Mars | Create Account</arg>
+</arguments>
+<msg timestamp="20200618 14:29:11.126" level="INFO">Page title is 'Mars | Create Account'.</msg>
+<status status="PASS" starttime="20200618 14:29:10.919" endtime="20200618 14:29:11.126"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>name:cust_id</arg>
+<arg>${CUST_ID}</arg>
+</arguments>
+<msg timestamp="20200618 14:29:11.127" level="INFO">Typing text '100000004' into text field 'name:cust_id'.</msg>
+<status status="PASS" starttime="20200618 14:29:11.127" endtime="20200618 14:29:11.872"></status>
+</kw>
+<kw name="Select From List By Value" library="SeleniumLibrary">
+<doc>Selects options from selection list ``locator`` by ``values``.</doc>
+<arguments>
+<arg>name:account_type</arg>
+<arg>savings</arg>
+</arguments>
+<msg timestamp="20200618 14:29:11.873" level="INFO">Selecting options from selection list 'name:account_type' by value savings.</msg>
+<status status="PASS" starttime="20200618 14:29:11.872" endtime="20200618 14:29:13.341"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>name:deposit_amt</arg>
+<arg>10000</arg>
+</arguments>
+<msg timestamp="20200618 14:29:13.342" level="INFO">Typing text '10000' into text field 'name:deposit_amt'.</msg>
+<status status="PASS" starttime="20200618 14:29:13.341" endtime="20200618 14:29:14.093"></status>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>Create</arg>
+</arguments>
+<msg timestamp="20200618 14:29:14.094" level="INFO">Clicking button 'Create'.</msg>
+<status status="PASS" starttime="20200618 14:29:14.094" endtime="20200618 14:29:15.150"></status>
+</kw>
+<kw name="Set Selenium Speed" library="SeleniumLibrary">
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<arguments>
+<arg>0.2 seconds</arg>
+</arguments>
+<status status="PASS" starttime="20200618 14:29:15.150" endtime="20200618 14:29:15.150"></status>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>//*[contains(text(),'Account Management')]</arg>
+</arguments>
+<msg timestamp="20200618 14:29:15.151" level="INFO">Clicking element '//*[contains(text(),'Account Management')]'.</msg>
+<status status="PASS" starttime="20200618 14:29:15.151" endtime="20200618 14:29:15.609"></status>
+</kw>
+<kw name="Click Link" library="SeleniumLibrary">
+<doc>Clicks a link identified by ``locator``.</doc>
+<arguments>
+<arg>Create Account</arg>
+</arguments>
+<msg timestamp="20200618 14:29:15.610" level="INFO">Clicking link 'Create Account'.</msg>
+<status status="PASS" starttime="20200618 14:29:15.610" endtime="20200618 14:29:16.387"></status>
+</kw>
+<kw name="Title Should Be" library="SeleniumLibrary">
+<doc>Verifies that the current page title equals ``title``.</doc>
+<arguments>
+<arg>Mars | Create Account</arg>
+</arguments>
+<msg timestamp="20200618 14:29:16.603" level="INFO">Page title is 'Mars | Create Account'.</msg>
+<status status="PASS" starttime="20200618 14:29:16.388" endtime="20200618 14:29:16.603"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>name:cust_id</arg>
+<arg>${CUST_ID}</arg>
+</arguments>
+<msg timestamp="20200618 14:29:16.605" level="INFO">Typing text '100000004' into text field 'name:cust_id'.</msg>
+<status status="PASS" starttime="20200618 14:29:16.605" endtime="20200618 14:29:17.350"></status>
+</kw>
+<kw name="Select From List By Value" library="SeleniumLibrary">
+<doc>Selects options from selection list ``locator`` by ``values``.</doc>
+<arguments>
+<arg>name:account_type</arg>
+<arg>current</arg>
+</arguments>
+<msg timestamp="20200618 14:29:17.351" level="INFO">Selecting options from selection list 'name:account_type' by value current.</msg>
+<status status="PASS" starttime="20200618 14:29:17.351" endtime="20200618 14:29:18.857"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>name:deposit_amt</arg>
+<arg>5000</arg>
+</arguments>
+<msg timestamp="20200618 14:29:18.858" level="INFO">Typing text '5000' into text field 'name:deposit_amt'.</msg>
+<status status="PASS" starttime="20200618 14:29:18.858" endtime="20200618 14:29:19.575"></status>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>Create</arg>
+</arguments>
+<msg timestamp="20200618 14:29:19.576" level="INFO">Clicking button 'Create'.</msg>
+<status status="PASS" starttime="20200618 14:29:19.576" endtime="20200618 14:29:20.659"></status>
+</kw>
+<kw name="Title Should Be" library="SeleniumLibrary">
+<doc>Verifies that the current page title equals ``title``.</doc>
+<arguments>
+<arg>Mars | Create Account</arg>
+</arguments>
+<msg timestamp="20200618 14:29:20.870" level="INFO">Page title is 'Mars | Create Account'.</msg>
+<status status="PASS" starttime="20200618 14:29:20.660" endtime="20200618 14:29:20.870"></status>
+</kw>
+<kw name="Click Link" library="SeleniumLibrary">
+<doc>Clicks a link identified by ``locator``.</doc>
+<arguments>
+<arg>Logout</arg>
+</arguments>
+<msg timestamp="20200618 14:29:20.871" level="INFO">Clicking link 'Logout'.</msg>
+<status status="PASS" starttime="20200618 14:29:20.871" endtime="20200618 14:29:21.911"></status>
+</kw>
+<kw name="Title Should Be" library="SeleniumLibrary">
+<doc>Verifies that the current page title equals ``title``.</doc>
+<arguments>
+<arg>Mars | Login</arg>
+</arguments>
+<msg timestamp="20200618 14:29:22.123" level="INFO">Page title is 'Mars | Login'.</msg>
+<status status="PASS" starttime="20200618 14:29:21.912" endtime="20200618 14:29:22.123"></status>
+</kw>
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20200618 14:29:22.125" endtime="20200618 14:29:25.509"></status>
+</kw>
+<status status="PASS" starttime="20200618 14:28:56.679" endtime="20200618 14:29:25.510" critical="yes"></status>
+</test>
+<test id="s1-t4" name="test_customer_and_account_status">
+<kw name="Open Browser" library="SeleniumLibrary">
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<arguments>
+<arg>${base_url}</arg>
+<arg>chrome</arg>
+</arguments>
+<msg timestamp="20200618 14:29:25.516" level="INFO">Opening browser 'chrome' to base url 'http://127.0.0.1:5000/'.</msg>
+<status status="PASS" starttime="20200618 14:29:25.515" endtime="20200618 14:29:30.420"></status>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20200618 14:29:30.421" endtime="20200618 14:29:32.772"></status>
+</kw>
+<kw name="CustExecutive Login Page Should Be Open">
+<kw name="Title Should Be" library="SeleniumLibrary">
+<doc>Verifies that the current page title equals ``title``.</doc>
+<arguments>
+<arg>Mars | Login</arg>
+</arguments>
+<msg timestamp="20200618 14:29:32.987" level="INFO">Page title is 'Mars | Login'.</msg>
+<status status="PASS" starttime="20200618 14:29:32.773" endtime="20200618 14:29:32.987"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>name:username</arg>
+<arg>${CUST_EXECUTIVE_USERNAME}</arg>
+</arguments>
+<msg timestamp="20200618 14:29:32.987" level="INFO">Typing text 'admin123' into text field 'name:username'.</msg>
+<status status="PASS" starttime="20200618 14:29:32.987" endtime="20200618 14:29:33.691"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>name:password</arg>
+<arg>${CUST_EXECUTIVE_PASSWORD}</arg>
+</arguments>
+<msg timestamp="20200618 14:29:33.692" level="INFO">Typing text 'Admin@1234' into text field 'name:password'.</msg>
+<status status="PASS" starttime="20200618 14:29:33.692" endtime="20200618 14:29:34.432"></status>
+</kw>
+<kw name="Select From List By Value" library="SeleniumLibrary">
+<doc>Selects options from selection list ``locator`` by ``values``.</doc>
+<arguments>
+<arg>name:login_type</arg>
+<arg>cust_executive</arg>
+</arguments>
+<msg timestamp="20200618 14:29:34.432" level="INFO">Selecting options from selection list 'name:login_type' by value cust_executive.</msg>
+<status status="PASS" starttime="20200618 14:29:34.432" endtime="20200618 14:29:35.722"></status>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>Login</arg>
+</arguments>
+<msg timestamp="20200618 14:29:35.722" level="INFO">Clicking button 'Login'.</msg>
+<status status="PASS" starttime="20200618 14:29:35.722" endtime="20200618 14:29:38.489"></status>
+</kw>
+<kw name="Title Should Be" library="SeleniumLibrary">
+<doc>Verifies that the current page title equals ``title``.</doc>
+<arguments>
+<arg>Mars | Home</arg>
+</arguments>
+<msg timestamp="20200618 14:29:38.704" level="INFO">Page title is 'Mars | Home'.</msg>
+<status status="PASS" starttime="20200618 14:29:38.489" endtime="20200618 14:29:38.704"></status>
+</kw>
+<status status="PASS" starttime="20200618 14:29:32.773" endtime="20200618 14:29:38.704"></status>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>//*[contains(text(),'Status Details')]</arg>
+</arguments>
+<msg timestamp="20200618 14:29:38.706" level="INFO">Clicking element '//*[contains(text(),'Status Details')]'.</msg>
+<status status="PASS" starttime="20200618 14:29:38.706" endtime="20200618 14:29:39.158"></status>
+</kw>
+<kw name="Click Link" library="SeleniumLibrary">
+<doc>Clicks a link identified by ``locator``.</doc>
+<arguments>
+<arg>Customer Status</arg>
+</arguments>
+<msg timestamp="20200618 14:29:39.159" level="INFO">Clicking link 'Customer Status'.</msg>
+<status status="PASS" starttime="20200618 14:29:39.159" endtime="20200618 14:29:40.183"></status>
+</kw>
+<kw name="Title Should Be" library="SeleniumLibrary">
+<doc>Verifies that the current page title equals ``title``.</doc>
+<arguments>
+<arg>Mars | Customer Status</arg>
+</arguments>
+<msg timestamp="20200618 14:29:40.397" level="INFO">Page title is 'Mars | Customer Status'.</msg>
+<status status="PASS" starttime="20200618 14:29:40.184" endtime="20200618 14:29:40.397"></status>
+</kw>
+<kw name="Click Link" library="SeleniumLibrary">
+<doc>Clicks a link identified by ``locator``.</doc>
+<arguments>
+<arg>Refresh</arg>
+</arguments>
+<msg timestamp="20200618 14:29:40.398" level="INFO">Clicking link 'Refresh'.</msg>
+<status status="PASS" starttime="20200618 14:29:40.398" endtime="20200618 14:29:41.184"></status>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>View</arg>
+</arguments>
+<msg timestamp="20200618 14:29:41.185" level="INFO">Clicking button 'View'.</msg>
+<status status="PASS" starttime="20200618 14:29:41.185" endtime="20200618 14:29:41.965"></status>
+</kw>
+<kw name="Title Should Be" library="SeleniumLibrary">
+<doc>Verifies that the current page title equals ``title``.</doc>
+<arguments>
+<arg>Mars | View Customer</arg>
+</arguments>
+<msg timestamp="20200618 14:29:42.171" level="INFO">Page title is 'Mars | View Customer'.</msg>
+<status status="PASS" starttime="20200618 14:29:41.966" endtime="20200618 14:29:42.171"></status>
+</kw>
+<kw name="Click Link" library="SeleniumLibrary">
+<doc>Clicks a link identified by ``locator``.</doc>
+<arguments>
+<arg>Back</arg>
+</arguments>
+<msg timestamp="20200618 14:29:42.173" level="INFO">Clicking link 'Back'.</msg>
+<status status="PASS" starttime="20200618 14:29:42.173" endtime="20200618 14:29:42.944"></status>
+</kw>
+<kw name="Title Should Be" library="SeleniumLibrary">
+<doc>Verifies that the current page title equals ``title``.</doc>
+<arguments>
+<arg>Mars | Customer Status</arg>
+</arguments>
+<msg timestamp="20200618 14:29:43.154" level="INFO">Page title is 'Mars | Customer Status'.</msg>
+<status status="PASS" starttime="20200618 14:29:42.945" endtime="20200618 14:29:43.154"></status>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>//*[contains(text(),'Status Details')]</arg>
+</arguments>
+<msg timestamp="20200618 14:29:43.155" level="INFO">Clicking element '//*[contains(text(),'Status Details')]'.</msg>
+<status status="PASS" starttime="20200618 14:29:43.155" endtime="20200618 14:29:43.618"></status>
+</kw>
+<kw name="Click Link" library="SeleniumLibrary">
+<doc>Clicks a link identified by ``locator``.</doc>
+<arguments>
+<arg>Account Status</arg>
+</arguments>
+<msg timestamp="20200618 14:29:43.619" level="INFO">Clicking link 'Account Status'.</msg>
+<status status="PASS" starttime="20200618 14:29:43.619" endtime="20200618 14:29:44.467"></status>
+</kw>
+<kw name="Click Link" library="SeleniumLibrary">
+<doc>Clicks a link identified by ``locator``.</doc>
+<arguments>
+<arg>Refresh</arg>
+</arguments>
+<msg timestamp="20200618 14:29:44.468" level="INFO">Clicking link 'Refresh'.</msg>
+<status status="PASS" starttime="20200618 14:29:44.468" endtime="20200618 14:29:45.252"></status>
+</kw>
+<kw name="Click Link" library="SeleniumLibrary">
+<doc>Clicks a link identified by ``locator``.</doc>
+<arguments>
+<arg>Logout</arg>
+</arguments>
+<msg timestamp="20200618 14:29:45.253" level="INFO">Clicking link 'Logout'.</msg>
+<status status="PASS" starttime="20200618 14:29:45.253" endtime="20200618 14:29:46.156"></status>
+</kw>
+<kw name="Title Should Be" library="SeleniumLibrary">
+<doc>Verifies that the current page title equals ``title``.</doc>
+<arguments>
+<arg>Mars | Login</arg>
+</arguments>
+<msg timestamp="20200618 14:29:46.362" level="INFO">Page title is 'Mars | Login'.</msg>
+<status status="PASS" starttime="20200618 14:29:46.157" endtime="20200618 14:29:46.362"></status>
+</kw>
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20200618 14:29:46.363" endtime="20200618 14:29:48.643"></status>
+</kw>
+<status status="PASS" starttime="20200618 14:29:25.514" endtime="20200618 14:29:48.653" critical="yes"></status>
+</test>
+<test id="s1-t5" name="test_customer_and_account_search">
+<kw name="Open Browser" library="SeleniumLibrary">
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<arguments>
+<arg>${base_url}</arg>
+<arg>chrome</arg>
+</arguments>
+<msg timestamp="20200618 14:29:48.657" level="INFO">Opening browser 'chrome' to base url 'http://127.0.0.1:5000/'.</msg>
+<status status="PASS" starttime="20200618 14:29:48.657" endtime="20200618 14:29:53.378"></status>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20200618 14:29:53.379" endtime="20200618 14:29:55.722"></status>
+</kw>
+<kw name="CustExecutive Login Page Should Be Open">
+<kw name="Title Should Be" library="SeleniumLibrary">
+<doc>Verifies that the current page title equals ``title``.</doc>
+<arguments>
+<arg>Mars | Login</arg>
+</arguments>
+<msg timestamp="20200618 14:29:55.940" level="INFO">Page title is 'Mars | Login'.</msg>
+<status status="PASS" starttime="20200618 14:29:55.724" endtime="20200618 14:29:55.940"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>name:username</arg>
+<arg>${CUST_EXECUTIVE_USERNAME}</arg>
+</arguments>
+<msg timestamp="20200618 14:29:55.940" level="INFO">Typing text 'admin123' into text field 'name:username'.</msg>
+<status status="PASS" starttime="20200618 14:29:55.940" endtime="20200618 14:29:56.657"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>name:password</arg>
+<arg>${CUST_EXECUTIVE_PASSWORD}</arg>
+</arguments>
+<msg timestamp="20200618 14:29:56.657" level="INFO">Typing text 'Admin@1234' into text field 'name:password'.</msg>
+<status status="PASS" starttime="20200618 14:29:56.657" endtime="20200618 14:29:57.413"></status>
+</kw>
+<kw name="Select From List By Value" library="SeleniumLibrary">
+<doc>Selects options from selection list ``locator`` by ``values``.</doc>
+<arguments>
+<arg>name:login_type</arg>
+<arg>cust_executive</arg>
+</arguments>
+<msg timestamp="20200618 14:29:57.413" level="INFO">Selecting options from selection list 'name:login_type' by value cust_executive.</msg>
+<status status="PASS" starttime="20200618 14:29:57.413" endtime="20200618 14:29:58.632"></status>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>Login</arg>
+</arguments>
+<msg timestamp="20200618 14:29:58.632" level="INFO">Clicking button 'Login'.</msg>
+<status status="PASS" starttime="20200618 14:29:58.632" endtime="20200618 14:30:01.519"></status>
+</kw>
+<kw name="Title Should Be" library="SeleniumLibrary">
+<doc>Verifies that the current page title equals ``title``.</doc>
+<arguments>
+<arg>Mars | Home</arg>
+</arguments>
+<msg timestamp="20200618 14:30:01.733" level="INFO">Page title is 'Mars | Home'.</msg>
+<status status="PASS" starttime="20200618 14:30:01.519" endtime="20200618 14:30:01.733"></status>
+</kw>
+<status status="PASS" starttime="20200618 14:29:55.723" endtime="20200618 14:30:01.733"></status>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>//*[contains(text(),'Search')]</arg>
+</arguments>
+<msg timestamp="20200618 14:30:01.734" level="INFO">Clicking element '//*[contains(text(),'Search')]'.</msg>
+<status status="PASS" starttime="20200618 14:30:01.734" endtime="20200618 14:30:02.201"></status>
+</kw>
+<kw name="Click Link" library="SeleniumLibrary">
+<doc>Clicks a link identified by ``locator``.</doc>
+<arguments>
+<arg>Search Customer</arg>
+</arguments>
+<msg timestamp="20200618 14:30:02.202" level="INFO">Clicking link 'Search Customer'.</msg>
+<status status="PASS" starttime="20200618 14:30:02.201" endtime="20200618 14:30:03.067"></status>
+</kw>
+<kw name="Title Should Be" library="SeleniumLibrary">
+<doc>Verifies that the current page title equals ``title``.</doc>
+<arguments>
+<arg>Mars | Search Customer</arg>
+</arguments>
+<msg timestamp="20200618 14:30:03.287" level="INFO">Page title is 'Mars | Search Customer'.</msg>
+<status status="PASS" starttime="20200618 14:30:03.068" endtime="20200618 14:30:03.287"></status>
+</kw>
+<kw name="Select From List By Value" library="SeleniumLibrary">
+<doc>Selects options from selection list ``locator`` by ``values``.</doc>
+<arguments>
+<arg>name:input_type</arg>
+<arg>ssn_id</arg>
+</arguments>
+<msg timestamp="20200618 14:30:03.289" level="INFO">Selecting options from selection list 'name:input_type' by value ssn_id.</msg>
+<status status="PASS" starttime="20200618 14:30:03.289" endtime="20200618 14:30:04.776"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>name:id</arg>
+<arg>${CUST_SSNID}</arg>
+</arguments>
+<msg timestamp="20200618 14:30:04.777" level="INFO">Typing text '123456789' into text field 'name:id'.</msg>
+<status status="PASS" starttime="20200618 14:30:04.777" endtime="20200618 14:30:05.518"></status>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>id:searchBtn</arg>
+</arguments>
+<msg timestamp="20200618 14:30:05.519" level="INFO">Clicking element 'id:searchBtn'.</msg>
+<status status="PASS" starttime="20200618 14:30:05.519" endtime="20200618 14:30:06.090"></status>
+</kw>
+<kw name="Title Should Be" library="SeleniumLibrary">
+<doc>Verifies that the current page title equals ``title``.</doc>
+<arguments>
+<arg>Mars | Search Customer</arg>
+</arguments>
+<msg timestamp="20200618 14:30:06.305" level="INFO">Page title is 'Mars | Search Customer'.</msg>
+<status status="PASS" starttime="20200618 14:30:06.091" endtime="20200618 14:30:06.305"></status>
+</kw>
+<kw name="Go To" library="SeleniumLibrary">
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<arguments>
+<arg>http://127.0.0.1:5000/customer_search</arg>
+</arguments>
+<msg timestamp="20200618 14:30:06.306" level="INFO">Opening url 'http://127.0.0.1:5000/customer_search'</msg>
+<status status="PASS" starttime="20200618 14:30:06.306" endtime="20200618 14:30:06.588"></status>
+</kw>
+<kw name="Title Should Be" library="SeleniumLibrary">
+<doc>Verifies that the current page title equals ``title``.</doc>
+<arguments>
+<arg>Mars | Search Customer</arg>
+</arguments>
+<msg timestamp="20200618 14:30:06.794" level="INFO">Page title is 'Mars | Search Customer'.</msg>
+<status status="PASS" starttime="20200618 14:30:06.589" endtime="20200618 14:30:06.794"></status>
+</kw>
+<kw name="Select From List By Value" library="SeleniumLibrary">
+<doc>Selects options from selection list ``locator`` by ``values``.</doc>
+<arguments>
+<arg>name:input_type</arg>
+<arg>cust_id</arg>
+</arguments>
+<msg timestamp="20200618 14:30:06.795" level="INFO">Selecting options from selection list 'name:input_type' by value cust_id.</msg>
+<status status="PASS" starttime="20200618 14:30:06.795" endtime="20200618 14:30:08.056"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>name:id</arg>
+<arg>${CUST_ID}</arg>
+</arguments>
+<msg timestamp="20200618 14:30:08.057" level="INFO">Typing text '100000004' into text field 'name:id'.</msg>
+<status status="PASS" starttime="20200618 14:30:08.057" endtime="20200618 14:30:08.789"></status>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>id:searchBtn</arg>
+</arguments>
+<msg timestamp="20200618 14:30:08.790" level="INFO">Clicking element 'id:searchBtn'.</msg>
+<status status="PASS" starttime="20200618 14:30:08.790" endtime="20200618 14:30:09.334"></status>
+</kw>
+<kw name="Title Should Be" library="SeleniumLibrary">
+<doc>Verifies that the current page title equals ``title``.</doc>
+<arguments>
+<arg>Mars | Search Customer</arg>
+</arguments>
+<msg timestamp="20200618 14:30:09.561" level="INFO">Page title is 'Mars | Search Customer'.</msg>
+<status status="PASS" starttime="20200618 14:30:09.335" endtime="20200618 14:30:09.561"></status>
+</kw>
+<kw name="Go To" library="SeleniumLibrary">
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<arguments>
+<arg>http://127.0.0.1:5000/account_search/</arg>
+</arguments>
+<msg timestamp="20200618 14:30:09.562" level="INFO">Opening url 'http://127.0.0.1:5000/account_search/'</msg>
+<status status="PASS" starttime="20200618 14:30:09.562" endtime="20200618 14:30:09.852"></status>
+</kw>
+<kw name="Title Should Be" library="SeleniumLibrary">
+<doc>Verifies that the current page title equals ``title``.</doc>
+<arguments>
+<arg>Mars | Search Account</arg>
+</arguments>
+<msg timestamp="20200618 14:30:10.061" level="INFO">Page title is 'Mars | Search Account'.</msg>
+<status status="PASS" starttime="20200618 14:30:09.853" endtime="20200618 14:30:10.061"></status>
+</kw>
+<kw name="Select From List By Value" library="SeleniumLibrary">
+<doc>Selects options from selection list ``locator`` by ``values``.</doc>
+<arguments>
+<arg>name:input_type</arg>
+<arg>cust_id</arg>
+</arguments>
+<msg timestamp="20200618 14:30:10.062" level="INFO">Selecting options from selection list 'name:input_type' by value cust_id.</msg>
+<status status="PASS" starttime="20200618 14:30:10.062" endtime="20200618 14:30:11.297"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>name:id</arg>
+<arg>${CUST_ID}</arg>
+</arguments>
+<msg timestamp="20200618 14:30:11.298" level="INFO">Typing text '100000004' into text field 'name:id'.</msg>
+<status status="PASS" starttime="20200618 14:30:11.298" endtime="20200618 14:30:12.036"></status>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>id:searchBtn</arg>
+</arguments>
+<msg timestamp="20200618 14:30:12.037" level="INFO">Clicking element 'id:searchBtn'.</msg>
+<status status="PASS" starttime="20200618 14:30:12.037" endtime="20200618 14:30:12.585"></status>
+</kw>
+<kw name="Title Should Be" library="SeleniumLibrary">
+<doc>Verifies that the current page title equals ``title``.</doc>
+<arguments>
+<arg>Mars | Search Account</arg>
+</arguments>
+<msg timestamp="20200618 14:30:12.805" level="INFO">Page title is 'Mars | Search Account'.</msg>
+<status status="PASS" starttime="20200618 14:30:12.586" endtime="20200618 14:30:12.805"></status>
+</kw>
+<kw name="Go To" library="SeleniumLibrary">
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<arguments>
+<arg>http://127.0.0.1:5000/account_search/</arg>
+</arguments>
+<msg timestamp="20200618 14:30:12.806" level="INFO">Opening url 'http://127.0.0.1:5000/account_search/'</msg>
+<status status="PASS" starttime="20200618 14:30:12.806" endtime="20200618 14:30:13.087"></status>
+</kw>
+<kw name="Title Should Be" library="SeleniumLibrary">
+<doc>Verifies that the current page title equals ``title``.</doc>
+<arguments>
+<arg>Mars | Search Account</arg>
+</arguments>
+<msg timestamp="20200618 14:30:13.294" level="INFO">Page title is 'Mars | Search Account'.</msg>
+<status status="PASS" starttime="20200618 14:30:13.088" endtime="20200618 14:30:13.294"></status>
+</kw>
+<kw name="Select From List By Value" library="SeleniumLibrary">
+<doc>Selects options from selection list ``locator`` by ``values``.</doc>
+<arguments>
+<arg>name:input_type</arg>
+<arg>acc_id</arg>
+</arguments>
+<msg timestamp="20200618 14:30:13.295" level="INFO">Selecting options from selection list 'name:input_type' by value acc_id.</msg>
+<status status="PASS" starttime="20200618 14:30:13.295" endtime="20200618 14:30:14.755"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>name:id</arg>
+<arg>300000003</arg>
+</arguments>
+<msg timestamp="20200618 14:30:14.756" level="INFO">Typing text '300000003' into text field 'name:id'.</msg>
+<status status="PASS" starttime="20200618 14:30:14.756" endtime="20200618 14:30:15.495"></status>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>id:searchBtn</arg>
+</arguments>
+<msg timestamp="20200618 14:30:15.497" level="INFO">Clicking element 'id:searchBtn'.</msg>
+<status status="PASS" starttime="20200618 14:30:15.497" endtime="20200618 14:30:16.034"></status>
+</kw>
+<kw name="Title Should Be" library="SeleniumLibrary">
+<doc>Verifies that the current page title equals ``title``.</doc>
+<arguments>
+<arg>Mars | Search Account</arg>
+</arguments>
+<msg timestamp="20200618 14:30:16.242" level="INFO">Page title is 'Mars | Search Account'.</msg>
+<status status="PASS" starttime="20200618 14:30:16.035" endtime="20200618 14:30:16.242"></status>
+</kw>
+<kw name="Click Link" library="SeleniumLibrary">
+<doc>Clicks a link identified by ``locator``.</doc>
+<arguments>
+<arg>Logout</arg>
+</arguments>
+<msg timestamp="20200618 14:30:16.242" level="INFO">Clicking link 'Logout'.</msg>
+<status status="PASS" starttime="20200618 14:30:16.242" endtime="20200618 14:30:17.161"></status>
+</kw>
+<kw name="Title Should Be" library="SeleniumLibrary">
+<doc>Verifies that the current page title equals ``title``.</doc>
+<arguments>
+<arg>Mars | Login</arg>
+</arguments>
+<msg timestamp="20200618 14:30:17.367" level="INFO">Page title is 'Mars | Login'.</msg>
+<status status="PASS" starttime="20200618 14:30:17.161" endtime="20200618 14:30:17.367"></status>
+</kw>
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20200618 14:30:17.367" endtime="20200618 14:30:19.723"></status>
+</kw>
+<status status="PASS" starttime="20200618 14:29:48.656" endtime="20200618 14:30:19.725" critical="yes"></status>
+</test>
+<test id="s1-t6" name="test_cashier_login">
+<kw name="Open Browser" library="SeleniumLibrary">
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<arguments>
+<arg>${base_url}</arg>
+<arg>chrome</arg>
+</arguments>
+<msg timestamp="20200618 14:30:19.730" level="INFO">Opening browser 'chrome' to base url 'http://127.0.0.1:5000/'.</msg>
+<status status="PASS" starttime="20200618 14:30:19.729" endtime="20200618 14:30:24.330"></status>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20200618 14:30:24.331" endtime="20200618 14:30:26.677"></status>
+</kw>
+<kw name="Cashier Login Page Should Be Open">
+<kw name="Title Should Be" library="SeleniumLibrary">
+<doc>Verifies that the current page title equals ``title``.</doc>
+<arguments>
+<arg>Mars | Login</arg>
+</arguments>
+<msg timestamp="20200618 14:30:26.887" level="INFO">Page title is 'Mars | Login'.</msg>
+<status status="PASS" starttime="20200618 14:30:26.678" endtime="20200618 14:30:26.887"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>name:username</arg>
+<arg>${CASHIER_USERNAME}</arg>
+</arguments>
+<msg timestamp="20200618 14:30:26.887" level="INFO">Typing text 'admin1234' into text field 'name:username'.</msg>
+<status status="PASS" starttime="20200618 14:30:26.887" endtime="20200618 14:30:27.605"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>name:password</arg>
+<arg>${CASHIER_PASSWORD}</arg>
+</arguments>
+<msg timestamp="20200618 14:30:27.605" level="INFO">Typing text 'Admin@1234' into text field 'name:password'.</msg>
+<status status="PASS" starttime="20200618 14:30:27.605" endtime="20200618 14:30:28.336"></status>
+</kw>
+<kw name="Select From List By Value" library="SeleniumLibrary">
+<doc>Selects options from selection list ``locator`` by ``values``.</doc>
+<arguments>
+<arg>name:login_type</arg>
+<arg>cashier</arg>
+</arguments>
+<msg timestamp="20200618 14:30:28.336" level="INFO">Selecting options from selection list 'name:login_type' by value cashier.</msg>
+<status status="PASS" starttime="20200618 14:30:28.336" endtime="20200618 14:30:29.806"></status>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>Login</arg>
+</arguments>
+<msg timestamp="20200618 14:30:29.806" level="INFO">Clicking button 'Login'.</msg>
+<status status="PASS" starttime="20200618 14:30:29.806" endtime="20200618 14:30:31.326"></status>
+</kw>
+<kw name="Title Should Be" library="SeleniumLibrary">
+<doc>Verifies that the current page title equals ``title``.</doc>
+<arguments>
+<arg>Mars | Home</arg>
+</arguments>
+<msg timestamp="20200618 14:30:31.532" level="INFO">Page title is 'Mars | Home'.</msg>
+<status status="PASS" starttime="20200618 14:30:31.326" endtime="20200618 14:30:31.532"></status>
+</kw>
+<status status="PASS" starttime="20200618 14:30:26.678" endtime="20200618 14:30:31.532"></status>
+</kw>
+<kw name="Click Link" library="SeleniumLibrary">
+<doc>Clicks a link identified by ``locator``.</doc>
+<arguments>
+<arg>Logout</arg>
+</arguments>
+<msg timestamp="20200618 14:30:31.533" level="INFO">Clicking link 'Logout'.</msg>
+<status status="PASS" starttime="20200618 14:30:31.533" endtime="20200618 14:30:32.471"></status>
+</kw>
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20200618 14:30:32.471" endtime="20200618 14:30:34.844"></status>
+</kw>
+<status status="PASS" starttime="20200618 14:30:19.728" endtime="20200618 14:30:34.846" critical="yes"></status>
+</test>
+<test id="s1-t7" name="test_account_actions">
+<kw name="Open Browser" library="SeleniumLibrary">
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<arguments>
+<arg>${base_url}</arg>
+<arg>chrome</arg>
+</arguments>
+<msg timestamp="20200618 14:30:34.852" level="INFO">Opening browser 'chrome' to base url 'http://127.0.0.1:5000/'.</msg>
+<status status="PASS" starttime="20200618 14:30:34.851" endtime="20200618 14:30:39.486"></status>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20200618 14:30:39.487" endtime="20200618 14:30:41.829"></status>
+</kw>
+<kw name="Go To Cashier Login Page">
+<kw name="Cashier Login Page Should Be Open">
+<kw name="Title Should Be" library="SeleniumLibrary">
+<doc>Verifies that the current page title equals ``title``.</doc>
+<arguments>
+<arg>Mars | Login</arg>
+</arguments>
+<msg timestamp="20200618 14:30:42.045" level="INFO">Page title is 'Mars | Login'.</msg>
+<status status="PASS" starttime="20200618 14:30:41.830" endtime="20200618 14:30:42.045"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>name:username</arg>
+<arg>${CASHIER_USERNAME}</arg>
+</arguments>
+<msg timestamp="20200618 14:30:42.045" level="INFO">Typing text 'admin1234' into text field 'name:username'.</msg>
+<status status="PASS" starttime="20200618 14:30:42.045" endtime="20200618 14:30:42.792"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>name:password</arg>
+<arg>${CASHIER_PASSWORD}</arg>
+</arguments>
+<msg timestamp="20200618 14:30:42.792" level="INFO">Typing text 'Admin@1234' into text field 'name:password'.</msg>
+<status status="PASS" starttime="20200618 14:30:42.792" endtime="20200618 14:30:43.510"></status>
+</kw>
+<kw name="Select From List By Value" library="SeleniumLibrary">
+<doc>Selects options from selection list ``locator`` by ``values``.</doc>
+<arguments>
+<arg>name:login_type</arg>
+<arg>cashier</arg>
+</arguments>
+<msg timestamp="20200618 14:30:43.510" level="INFO">Selecting options from selection list 'name:login_type' by value cashier.</msg>
+<status status="PASS" starttime="20200618 14:30:43.510" endtime="20200618 14:30:44.997"></status>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>Login</arg>
+</arguments>
+<msg timestamp="20200618 14:30:44.997" level="INFO">Clicking button 'Login'.</msg>
+<status status="PASS" starttime="20200618 14:30:44.997" endtime="20200618 14:30:46.328"></status>
+</kw>
+<kw name="Title Should Be" library="SeleniumLibrary">
+<doc>Verifies that the current page title equals ``title``.</doc>
+<arguments>
+<arg>Mars | Home</arg>
+</arguments>
+<msg timestamp="20200618 14:30:46.539" level="INFO">Page title is 'Mars | Home'.</msg>
+<status status="PASS" starttime="20200618 14:30:46.328" endtime="20200618 14:30:46.539"></status>
+</kw>
+<status status="PASS" starttime="20200618 14:30:41.830" endtime="20200618 14:30:46.539"></status>
+</kw>
+<status status="PASS" starttime="20200618 14:30:41.829" endtime="20200618 14:30:46.539"></status>
+</kw>
+<kw name="Click Link" library="SeleniumLibrary">
+<doc>Clicks a link identified by ``locator``.</doc>
+<arguments>
+<arg>Account Details</arg>
+</arguments>
+<msg timestamp="20200618 14:30:46.540" level="INFO">Clicking link 'Account Details'.</msg>
+<status status="PASS" starttime="20200618 14:30:46.540" endtime="20200618 14:30:47.461"></status>
+</kw>
+<kw name="Title Should Be" library="SeleniumLibrary">
+<doc>Verifies that the current page title equals ``title``.</doc>
+<arguments>
+<arg>Mars | Account Details</arg>
+</arguments>
+<msg timestamp="20200618 14:30:47.668" level="INFO">Page title is 'Mars | Account Details'.</msg>
+<status status="PASS" starttime="20200618 14:30:47.462" endtime="20200618 14:30:47.668"></status>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>Deposit</arg>
+</arguments>
+<msg timestamp="20200618 14:30:47.669" level="INFO">Clicking button 'Deposit'.</msg>
+<status status="PASS" starttime="20200618 14:30:47.669" endtime="20200618 14:30:48.467"></status>
+</kw>
+<kw name="Title Should Be" library="SeleniumLibrary">
+<doc>Verifies that the current page title equals ``title``.</doc>
+<arguments>
+<arg>Mars | Deposit</arg>
+</arguments>
+<msg timestamp="20200618 14:30:48.687" level="INFO">Page title is 'Mars | Deposit'.</msg>
+<status status="PASS" starttime="20200618 14:30:48.468" endtime="20200618 14:30:48.687"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>name:deposit_amt</arg>
+<arg>5000</arg>
+</arguments>
+<msg timestamp="20200618 14:30:48.688" level="INFO">Typing text '5000' into text field 'name:deposit_amt'.</msg>
+<status status="PASS" starttime="20200618 14:30:48.688" endtime="20200618 14:30:49.413"></status>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>Deposit</arg>
+</arguments>
+<msg timestamp="20200618 14:30:49.415" level="INFO">Clicking button 'Deposit'.</msg>
+<status status="PASS" starttime="20200618 14:30:49.415" endtime="20200618 14:30:50.505"></status>
+</kw>
+<kw name="Title Should Be" library="SeleniumLibrary">
+<doc>Verifies that the current page title equals ``title``.</doc>
+<arguments>
+<arg>Mars | Account Details</arg>
+</arguments>
+<msg timestamp="20200618 14:30:50.714" level="INFO">Page title is 'Mars | Account Details'.</msg>
+<status status="PASS" starttime="20200618 14:30:50.506" endtime="20200618 14:30:50.714"></status>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>Withdraw</arg>
+</arguments>
+<msg timestamp="20200618 14:30:50.715" level="INFO">Clicking button 'Withdraw'.</msg>
+<status status="PASS" starttime="20200618 14:30:50.715" endtime="20200618 14:30:51.484"></status>
+</kw>
+<kw name="Title Should Be" library="SeleniumLibrary">
+<doc>Verifies that the current page title equals ``title``.</doc>
+<arguments>
+<arg>Mars | Withdraw</arg>
+</arguments>
+<msg timestamp="20200618 14:30:51.706" level="INFO">Page title is 'Mars | Withdraw'.</msg>
+<status status="PASS" starttime="20200618 14:30:51.485" endtime="20200618 14:30:51.706"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>name:withdraw_amt</arg>
+<arg>1000</arg>
+</arguments>
+<msg timestamp="20200618 14:30:51.707" level="INFO">Typing text '1000' into text field 'name:withdraw_amt'.</msg>
+<status status="PASS" starttime="20200618 14:30:51.707" endtime="20200618 14:30:52.423"></status>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>Withdraw</arg>
+</arguments>
+<msg timestamp="20200618 14:30:52.424" level="INFO">Clicking button 'Withdraw'.</msg>
+<status status="PASS" starttime="20200618 14:30:52.424" endtime="20200618 14:30:53.496"></status>
+</kw>
+<kw name="Title Should Be" library="SeleniumLibrary">
+<doc>Verifies that the current page title equals ``title``.</doc>
+<arguments>
+<arg>Mars | Account Details</arg>
+</arguments>
+<msg timestamp="20200618 14:30:53.703" level="INFO">Page title is 'Mars | Account Details'.</msg>
+<status status="PASS" starttime="20200618 14:30:53.497" endtime="20200618 14:30:53.703"></status>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>Transfer</arg>
+</arguments>
+<msg timestamp="20200618 14:30:53.704" level="INFO">Clicking button 'Transfer'.</msg>
+<status status="PASS" starttime="20200618 14:30:53.704" endtime="20200618 14:30:54.482"></status>
+</kw>
+<kw name="Title Should Be" library="SeleniumLibrary">
+<doc>Verifies that the current page title equals ``title``.</doc>
+<arguments>
+<arg>Mars | Transfer</arg>
+</arguments>
+<msg timestamp="20200618 14:30:54.688" level="INFO">Page title is 'Mars | Transfer'.</msg>
+<status status="PASS" starttime="20200618 14:30:54.483" endtime="20200618 14:30:54.688"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>name:target_account_id</arg>
+<arg>300000003</arg>
+</arguments>
+<msg timestamp="20200618 14:30:54.689" level="INFO">Typing text '300000003' into text field 'name:target_account_id'.</msg>
+<status status="PASS" starttime="20200618 14:30:54.689" endtime="20200618 14:30:55.418"></status>
+</kw>
+<kw name="Select From List By Value" library="SeleniumLibrary">
+<doc>Selects options from selection list ``locator`` by ``values``.</doc>
+<arguments>
+<arg>name:target_account_type</arg>
+<arg>savings</arg>
+</arguments>
+<msg timestamp="20200618 14:30:55.418" level="INFO">Selecting options from selection list 'name:target_account_type' by value savings.</msg>
+<status status="PASS" starttime="20200618 14:30:55.418" endtime="20200618 14:30:56.869"></status>
+</kw>
+<kw name="Execute Javascript" library="SeleniumLibrary">
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<arguments>
+<arg>window.scrollTo(0,200)</arg>
+</arguments>
+<msg timestamp="20200618 14:30:56.870" level="INFO">Executing JavaScript:
+window.scrollTo(0,200)
+Without any arguments.</msg>
+<status status="PASS" starttime="20200618 14:30:56.870" endtime="20200618 14:30:57.079"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>name:transfer_amt</arg>
+<arg>100</arg>
+</arguments>
+<msg timestamp="20200618 14:30:57.080" level="INFO">Typing text '100' into text field 'name:transfer_amt'.</msg>
+<status status="PASS" starttime="20200618 14:30:57.080" endtime="20200618 14:30:57.792"></status>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>Transfer</arg>
+</arguments>
+<msg timestamp="20200618 14:30:57.793" level="INFO">Clicking button 'Transfer'.</msg>
+<status status="PASS" starttime="20200618 14:30:57.793" endtime="20200618 14:30:59.233"></status>
+</kw>
+<kw name="Title Should Be" library="SeleniumLibrary">
+<doc>Verifies that the current page title equals ``title``.</doc>
+<arguments>
+<arg>Mars | Account Details</arg>
+</arguments>
+<msg timestamp="20200618 14:30:59.440" level="INFO">Page title is 'Mars | Account Details'.</msg>
+<status status="PASS" starttime="20200618 14:30:59.234" endtime="20200618 14:30:59.440"></status>
+</kw>
+<kw name="Click Link" library="SeleniumLibrary">
+<doc>Clicks a link identified by ``locator``.</doc>
+<arguments>
+<arg>Logout</arg>
+</arguments>
+<msg timestamp="20200618 14:30:59.441" level="INFO">Clicking link 'Logout'.</msg>
+<status status="PASS" starttime="20200618 14:30:59.441" endtime="20200618 14:31:00.488"></status>
+</kw>
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20200618 14:31:00.488" endtime="20200618 14:31:03.896"></status>
+</kw>
+<status status="PASS" starttime="20200618 14:30:34.850" endtime="20200618 14:31:03.898" critical="yes"></status>
+</test>
+<test id="s1-t8" name="test_account_statement">
+<kw name="Open Browser" library="SeleniumLibrary">
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<arguments>
+<arg>${base_url}</arg>
+<arg>chrome</arg>
+</arguments>
+<msg timestamp="20200618 14:31:03.904" level="INFO">Opening browser 'chrome' to base url 'http://127.0.0.1:5000/'.</msg>
+<status status="PASS" starttime="20200618 14:31:03.903" endtime="20200618 14:31:08.427"></status>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20200618 14:31:08.428" endtime="20200618 14:31:10.756"></status>
+</kw>
+<kw name="Go To Cashier Login Page">
+<kw name="Cashier Login Page Should Be Open">
+<kw name="Title Should Be" library="SeleniumLibrary">
+<doc>Verifies that the current page title equals ``title``.</doc>
+<arguments>
+<arg>Mars | Login</arg>
+</arguments>
+<msg timestamp="20200618 14:31:10.974" level="INFO">Page title is 'Mars | Login'.</msg>
+<status status="PASS" starttime="20200618 14:31:10.758" endtime="20200618 14:31:10.974"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>name:username</arg>
+<arg>${CASHIER_USERNAME}</arg>
+</arguments>
+<msg timestamp="20200618 14:31:10.974" level="INFO">Typing text 'admin1234' into text field 'name:username'.</msg>
+<status status="PASS" starttime="20200618 14:31:10.974" endtime="20200618 14:31:11.714"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>name:password</arg>
+<arg>${CASHIER_PASSWORD}</arg>
+</arguments>
+<msg timestamp="20200618 14:31:11.714" level="INFO">Typing text 'Admin@1234' into text field 'name:password'.</msg>
+<status status="PASS" starttime="20200618 14:31:11.714" endtime="20200618 14:31:12.447"></status>
+</kw>
+<kw name="Select From List By Value" library="SeleniumLibrary">
+<doc>Selects options from selection list ``locator`` by ``values``.</doc>
+<arguments>
+<arg>name:login_type</arg>
+<arg>cashier</arg>
+</arguments>
+<msg timestamp="20200618 14:31:12.447" level="INFO">Selecting options from selection list 'name:login_type' by value cashier.</msg>
+<status status="PASS" starttime="20200618 14:31:12.447" endtime="20200618 14:31:13.890"></status>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>Login</arg>
+</arguments>
+<msg timestamp="20200618 14:31:13.890" level="INFO">Clicking button 'Login'.</msg>
+<status status="PASS" starttime="20200618 14:31:13.890" endtime="20200618 14:31:15.289"></status>
+</kw>
+<kw name="Title Should Be" library="SeleniumLibrary">
+<doc>Verifies that the current page title equals ``title``.</doc>
+<arguments>
+<arg>Mars | Home</arg>
+</arguments>
+<msg timestamp="20200618 14:31:15.507" level="INFO">Page title is 'Mars | Home'.</msg>
+<status status="PASS" starttime="20200618 14:31:15.289" endtime="20200618 14:31:15.507"></status>
+</kw>
+<status status="PASS" starttime="20200618 14:31:10.757" endtime="20200618 14:31:15.507"></status>
+</kw>
+<status status="PASS" starttime="20200618 14:31:10.757" endtime="20200618 14:31:15.507"></status>
+</kw>
+<kw name="Click Link" library="SeleniumLibrary">
+<doc>Clicks a link identified by ``locator``.</doc>
+<arguments>
+<arg>Account Statement</arg>
+</arguments>
+<msg timestamp="20200618 14:31:15.509" level="INFO">Clicking link 'Account Statement'.</msg>
+<status status="PASS" starttime="20200618 14:31:15.509" endtime="20200618 14:31:16.386"></status>
+</kw>
+<kw name="Title Should Be" library="SeleniumLibrary">
+<doc>Verifies that the current page title equals ``title``.</doc>
+<arguments>
+<arg>Mars | Account Statement</arg>
+</arguments>
+<msg timestamp="20200618 14:31:16.608" level="INFO">Page title is 'Mars | Account Statement'.</msg>
+<status status="PASS" starttime="20200618 14:31:16.387" endtime="20200618 14:31:16.608"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>name:account_id</arg>
+<arg>300000002</arg>
+</arguments>
+<msg timestamp="20200618 14:31:16.609" level="INFO">Typing text '300000002' into text field 'name:account_id'.</msg>
+<status status="PASS" starttime="20200618 14:31:16.609" endtime="20200618 14:31:17.351"></status>
+</kw>
+<kw name="Select Radio Button" library="SeleniumLibrary">
+<doc>Sets the radio button group ``group_name`` to ``value``.</doc>
+<arguments>
+<arg>statement_type</arg>
+<arg>transactions</arg>
+</arguments>
+<msg timestamp="20200618 14:31:17.352" level="INFO">Selecting 'transactions' from radio button 'statement_type'.</msg>
+<status status="PASS" starttime="20200618 14:31:17.352" endtime="20200618 14:31:17.789"></status>
+</kw>
+<kw name="Set Selenium Speed" library="SeleniumLibrary">
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<arguments>
+<arg>0.2 seconds</arg>
+</arguments>
+<status status="PASS" starttime="20200618 14:31:17.790" endtime="20200618 14:31:17.790"></status>
+</kw>
+<kw name="Select From List By Value" library="SeleniumLibrary">
+<doc>Selects options from selection list ``locator`` by ``values``.</doc>
+<arguments>
+<arg>name:num_of_transactions</arg>
+<arg>5</arg>
+</arguments>
+<msg timestamp="20200618 14:31:17.791" level="INFO">Selecting options from selection list 'name:num_of_transactions' by value 5.</msg>
+<status status="PASS" starttime="20200618 14:31:17.791" endtime="20200618 14:31:19.288"></status>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>Submit</arg>
+</arguments>
+<msg timestamp="20200618 14:31:19.289" level="INFO">Clicking button 'Submit'.</msg>
+<status status="PASS" starttime="20200618 14:31:19.289" endtime="20200618 14:31:21.541"></status>
+</kw>
+<kw name="Set Selenium Speed" library="SeleniumLibrary">
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<arguments>
+<arg>0.2 seconds</arg>
+</arguments>
+<status status="PASS" starttime="20200618 14:31:21.542" endtime="20200618 14:31:21.543"></status>
+</kw>
+<kw name="Set Selenium Speed" library="SeleniumLibrary">
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<arguments>
+<arg>0.2 seconds</arg>
+</arguments>
+<status status="PASS" starttime="20200618 14:31:21.543" endtime="20200618 14:31:21.544"></status>
+</kw>
+<kw name="Set Selenium Speed" library="SeleniumLibrary">
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<arguments>
+<arg>0.2 seconds</arg>
+</arguments>
+<status status="PASS" starttime="20200618 14:31:21.545" endtime="20200618 14:31:21.545"></status>
+</kw>
+<kw name="Set Selenium Speed" library="SeleniumLibrary">
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<arguments>
+<arg>0.2 seconds</arg>
+</arguments>
+<status status="PASS" starttime="20200618 14:31:21.546" endtime="20200618 14:31:21.547"></status>
+</kw>
+<kw name="Set Selenium Speed" library="SeleniumLibrary">
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<arguments>
+<arg>0.2 seconds</arg>
+</arguments>
+<status status="PASS" starttime="20200618 14:31:21.547" endtime="20200618 14:31:21.548"></status>
+</kw>
+<kw name="Set Selenium Speed" library="SeleniumLibrary">
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<arguments>
+<arg>0.2 seconds</arg>
+</arguments>
+<status status="PASS" starttime="20200618 14:31:21.548" endtime="20200618 14:31:21.549"></status>
+</kw>
+<kw name="Set Selenium Speed" library="SeleniumLibrary">
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<arguments>
+<arg>0.2 seconds</arg>
+</arguments>
+<status status="PASS" starttime="20200618 14:31:21.549" endtime="20200618 14:31:21.550"></status>
+</kw>
+<kw name="Execute Javascript" library="SeleniumLibrary">
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<arguments>
+<arg>window.scrollTo(0,200)</arg>
+</arguments>
+<msg timestamp="20200618 14:31:21.551" level="INFO">Executing JavaScript:
+window.scrollTo(0,200)
+Without any arguments.</msg>
+<status status="PASS" starttime="20200618 14:31:21.550" endtime="20200618 14:31:21.765"></status>
+</kw>
+<kw name="Click Link" library="SeleniumLibrary">
+<doc>Clicks a link identified by ``locator``.</doc>
+<arguments>
+<arg>Go Back</arg>
+</arguments>
+<msg timestamp="20200618 14:31:21.765" level="INFO">Clicking link 'Go Back'.</msg>
+<status status="PASS" starttime="20200618 14:31:21.765" endtime="20200618 14:31:22.509"></status>
+</kw>
+<kw name="Title Should Be" library="SeleniumLibrary">
+<doc>Verifies that the current page title equals ``title``.</doc>
+<arguments>
+<arg>Mars | Account Statement</arg>
+</arguments>
+<msg timestamp="20200618 14:31:22.715" level="INFO">Page title is 'Mars | Account Statement'.</msg>
+<status status="PASS" starttime="20200618 14:31:22.510" endtime="20200618 14:31:22.715"></status>
+</kw>
+<kw name="Click Link" library="SeleniumLibrary">
+<doc>Clicks a link identified by ``locator``.</doc>
+<arguments>
+<arg>Logout</arg>
+</arguments>
+<msg timestamp="20200618 14:31:22.716" level="INFO">Clicking link 'Logout'.</msg>
+<status status="PASS" starttime="20200618 14:31:22.716" endtime="20200618 14:31:23.633"></status>
+</kw>
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20200618 14:31:23.633" endtime="20200618 14:31:25.946"></status>
+</kw>
+<status status="PASS" starttime="20200618 14:31:03.902" endtime="20200618 14:31:25.947" critical="yes"></status>
+</test>
+<test id="s1-t9" name="test_delete_customer">
+<kw name="Open Browser" library="SeleniumLibrary">
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<arguments>
+<arg>${base_url}</arg>
+<arg>chrome</arg>
+</arguments>
+<msg timestamp="20200618 14:31:25.951" level="INFO">Opening browser 'chrome' to base url 'http://127.0.0.1:5000/'.</msg>
+<status status="PASS" starttime="20200618 14:31:25.951" endtime="20200618 14:31:30.800"></status>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20200618 14:31:30.800" endtime="20200618 14:31:33.142"></status>
+</kw>
+<kw name="CustExecutive Login Page Should Be Open">
+<kw name="Title Should Be" library="SeleniumLibrary">
+<doc>Verifies that the current page title equals ``title``.</doc>
+<arguments>
+<arg>Mars | Login</arg>
+</arguments>
+<msg timestamp="20200618 14:31:33.367" level="INFO">Page title is 'Mars | Login'.</msg>
+<status status="PASS" starttime="20200618 14:31:33.144" endtime="20200618 14:31:33.367"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>name:username</arg>
+<arg>${CUST_EXECUTIVE_USERNAME}</arg>
+</arguments>
+<msg timestamp="20200618 14:31:33.367" level="INFO">Typing text 'admin123' into text field 'name:username'.</msg>
+<status status="PASS" starttime="20200618 14:31:33.367" endtime="20200618 14:31:34.085"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>name:password</arg>
+<arg>${CUST_EXECUTIVE_PASSWORD}</arg>
+</arguments>
+<msg timestamp="20200618 14:31:34.085" level="INFO">Typing text 'Admin@1234' into text field 'name:password'.</msg>
+<status status="PASS" starttime="20200618 14:31:34.085" endtime="20200618 14:31:34.822"></status>
+</kw>
+<kw name="Select From List By Value" library="SeleniumLibrary">
+<doc>Selects options from selection list ``locator`` by ``values``.</doc>
+<arguments>
+<arg>name:login_type</arg>
+<arg>cust_executive</arg>
+</arguments>
+<msg timestamp="20200618 14:31:34.822" level="INFO">Selecting options from selection list 'name:login_type' by value cust_executive.</msg>
+<status status="PASS" starttime="20200618 14:31:34.822" endtime="20200618 14:31:36.107"></status>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>Login</arg>
+</arguments>
+<msg timestamp="20200618 14:31:36.107" level="INFO">Clicking button 'Login'.</msg>
+<status status="PASS" starttime="20200618 14:31:36.107" endtime="20200618 14:31:38.800"></status>
+</kw>
+<kw name="Title Should Be" library="SeleniumLibrary">
+<doc>Verifies that the current page title equals ``title``.</doc>
+<arguments>
+<arg>Mars | Home</arg>
+</arguments>
+<msg timestamp="20200618 14:31:39.007" level="INFO">Page title is 'Mars | Home'.</msg>
+<status status="PASS" starttime="20200618 14:31:38.800" endtime="20200618 14:31:39.007"></status>
+</kw>
+<status status="PASS" starttime="20200618 14:31:33.143" endtime="20200618 14:31:39.007"></status>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>//*[contains(text(),'Customer Management')]</arg>
+</arguments>
+<msg timestamp="20200618 14:31:39.008" level="INFO">Clicking element '//*[contains(text(),'Customer Management')]'.</msg>
+<status status="PASS" starttime="20200618 14:31:39.008" endtime="20200618 14:31:39.473"></status>
+</kw>
+<kw name="Click Link" library="SeleniumLibrary">
+<doc>Clicks a link identified by ``locator``.</doc>
+<arguments>
+<arg>Delete Customer</arg>
+</arguments>
+<msg timestamp="20200618 14:31:39.474" level="INFO">Clicking link 'Delete Customer'.</msg>
+<status status="PASS" starttime="20200618 14:31:39.474" endtime="20200618 14:31:40.377"></status>
+</kw>
+<kw name="Select From List By Value" library="SeleniumLibrary">
+<doc>Selects options from selection list ``locator`` by ``values``.</doc>
+<arguments>
+<arg>name:input_type</arg>
+<arg>cust_id</arg>
+</arguments>
+<msg timestamp="20200618 14:31:40.378" level="INFO">Selecting options from selection list 'name:input_type' by value cust_id.</msg>
+<status status="PASS" starttime="20200618 14:31:40.377" endtime="20200618 14:31:41.630"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>name:id</arg>
+<arg>${CUST_ID}</arg>
+</arguments>
+<msg timestamp="20200618 14:31:41.631" level="INFO">Typing text '100000004' into text field 'name:id'.</msg>
+<status status="PASS" starttime="20200618 14:31:41.631" endtime="20200618 14:31:42.396"></status>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>id:searchBtn</arg>
+</arguments>
+<msg timestamp="20200618 14:31:42.397" level="INFO">Clicking element 'id:searchBtn'.</msg>
+<status status="PASS" starttime="20200618 14:31:42.397" endtime="20200618 14:31:42.990"></status>
+</kw>
+<kw name="Click Link" library="SeleniumLibrary">
+<doc>Clicks a link identified by ``locator``.</doc>
+<arguments>
+<arg>Cancel</arg>
+</arguments>
+<msg timestamp="20200618 14:31:42.991" level="INFO">Clicking link 'Cancel'.</msg>
+<status status="PASS" starttime="20200618 14:31:42.990" endtime="20200618 14:31:43.779"></status>
+</kw>
+<kw name="Title Should Be" library="SeleniumLibrary">
+<doc>Verifies that the current page title equals ``title``.</doc>
+<arguments>
+<arg>Mars | Delete Customer</arg>
+</arguments>
+<msg timestamp="20200618 14:31:43.990" level="INFO">Page title is 'Mars | Delete Customer'.</msg>
+<status status="PASS" starttime="20200618 14:31:43.779" endtime="20200618 14:31:43.990"></status>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>//*[contains(text(),'Customer Management')]</arg>
+</arguments>
+<msg timestamp="20200618 14:31:43.991" level="INFO">Clicking element '//*[contains(text(),'Customer Management')]'.</msg>
+<status status="PASS" starttime="20200618 14:31:43.991" endtime="20200618 14:31:44.463"></status>
+</kw>
+<kw name="Click Link" library="SeleniumLibrary">
+<doc>Clicks a link identified by ``locator``.</doc>
+<arguments>
+<arg>Delete Customer</arg>
+</arguments>
+<msg timestamp="20200618 14:31:44.464" level="INFO">Clicking link 'Delete Customer'.</msg>
+<status status="PASS" starttime="20200618 14:31:44.463" endtime="20200618 14:31:45.216"></status>
+</kw>
+<kw name="Select From List By Value" library="SeleniumLibrary">
+<doc>Selects options from selection list ``locator`` by ``values``.</doc>
+<arguments>
+<arg>name:input_type</arg>
+<arg>cust_id</arg>
+</arguments>
+<msg timestamp="20200618 14:31:45.217" level="INFO">Selecting options from selection list 'name:input_type' by value cust_id.</msg>
+<status status="PASS" starttime="20200618 14:31:45.217" endtime="20200618 14:31:46.500"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>name:id</arg>
+<arg>${CUST_ID}</arg>
+</arguments>
+<msg timestamp="20200618 14:31:46.501" level="INFO">Typing text '100000004' into text field 'name:id'.</msg>
+<status status="PASS" starttime="20200618 14:31:46.501" endtime="20200618 14:31:47.271"></status>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>id:searchBtn</arg>
+</arguments>
+<msg timestamp="20200618 14:31:47.273" level="INFO">Clicking element 'id:searchBtn'.</msg>
+<status status="PASS" starttime="20200618 14:31:47.273" endtime="20200618 14:31:47.820"></status>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>Delete</arg>
+</arguments>
+<msg timestamp="20200618 14:31:47.821" level="INFO">Clicking button 'Delete'.</msg>
+<status status="PASS" starttime="20200618 14:31:47.821" endtime="20200618 14:31:48.896"></status>
+</kw>
+<kw name="Title Should Be" library="SeleniumLibrary">
+<doc>Verifies that the current page title equals ``title``.</doc>
+<arguments>
+<arg>Mars | Delete Customer</arg>
+</arguments>
+<msg timestamp="20200618 14:31:49.103" level="INFO">Page title is 'Mars | Delete Customer'.</msg>
+<status status="PASS" starttime="20200618 14:31:48.897" endtime="20200618 14:31:49.103"></status>
+</kw>
+<kw name="Click Link" library="SeleniumLibrary">
+<doc>Clicks a link identified by ``locator``.</doc>
+<arguments>
+<arg>Logout</arg>
+</arguments>
+<msg timestamp="20200618 14:31:49.104" level="INFO">Clicking link 'Logout'.</msg>
+<status status="PASS" starttime="20200618 14:31:49.104" endtime="20200618 14:31:50.063"></status>
+</kw>
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20200618 14:31:50.064" endtime="20200618 14:31:53.662"></status>
+</kw>
+<status status="PASS" starttime="20200618 14:31:25.949" endtime="20200618 14:31:53.663" critical="yes"></status>
+</test>
+<status status="PASS" starttime="20200618 14:28:09.423" endtime="20200618 14:31:53.667"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="9" fail="0">Critical Tests</stat>
+<stat pass="9" fail="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="9" fail="0" id="s1" name="RetailBanking">RetailBanking</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

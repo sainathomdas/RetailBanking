@@ -30,44 +30,29 @@ nav {
     font-family: 'Fira Sans', sans-serif;
 }
 
-.dropdown:hover .dropdown-menu {
-  display: block;
-  margin-top: 0;
-}
 .dropdown-menu{
-background-color: gold;
-z-index: -100;
-margin-top: 10;
-}
-
-
-@media (min-width:320px) {
-    /* smartphones, iPhone, portrait 480x320 phones */
-}
-
-@media (min-width:481px) {
-    /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
-}
-
-@media (min-width:641px) {
-    /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
-}
-
-@media (min-width:961px) {
-    /* tablet, landscape iPad, lo-res laptops ands desktops */
-}
+  background-color: gold;
+  z-index: 100;
+  margin-top: 10;
+  }
 
 @media (min-width:1025px) {
     /* big landscape tablets, laptops, and desktops */
     nav {
-        margin-left: 6.5em;
-        margin-right: 6.5em;
-        margin-top: 0.8rem;
+        margin-left: 3em;
+        margin-right: 3em;
+        margin-top: 0.6rem;
     }
     .bank {
-        margin-left: 6.5rem;
-        margin-right: 6.5rem;
+        margin-left: 3rem;
+        margin-right: 3rem;
     }
+    
+.dropdown:hover .dropdown-menu {
+  display: block;
+  margin-top: 0;
+}
+
 }
 
 @media (min-width:1281px) {
@@ -81,6 +66,12 @@ margin-top: 10;
         margin-left: 12rem;
         margin-right: 12rem;
     }
+    
+.dropdown:hover .dropdown-menu {
+  display: block;
+  margin-top: 0;
+}
+
 }
   
 /* =================================== end of navbar ==================================== */

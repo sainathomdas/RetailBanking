@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %} Mars | Account Statment {% endblock %}
+{% block title %} Mars | Account Statement {% endblock %}
 
 {% block content %}
 
@@ -38,7 +38,7 @@
                 <!-- Default inline 2-->
                 <div class="custom-control custom-radio custom-control-inline">
                     <input type="radio" class="custom-control-input" id="dates" value="dates" name="statement_type" onchange="radioFunction(0)">
-                    <label class="custom-control-label" for="dates">Start to End Dates</label>
+                    <label class="custom-control-label" id="date_label" for="dates">Start to End Dates</label>
                 </div>
             </div>
 
